@@ -17,5 +17,8 @@
         [user setPassword:CDUser.password];
         return user;
     }
+    else{
+        return nil;
+    }
 }
 @end

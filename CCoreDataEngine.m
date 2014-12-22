@@ -123,11 +123,15 @@
 
 // Fetch the Contacts info from Coredata
 
--(void)fetchContacts :(void (^)(NSMutableArray *PUcontacts, NSError *error))block{
+-(void)fetchContacts :(NSString*)objectId :(void (^)(NSMutableArray *PUcontacts, NSError *error))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
+    if(objectId){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",objectId];
+        [fetchRequest setPredicate:predicate];
+    }
     NSArray * arrayOfContactsCDModel = [[[CCoreDataSharedInstance sharedInstance] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     NSMutableArray *PUcontacts = [[NSMutableArray alloc]init];
     for(CDContact *CDcontact in arrayOfContactsCDModel){
@@ -135,6 +139,7 @@
     }
     block(PUcontacts,nil);
 }
+
 
 
 
@@ -286,7 +291,7 @@
     [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%d",contact.objectId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contact.objectId];
     [fetchRequest setPredicate:predicate];
     NSArray * arrayOfCDContacts = [moc executeFetchRequest:fetchRequest error:&error];
     CDContact *cdContact = [arrayOfCDContacts firstObject];

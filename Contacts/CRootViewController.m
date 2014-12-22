@@ -51,7 +51,10 @@
     else{
         _loginOrSignUpBtnProperty.title = @"Login/SignUp";
     }
+    [self pr_changesReflectOnUI];
 }
+
+
 
 # pragma mark - Private API
 - (void)pr_refreshTable {
@@ -62,6 +65,15 @@
     [self pr_initialDataSetup];
 }
 
+- (void)pr_changesReflectOnUI{
+    [[CLocal defaultLocalDB] fetchContacts:nil :^(NSMutableArray *arrayOfContacts,NSError *error){
+        if(arrayOfContacts.count){
+            [contactsCollection removeAllObjects];
+            contactsCollection = arrayOfContacts;
+            [self.tableView reloadData];
+        }
+    }];
+}
 - (void)pr_sharedContactsReceived{
     __block  int count = [CSharedContact sharedInstance].sharedContacts.count;
     for(CContact *contact in [CSharedContact sharedInstance].sharedContacts){
@@ -250,6 +262,9 @@
                 }
             }];
         }
+    }
+    else{
+        [self.tableView reloadData];
     }
 }
 

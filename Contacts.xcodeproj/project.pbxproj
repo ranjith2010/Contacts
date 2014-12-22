@@ -10,7 +10,6 @@
 		C6358C351A40225100E052FD /* CDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C341A40225100E052FD /* CDisplayViewController.m */; };
 		C6358C391A403B7600E052FD /* CEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C381A403B7600E052FD /* CEditViewController.m */; };
 		C6358C3C1A404FE400E052FD /* CDAddress+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C3B1A404FE400E052FD /* CDAddress+Additions.m */; };
-		C69207531A4826F400E88444 /* ReadMe File in Resources */ = {isa = PBXBuildFile; fileRef = C69207521A4826F400E88444 /* ReadMe File */; };
 		C69E0E3E1A415543008BDB5E /* CAddMoreFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C69E0E3D1A415543008BDB5E /* CAddMoreFieldViewController.m */; };
 		C69E0E411A41CA0A008BDB5E /* CActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C69E0E401A41CA0A008BDB5E /* CActivityViewController.m */; };
 		C6A10EA01A429B6100A170D2 /* CSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A10E9F1A429B6100A170D2 /* CSelectionTableViewController.m */; };
@@ -80,7 +79,6 @@
 		C6358C381A403B7600E052FD /* CEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEditViewController.m; sourceTree = "<group>"; };
 		C6358C3A1A404FE400E052FD /* CDAddress+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDAddress+Additions.h"; path = "Contacts/CDAddress+Additions.h"; sourceTree = "<group>"; };
 		C6358C3B1A404FE400E052FD /* CDAddress+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDAddress+Additions.m"; path = "Contacts/CDAddress+Additions.m"; sourceTree = "<group>"; };
-		C69207521A4826F400E88444 /* ReadMe File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ReadMe File"; sourceTree = "<group>"; };
 		C69E0E3C1A415543008BDB5E /* CAddMoreFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAddMoreFieldViewController.h; sourceTree = "<group>"; };
 		C69E0E3D1A415543008BDB5E /* CAddMoreFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAddMoreFieldViewController.m; sourceTree = "<group>"; };
 		C69E0E3F1A41CA0A008BDB5E /* CActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CActivityViewController.h; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 		C6A3F5121A4000ED004D3479 = {
 			isa = PBXGroup;
 			children = (
-				C69207521A4826F400E88444 /* ReadMe File */,
 				C6A3F59C1A4003F3004D3479 /* Constants */,
 				C6A3F5B11A400990004D3479 /* CD Model */,
 				C6A3F58F1A4003D3004D3479 /* Model */,
@@ -475,6 +472,7 @@
 		C6A3F5131A4000ED004D3479 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = C;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Zippr;
 				TargetAttributes = {
@@ -513,7 +511,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6A3F52A1A4000ED004D3479 /* Main.storyboard in Resources */,
-				C69207531A4826F400E88444 /* ReadMe File in Resources */,
 				C6A3F52F1A4000ED004D3479 /* LaunchScreen.xib in Resources */,
 				C6A3F52C1A4000ED004D3479 /* Images.xcassets in Resources */,
 			);

@@ -22,7 +22,7 @@
 //-(void)storeContactInfo:(CContact*)contactInfo :(void (^)(CDContact *contactInfoCDModel, NSError *error))block;
 
 
--(void)fetchContacts :(void (^)(NSMutableArray *PUcontacts, NSError *error))block;
+-(void)fetchContacts : (NSString*)objectId :(void (^)(NSMutableArray *PUcontacts, NSError *error))block;
 
 
 - (void)updateAddressInfo:(CContact*)contact withAddress:(NSMutableDictionary *)addressInfo :(void (^)(BOOL, NSError *))block;

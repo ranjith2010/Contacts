@@ -34,6 +34,22 @@
     [self pr_initialDataSetup];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    if(_contact){
+        [[CLocal defaultLocalDB] fetchContacts :_contact.objectId
+                                               :^(NSMutableArray *arrayOfContacts,NSError *error){
+            if(arrayOfContacts.count){
+                for(CContact *contact in arrayOfContacts){
+                    if([contact.name isEqualToString:_contact.name]){
+                        _contact = contact;
+                        [self pr_initialDataSetup];
+                    }
+                }
+            }
+        }];
+    }
+}
+
 #pragma mark - Private API
 
 - (void)pr_initialDataSetup{
@@ -145,7 +161,9 @@
             }];
         }
     }
-    
+    else{
+        [self.addressTableView reloadData];
+    }
 }
 
 
