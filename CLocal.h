@@ -10,7 +10,7 @@
 
 @interface CLocal : NSObject
 
-+(id) defaultLocalDB;
-+(id) withCoreData:(NSString*)type;
++ (id)defaultLocalDB;
++ (id)withCoreData:(NSString*)type;
 
 @end

@@ -10,34 +10,29 @@
 
 @interface CConstants : NSObject
 
-extern NSString * const kApplicationId                              ;
-extern NSString * const kClientKey                                  ;
+extern NSString * const kServerApplicationId                         ;
+extern NSString * const kServerClientKey                             ;
 
-extern NSString * const kParseContactClassName                      ;
-extern NSString * const kParseAddressClassName                      ;
+extern NSString * const kServerContactClassName                      ;
+extern NSString * const kServerAddressClassName                      ;
 
-extern NSString * const kParseUserObjectIdAttribute                 ;
-extern NSString * const kParseObjectIdAttribute                     ;
-extern NSString * const kParsePhoneAttribute                        ;
-extern NSString * const kParseEmailAttribute                        ;
-extern NSString * const kParseNameAttribute                         ;
-extern NSString * const kParseAddressIdCollection                   ;
-extern NSString * const kParseAddressId                             ;
-extern NSString * const kParseContactObjectId                       ;
+extern NSString * const kServerUserName                              ;
+extern NSString * const kServerPassword                              ;
 
-extern NSString * const kParseAddressClassName                      ;
-extern NSString * const kParseStreetAttribute                       ;
-extern NSString * const kParseDistrictAttribute                     ;
-extern NSString * const kParseTypeAttribute                         ;
-extern NSString * const kParseSharedContactsClassName               ;
-extern NSString * const kParseContactsArray                         ;
+extern NSString * const kServerUserObjectIdAttribute                 ;
+extern NSString * const kServerObjectIdAttribute                     ;
+extern NSString * const kServerPhoneAttribute                        ;
+extern NSString * const kServerEmailAttribute                        ;
+extern NSString * const kServerNameAttribute                         ;
+extern NSString * const kServerAddressIdCollection                   ;
+extern NSString * const kServerAddressId                             ;
+extern NSString * const kServerContactObjectId                       ;
 
-extern NSString * const kAppDidReceivedSharedContactsNotification   ;
-
-
-extern NSString * const kAddressEntity                              ;
-extern NSString * const kUserEntity                                 ;
-extern NSString * const kContactEntity                              ;
-
+extern NSString * const kServerAddressClassName                      ;
+extern NSString * const kServerStreetAttribute                       ;
+extern NSString * const kServerDistrictAttribute                     ;
+extern NSString * const kServerTypeAttribute                         ;
+extern NSString * const kServerSharedContactsClassName               ;
+extern NSString * const kServerContactsArray                         ;
 
 @end

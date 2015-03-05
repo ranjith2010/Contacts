@@ -31,8 +31,8 @@
 
 - (void)pr_isItFirstLaunch{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if(![defaults objectForKey:kParseAddressId]){
-        [defaults setObject:[NSNumber numberWithInt:0] forKey:kParseAddressId];
+    if(![defaults objectForKey:kServerAddressId]){
+        [defaults setObject:[NSNumber numberWithInt:0] forKey:kServerAddressId];
         [defaults synchronize];
     }
 }
@@ -51,8 +51,6 @@
         [sharedZippr.sharedContacts addObjectsFromArray:arrayOfContacts];
     }];
 }
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

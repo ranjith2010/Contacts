@@ -22,5 +22,4 @@
 @property (weak, nonatomic) IBOutlet UITextField *typeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *streetTextField;
 @property (weak, nonatomic) IBOutlet UITextField *districtTextField;
-@property (weak, nonatomic) IBOutlet UIButton *deleteBtnProperty;
 @end

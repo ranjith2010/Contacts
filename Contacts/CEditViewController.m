@@ -34,17 +34,15 @@
         _nameTextField.text = _contact.name;
         _emailTextField.text = _contact.email;
         _mobileTextField.text = _contact.phone;
-        [[CLocal defaultLocalDB] fetchAddress:[[_contact.addressIdCollection firstObject] intValue] :^(CAddress *address){
-            if(address){
-                _typeTextField.text = address.typeOfAddress;
-                _streetTextField.text = address.street;
-                _districtTextField.text = address.district;
-            }
-        }];
-    }
-    else{
-        _deleteBtnProperty.hidden=YES;
-    }
+        [[CLocal defaultLocalDB] fetchAddress:[[_contact.addressIdCollection firstObject] intValue]
+                                             :^(CAddress *address){
+                                                 if(address){
+                                                     _typeTextField.text = address.typeOfAddress;
+                                                     _streetTextField.text = address.street;
+                                                     _districtTextField.text = address.district;
+                                                 }
+                                             }];
+                                        }
 }
 
 
@@ -53,11 +51,10 @@
             UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Don't go with Emptie name" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [errorAlert show];
     }
-    else{
-    if(_nameTextField.text&&!_contact){
+    else if(!_contact){
     [self pr_createNewContact];
     }
-    else if(_contact){
+    else{
         _contact.name = _nameTextField.text;
         _contact.phone = _mobileTextField.text;
         _contact.email = _emailTextField.text;
@@ -67,7 +64,6 @@
         _address.street = _streetTextField.text;
         _address.district = _districtTextField.text;
         [self pr_updateExistingContact];
-    }
     }
 }
 
@@ -146,13 +142,9 @@
         }];
 }
 
-
-- (IBAction)deleteContactBtn:(id)sender {
-}
 - (IBAction)cancelBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (IBAction)dismissKeyboard:(id)sender {
 }

@@ -34,8 +34,8 @@
 #pragma mark - Public API
 
 - (void)fetchAllContacts:(void (^)(NSMutableArray *contacts, NSError *error))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-    [query whereKey:kParseUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kParseObjectIdAttribute]];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+    [query whereKey:kServerUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]];
     NSMutableArray *returnArrayOfContacts = [[NSMutableArray alloc]init];
     for(PFObject *pfObject in [query findObjects]){
        [returnArrayOfContacts addObject:[PFObject PFObjectToCContact:pfObject]];
@@ -46,12 +46,12 @@
 
 
 - (void)saveArrayOfContacts:(CContact*)contact :(void(^)(BOOL succeeded, NSError *error))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kParseContactClassName];
-    [pfObject setObject:contact.userObjectId  forKey:kParseUserObjectIdAttribute];
-    [pfObject setObject:contact.phone forKey:kParsePhoneAttribute];
-    [pfObject setObject:contact.email forKey:kParseEmailAttribute];
-    [pfObject setObject:contact.name forKey:kParseNameAttribute];
-    [pfObject setObject:contact.addressIdCollection forKey:kParseAddressIdCollection];
+    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
+    [pfObject setObject:contact.userObjectId  forKey:kServerUserObjectIdAttribute];
+    [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+    [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+    [pfObject setObject:contact.name forKey:kServerNameAttribute];
+    [pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
     if([pfObject save]){
         block(YES,nil);
     }
@@ -67,24 +67,24 @@
 -(void)updateAddressInfo:(CContact*)contact withAddress:(NSMutableDictionary*)addressInfo
                                                         :(void(^)(BOOL succeeded, NSError *error))block{
     
-    NSLog(@"%@",[[PFUser currentUser]valueForKey:kParseObjectIdAttribute]);
-    if(![contact.userObjectId isEqualToString:[[PFUser currentUser]valueForKey:kParseObjectIdAttribute]]){
+    NSLog(@"%@",[[PFUser currentUser]valueForKey:kServerObjectIdAttribute]);
+    if(![contact.userObjectId isEqualToString:[[PFUser currentUser]valueForKey:kServerObjectIdAttribute]]){
         block(YES,nil);
     }
     else{
-        PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-        [query whereKey:kParseNameAttribute equalTo:contact.name];
+        PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+        [query whereKey:kServerNameAttribute equalTo:contact.name];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error && objects.count){
             PFObject *pfObject = [objects firstObject];
-        [pfObject setObject:contact.name forKey:kParseNameAttribute];
-        [pfObject setObject:contact.email forKey:kParseEmailAttribute];
-        [pfObject setObject:contact.phone forKey:kParsePhoneAttribute];
-        [pfObject setObject:contact.userObjectId forKey:kParseUserObjectIdAttribute];
-        NSMutableArray *arrayOfCollection = [pfObject valueForKey:kParseAddressIdCollection];
+        [pfObject setObject:contact.name forKey:kServerNameAttribute];
+        [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+        [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+        [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
+        NSMutableArray *arrayOfCollection = [pfObject valueForKey:kServerAddressIdCollection];
             [arrayOfCollection removeObjectAtIndex:0];
             [arrayOfCollection insertObject:addressInfo atIndex:0];
-            [pfObject setObject:arrayOfCollection forKey:kParseAddressIdCollection];
+            [pfObject setObject:arrayOfCollection forKey:kServerAddressIdCollection];
         if([pfObject save]){
             NSLog(@"updated successfully");
             block(YES,error);
@@ -100,12 +100,12 @@
 // Add More Address;
 
 -(void)addMoreAddress:(NSMutableDictionary*)addressDictionary withContactName:(NSString*)whom WhichOperation:(NSString*)operation :(void(^)(BOOL succeeded, NSError *error))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-    [query whereKey:kParseNameAttribute equalTo:whom];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+    [query whereKey:kServerNameAttribute equalTo:whom];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error && objects.count){
             PFObject *pfObject = [objects firstObject];
-            NSMutableArray *existingAddress = [pfObject valueForKey:kParseAddressIdCollection];
+            NSMutableArray *existingAddress = [pfObject valueForKey:kServerAddressIdCollection];
             if([operation isEqualToString:@"Add"]){
                 // To add the New address with Existing dictionary;
                 [existingAddress addObject:addressDictionary];
@@ -116,7 +116,7 @@
                 // Just create one new instance of NSMutableArray and do operation!!
                 NSMutableArray *toDeleteArray = [[NSMutableArray alloc]init];
                 for(NSMutableDictionary *addressDict in existingAddress){
-                    if([[addressDict valueForKey:kParseAddressId] isEqualToNumber:[addressDictionary valueForKey:kParseAddressId]]){
+                    if([[addressDict valueForKey:kServerAddressId] isEqualToNumber:[addressDictionary valueForKey:kServerAddressId]]){
                         [toDeleteArray addObject:addressDictionary];
                     }
                 }
@@ -126,14 +126,14 @@
                 // Here you have updated address check with and just replace with existing one!!!
                 NSMutableArray *toDeleteArray = [[NSMutableArray alloc]init];
                 for(NSMutableArray *addressDict in existingAddress){
-                        if([[addressDict valueForKey:kParseAddressId] isEqualToNumber:[addressDictionary valueForKey:kParseAddressId]]){
+                        if([[addressDict valueForKey:kServerAddressId] isEqualToNumber:[addressDictionary valueForKey:kServerAddressId]]){
                             [toDeleteArray addObject:addressDict];
                         }
                 }
                 [existingAddress removeObjectsInArray:toDeleteArray];
                 [existingAddress addObject:addressDictionary];
             }
-            [pfObject setObject:existingAddress forKey:kParseAddressIdCollection];
+            [pfObject setObject:existingAddress forKey:kServerAddressIdCollection];
             if([pfObject save]){
                 block(YES,nil);
             }
@@ -159,11 +159,11 @@
 
 
 -(void)findPFObjectwithObjectId:(NSString*)objectId :(void (^)(NSString *sharedClassObjectId, NSError *error))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseSharedContactsClassName];
-    [query whereKey:kParseUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kParseObjectIdAttribute]];
+    PFQuery *query = [PFQuery queryWithClassName:kServerSharedContactsClassName];
+    [query whereKey:kServerUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]];
     NSArray *pfObjects=[query findObjects];
         if(pfObjects.count){
-            block([[pfObjects firstObject] valueForKey:kParseObjectIdAttribute],nil);
+            block([[pfObjects firstObject] valueForKey:kServerObjectIdAttribute],nil);
         }
         else{
             block(nil,nil);
@@ -180,10 +180,6 @@
         block(NO);
     }
 }
-
-
-
-
 
 
 #pragma mark - Good Written Fucntions
@@ -241,8 +237,7 @@
 }
 
 - (void)parseAuthentication{
-    [Parse setApplicationId:kApplicationId
-                  clientKey:kClientKey];
+    [Parse setApplicationId:kServerApplicationId clientKey:kServerClientKey];
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicWriteAccess:NO];
     [defaultACL setPublicReadAccess:YES];
@@ -250,25 +245,25 @@
 }
 
 -(void)currentUserObjectId:(void (^)(NSString *objectId))block{
-    block([[PFUser currentUser] valueForKey:kParseObjectIdAttribute]);
+    block([[PFUser currentUser] valueForKey:kServerObjectIdAttribute]);
 }
 
 - (NSNumber*)randomIdFromNSUserDefault{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *numb = [defaults objectForKey:kParseAddressId];
+    NSNumber *numb = [defaults objectForKey:kServerAddressId];
     int integerValue = [numb intValue];
     integerValue = integerValue+1;
-    [defaults setObject:[NSNumber numberWithInt:integerValue] forKey:kParseAddressId];
+    [defaults setObject:[NSNumber numberWithInt:integerValue] forKey:kServerAddressId];
     [defaults synchronize];
     return [NSNumber numberWithInt:integerValue];
 }
 
 - (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kParseContactClassName];
-    [pfObject setObject:contact.userObjectId forKey:kParseUserObjectIdAttribute];
-    [pfObject setObject:contact.phone forKey:kParsePhoneAttribute];
-    [pfObject setObject:contact.email forKey:kParseEmailAttribute];
-    [pfObject setObject:contact.name forKey:kParseNameAttribute];
+    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
+    [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
+    [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+    [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+    [pfObject setObject:contact.name forKey:kServerNameAttribute];
     if([pfObject save]){
         block(YES);
     }
@@ -278,12 +273,12 @@
 }
 
 - (void)saveAddress:(CAddress*)address :(void (^)(BOOL succedeed))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kParseAddressClassName];
-    [pfObject setObject:address.typeOfAddress forKey:kParseTypeAttribute];
-    [pfObject setObject:address.street forKey:kParseStreetAttribute];
-    [pfObject setObject:address.district forKey:kParseDistrictAttribute];
-    [pfObject setObject:[NSNumber numberWithInt:address.addressId] forKey:kParseAddressId];
-    [pfObject setObject:address.contactObjectId forKey:kParseContactObjectId];
+    PFObject *pfObject = [PFObject objectWithClassName:kServerAddressClassName];
+    [pfObject setObject:address.typeOfAddress forKey:kServerTypeAttribute];
+    [pfObject setObject:address.street forKey:kServerStreetAttribute];
+    [pfObject setObject:address.district forKey:kServerDistrictAttribute];
+    [pfObject setObject:[NSNumber numberWithInt:address.addressId] forKey:kServerAddressId];
+    [pfObject setObject:address.contactObjectId forKey:kServerContactObjectId];
     if([pfObject save]){
             block(YES);
         }
@@ -294,13 +289,13 @@
 
 
 - (void)updateContact:(CContact*)contact :(void (^)(CContact *contact))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-    [query whereKey:kParseNameAttribute equalTo:contact.name];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+    [query whereKey:kServerNameAttribute equalTo:contact.name];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error && objects.count){
             PFObject *pfObject = [objects firstObject];
-            [pfObject setObject:contact.addressIdCollection forKey:kParseAddressIdCollection];
-            contact.objectId = [pfObject valueForKey:kParseObjectIdAttribute];
+            [pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
+            contact.objectId = [pfObject valueForKey:kServerObjectIdAttribute];
             if([pfObject save]){
                     block(contact);
                 }
@@ -313,12 +308,12 @@
 
 
 - (void)editContact:(CContact*)contact :(void(^)(BOOL succeed))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
     [query getObjectInBackgroundWithId:contact.objectId block:^(PFObject* pfObject,NSError *error){
         if(!error){
-            pfObject[kParseNameAttribute]=contact.name;
-            pfObject[kParsePhoneAttribute]=contact.phone;
-            pfObject[kParseEmailAttribute]=contact.email;
+            pfObject[kServerNameAttribute]=contact.name;
+            pfObject[kServerPhoneAttribute]=contact.phone;
+            pfObject[kServerEmailAttribute]=contact.email;
            if([pfObject save]){
                block(YES);
            }
@@ -330,14 +325,14 @@
 }
 
 - (void)editAddress:(CAddress*)address :(void(^)(BOOL succeed))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseAddressClassName];
-    [query whereKey:kParseAddressId equalTo:[NSNumber numberWithInt:address.addressId]];
+    PFQuery *query = [PFQuery queryWithClassName:kServerAddressClassName];
+    [query whereKey:kServerAddressId equalTo:[NSNumber numberWithInt:address.addressId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
         if(pfObjects.count){
             PFObject *pfObject = [pfObjects firstObject];
-            pfObject[kParseTypeAttribute]=address.typeOfAddress;
-            pfObject[kParseStreetAttribute]=address.street;
-            pfObject[kParseDistrictAttribute]=address.district;
+            pfObject[kServerTypeAttribute]=address.typeOfAddress;
+            pfObject[kServerStreetAttribute]=address.street;
+            pfObject[kServerDistrictAttribute]=address.district;
             if([pfObject save]){
                 block(YES);
             }
@@ -349,16 +344,16 @@
 }
 
 - (void)fetchAddress:(int)addressId :(void(^)(CAddress *address))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseAddressClassName];
-    [query whereKey:kParseAddressId equalTo:[NSNumber numberWithInt:addressId]];
+    PFQuery *query = [PFQuery queryWithClassName:kServerAddressClassName];
+    [query whereKey:kServerAddressId equalTo:[NSNumber numberWithInt:addressId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
         if(pfObjects.count){
             PFObject *pfObject = [pfObjects firstObject];
             CAddress *address = [[CAddress alloc]init];
-            [address setTypeOfAddress:[pfObject valueForKey:kParseTypeAttribute]];
-            [address setStreet:[pfObject valueForKey:kParseStreetAttribute]];
-            [address setDistrict:[pfObject valueForKey:kParseDistrictAttribute]];
-            [address setAddressId:[[pfObject valueForKey:kParseAddressId] intValue]];
+            [address setTypeOfAddress:[pfObject valueForKey:kServerTypeAttribute]];
+            [address setStreet:[pfObject valueForKey:kServerStreetAttribute]];
+            [address setDistrict:[pfObject valueForKey:kServerDistrictAttribute]];
+            [address setAddressId:[[pfObject valueForKey:kServerAddressId] intValue]];
             block(address);
             }
             else{
@@ -370,17 +365,17 @@
 #pragma mark - PLS Concentrate on Code Quality Here:
 
 - (void)affectAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-    [query whereKey:kParseObjectIdAttribute equalTo:contactObjectId];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+    [query whereKey:kServerObjectIdAttribute equalTo:contactObjectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
         if(!error && pfObjects.count){
             PFObject *pfObject = [pfObjects firstObject];
-            NSMutableArray *arrayOfAddress = [pfObject valueForKey:kParseAddressIdCollection];
+            NSMutableArray *arrayOfAddress = [pfObject valueForKey:kServerAddressIdCollection];
             if(!arrayOfAddress){
                 arrayOfAddress = [[NSMutableArray alloc]init];
             }
                 [arrayOfAddress addObject:[NSNumber numberWithInt:addressId]];
-                [pfObject setObject:arrayOfAddress forKey:kParseAddressIdCollection];
+                [pfObject setObject:arrayOfAddress forKey:kServerAddressIdCollection];
                 if([pfObject save]){
                         block(YES);
                     }
@@ -392,15 +387,15 @@
 }
 
 - (void)removeAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-    [query whereKey:kParseObjectIdAttribute equalTo:contactObjectId];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+    [query whereKey:kServerObjectIdAttribute equalTo:contactObjectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
         if(!error && pfObjects.count){
             PFObject *pfObject = [pfObjects firstObject];
-            NSMutableArray *arrayOfAddress = [pfObject valueForKey:kParseAddressIdCollection];
+            NSMutableArray *arrayOfAddress = [pfObject valueForKey:kServerAddressIdCollection];
             if(arrayOfAddress.count){
                 [arrayOfAddress removeObject:[NSNumber numberWithInt:addressId]];
-                [pfObject setObject:arrayOfAddress forKey:kParseAddressIdCollection];
+                [pfObject setObject:arrayOfAddress forKey:kServerAddressIdCollection];
                 if([pfObject save]){
                         block(YES);
                     }
@@ -415,8 +410,8 @@
 #pragma mark -
 
 - (void)deleteAddress:(int)addressId :(void(^)(BOOL succeed))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseAddressClassName];
-    [query whereKey:kParseAddressId equalTo:[NSNumber numberWithInt:addressId]];
+    PFQuery *query = [PFQuery queryWithClassName:kServerAddressClassName];
+    [query whereKey:kServerAddressId equalTo:[NSNumber numberWithInt:addressId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
         if(pfObjects.count){
             [[pfObjects firstObject] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
@@ -433,7 +428,7 @@
 
 
 - (void)deleteContact:(NSString*)contactObjectId :(void(^)(BOOL succeeded))block{
-    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
+    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
     [query getObjectInBackgroundWithId:contactObjectId block:^(PFObject *object, NSError *error) {
         if (!object) {
             NSLog(@"The getFirstObject request failed.");
@@ -480,12 +475,12 @@
         NSString *myString = [url absoluteString];
         NSArray *items = [myString componentsSeparatedByString:@"/"];
         if([items[2] isEqualToString:@"multipleContacts"]){
-            PFQuery *query = [PFQuery queryWithClassName:kParseSharedContactsClassName];
-            [query whereKey:kParseObjectIdAttribute equalTo:items[3]];
+            PFQuery *query = [PFQuery queryWithClassName:kServerSharedContactsClassName];
+            [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
             [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
                 if(!error && pfObjects.count){
-                    PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-                    [query whereKey:kParseObjectIdAttribute containedIn:[[pfObjects firstObject] valueForKey:kParseContactsArray]];
+                    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+                    [query whereKey:kServerObjectIdAttribute containedIn:[[pfObjects firstObject] valueForKey:kServerContactsArray]];
                     [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
                         __block NSUInteger pass = pfObjects.count;
                         if(!error && pfObjects.count){
@@ -507,24 +502,24 @@
             }];
         }
         else{
-            PFQuery *query = [PFQuery queryWithClassName:kParseContactClassName];
-            if([items[2] isEqualToString:kParseUserObjectIdAttribute]){
-                [query whereKey:kParseUserObjectIdAttribute equalTo:items[3]];
+            PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+            if([items[2] isEqualToString:kServerUserObjectIdAttribute]){
+                [query whereKey:kServerUserObjectIdAttribute equalTo:items[3]];
             }
             else{
-                [query whereKey:kParseObjectIdAttribute equalTo:items[3]];
+                [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
             }
             [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
                 __block NSUInteger pass = pfObjects.count;
                 if(!error && pfObjects.count){
                     for(PFObject *object in pfObjects){
                         CContact *contactInfo = [[CContact alloc]init];
-                        [contactInfo setName:[object valueForKey:kParseNameAttribute]];
-                        [contactInfo setPhone:[object valueForKey:kParsePhoneAttribute]];
-                        [contactInfo setEmail:[object valueForKey:kParseEmailAttribute]];
-                        [contactInfo setObjectId:[object valueForKey:kParseObjectIdAttribute]];
-                        [contactInfo setUserObjectId:[object valueForKey:kParseUserObjectIdAttribute]];
-                        [contactInfo setAddressIdCollection:[object valueForKey:kParseAddressIdCollection]];
+                        [contactInfo setName:[object valueForKey:kServerNameAttribute]];
+                        [contactInfo setPhone:[object valueForKey:kServerPhoneAttribute]];
+                        [contactInfo setEmail:[object valueForKey:kServerEmailAttribute]];
+                        [contactInfo setObjectId:[object valueForKey:kServerObjectIdAttribute]];
+                        [contactInfo setUserObjectId:[object valueForKey:kServerUserObjectIdAttribute]];
+                        [contactInfo setAddressIdCollection:[object valueForKey:kServerAddressIdCollection]];
                         pass--;
                         if(!error && contactInfo){
                             [fetchedObjects addObject:contactInfo];
@@ -540,9 +535,10 @@
 }
 
 - (void)saveSharedContacts:(NSMutableArray*)sharedContactsArray :(void (^)(BOOL succedeed))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kParseSharedContactsClassName];
-    [pfObject setObject:sharedContactsArray forKey:kParseContactsArray];
-    [pfObject setObject:[[PFUser currentUser] valueForKey:kParseObjectIdAttribute] forKey:kParseUserObjectIdAttribute];
+    PFObject *pfObject = [PFObject objectWithClassName:kServerSharedContactsClassName];
+    [pfObject setObject:sharedContactsArray forKey:kServerContactsArray];
+    [pfObject setObject:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]
+                                                   forKey:kServerUserObjectIdAttribute];
     if([pfObject save]){
         block(YES);
     }
@@ -550,9 +546,5 @@
         block(NO);
     }
 }
-
-
-
-
 
 @end

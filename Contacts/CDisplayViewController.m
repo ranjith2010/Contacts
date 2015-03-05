@@ -27,8 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [scroller setScrollEnabled:YES];
-    [scroller setContentSize:CGSizeMake(320, 800)];
+//    [scroller setScrollEnabled:YES];
+//    [scroller setContentSize:CGSizeMake(320, 800)];
+    addressCollectionDataSource = [[NSMutableArray alloc]init];
     self.addressTableView.delegate = self;
     self.addressTableView.dataSource = self;
     [self pr_initialDataSetup];
@@ -58,8 +59,8 @@
         _mobileLabel.text = _contact.phone;
         _emailLabel.text = _contact.email;
         if(_contact.addressIdCollection.count){
-            addressCollectionDataSource = [[NSMutableArray alloc]init];
-            __block int count = _contact.addressIdCollection.count;
+            __block NSUInteger count = _contact.addressIdCollection.count;
+            [addressCollectionDataSource removeAllObjects];
             for(NSNumber *addressId in _contact.addressIdCollection){
                 count--;
                 [[CLocal defaultLocalDB] fetchAddress:[addressId intValue] :^(CAddress *address){

@@ -43,6 +43,8 @@
 
 - (void)affectAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block;
 
+- (void)saveAddress:(CAddress*)address :(void (^)(BOOL succeed))block;
+
 - (void)deleteAddress:(int)addressId :(void(^)(BOOL succeed))block;
 - (void)deleteContact:(NSString*)contactObjectId :(void (^)(BOOL succedeed))block;
 - (void)removeAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block;

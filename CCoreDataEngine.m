@@ -55,7 +55,7 @@
 
 - (void)deleteContact:(NSString*)contactObjectId :(void (^)(BOOL succedeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contactObjectId];
@@ -75,7 +75,7 @@
 - (void)updateAddressInfo:(CContact*)contact withAddress:(NSMutableDictionary *)addressInfo :(void (^)(BOOL, NSError *))block{
     // Update into Contact.addressObjects -> Value
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact"
                                         inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError *error = nil;
@@ -91,19 +91,19 @@
         if(addressInfoLocal==nil){
         // No Address dict
         addressInfoLocal = [[NSMutableDictionary alloc]init];
-            [addressInfoLocal safeAddForKey:kParseTypeAttribute value:[addressInfo valueForKey:kParseTypeAttribute]];
-            [addressInfoLocal safeAddForKey:kParseStreetAttribute value:[addressInfo valueForKey:kParseStreetAttribute]];
-            [addressInfoLocal safeAddForKey:kParseDistrictAttribute value:[addressInfo valueForKey:kParseDistrictAttribute]];
+            [addressInfoLocal safeAddForKey:kServerTypeAttribute value:[addressInfo valueForKey:kServerTypeAttribute]];
+            [addressInfoLocal safeAddForKey:kServerStreetAttribute value:[addressInfo valueForKey:kServerStreetAttribute]];
+            [addressInfoLocal safeAddForKey:kServerDistrictAttribute value:[addressInfo valueForKey:kServerDistrictAttribute]];
         }
-          else if([[addressInfoLocal valueForKey:kParseAddressId] isEqualToNumber:[addressInfo valueForKey:kParseAddressId]]){
-                [addressInfoLocal safeAddForKey:kParseTypeAttribute value:[addressInfo valueForKey:kParseTypeAttribute]];
-                [addressInfoLocal safeAddForKey:kParseStreetAttribute value:[addressInfo valueForKey:kParseStreetAttribute]];
-                [addressInfoLocal safeAddForKey:kParseDistrictAttribute value:[addressInfo valueForKey:kParseDistrictAttribute]];
+          else if([[addressInfoLocal valueForKey:kServerAddressId] isEqualToNumber:[addressInfo valueForKey:kServerAddressId]]){
+                [addressInfoLocal safeAddForKey:kServerTypeAttribute value:[addressInfo valueForKey:kServerTypeAttribute]];
+                [addressInfoLocal safeAddForKey:kServerStreetAttribute value:[addressInfo valueForKey:kServerStreetAttribute]];
+                [addressInfoLocal safeAddForKey:kServerDistrictAttribute value:[addressInfo valueForKey:kServerDistrictAttribute]];
                 }
           else{
-              [addressInfoLocal safeAddForKey:kParseTypeAttribute value:[addressInfo valueForKey:kParseTypeAttribute]];
-              [addressInfoLocal safeAddForKey:kParseStreetAttribute value:[addressInfo valueForKey:kParseStreetAttribute]];
-              [addressInfoLocal safeAddForKey:kParseDistrictAttribute value:[addressInfo valueForKey:kParseDistrictAttribute]];
+              [addressInfoLocal safeAddForKey:kServerTypeAttribute value:[addressInfo valueForKey:kServerTypeAttribute]];
+              [addressInfoLocal safeAddForKey:kServerStreetAttribute value:[addressInfo valueForKey:kServerStreetAttribute]];
+              [addressInfoLocal safeAddForKey:kServerDistrictAttribute value:[addressInfo valueForKey:kServerDistrictAttribute]];
           }
     [CDcontact setAddressIdCollection:[NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] initWithObjects:addressInfoLocal, nil]]];
     // Here it simply saving the 'Coredata Context'
@@ -125,7 +125,8 @@
 
 -(void)fetchContacts :(NSString*)objectId :(void (^)(NSMutableArray *PUcontacts, NSError *error))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact"
+                                        inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     if(objectId){
@@ -147,7 +148,8 @@
 
 -(void)addMoreAddress:(NSMutableDictionary*)addressDictionary withContactName:(NSString*)whom WhichOperation:(NSString*)operation :(void(^)(BOOL succeeded, NSError *error))block{
     NSFetchRequest * allContacts = [[NSFetchRequest alloc] init];
-    [allContacts setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
+    [allContacts setEntity:[NSEntityDescription entityForName:@"CDContact"
+                                       inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
     [allContacts setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray * contactsObjects = [[[CCoreDataSharedInstance sharedInstance] managedObjectContext] executeFetchRequest:allContacts error:&error];
@@ -160,7 +162,7 @@
             else if ([operation isEqualToString:@"Edit"]){
                 NSMutableArray *toDeleteArray = [[NSMutableArray alloc]init];
                 for(NSMutableDictionary *dict in existingAddress){
-                    if([[dict valueForKey:kParseAddressId] isEqualToNumber:[addressDictionary valueForKey:kParseAddressId]]){
+                    if([[dict valueForKey:kServerAddressId] isEqualToNumber:[addressDictionary valueForKey:kServerAddressId]]){
                         [toDeleteArray addObject:dict];
                     }
                 }
@@ -170,7 +172,7 @@
             else if ([operation isEqualToString:@"Delete"]){
                 NSMutableArray *toDeleteArray = [[NSMutableArray alloc]init];
                 for(NSMutableDictionary *dict in existingAddress){
-                    if([[dict valueForKey:kParseAddressId] isEqualToNumber:[addressDictionary valueForKey:kParseAddressId]]){
+                    if([[dict valueForKey:kServerAddressId] isEqualToNumber:[addressDictionary valueForKey:kServerAddressId]]){
                         [toDeleteArray addObject:dict];
                     }
                 }
@@ -194,7 +196,7 @@
 
 
 - (void)createNewUser:(CUser*)user :(void (^)(BOOL succedeed))block{
-    NSEntityDescription *userEntityDesc = [NSEntityDescription entityForName:kUserEntity
+    NSEntityDescription *userEntityDesc = [NSEntityDescription entityForName:@"CDUser"
                                                       inManagedObjectContext:moc];
     CDUser *newUserCDModel = (CDUser*)[[NSManagedObject alloc] initWithEntity:userEntityDesc
                                                insertIntoManagedObjectContext:moc];
@@ -213,7 +215,7 @@
 
 - (void)fetchAddress:(int)addressId : (void (^)(CAddress *address))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kAddressEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDAddress" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"addressId=%d",addressId];
@@ -223,7 +225,8 @@
 }
 
 - (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block{
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"CDContact"
+                                                  inManagedObjectContext:moc];
     CDContact *newContact = (CDContact*)[[NSManagedObject alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:moc];
     [newContact setName:contact.name];
     [newContact setPhone:contact.phone];
@@ -243,7 +246,8 @@
 }
 
 - (void)saveAddress:(CAddress*)address :(void (^)(BOOL succeed))block{
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:kAddressEntity inManagedObjectContext:moc];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"CDAddress"
+                                                  inManagedObjectContext:moc];
     CDAddress *newAddress = (CDAddress*)[[NSManagedObject alloc]initWithEntity:entityDesc insertIntoManagedObjectContext:moc];
     [newAddress setType:address.typeOfAddress];
     [newAddress setStreet:address.street];
@@ -262,7 +266,7 @@
 
 - (CDContact*)pr_fetchContact:(NSString*)contactObjectId{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contactObjectId];
@@ -274,7 +278,7 @@
 
 - (id)fetchCurrentUser:(BOOL)CDUserNeeded{
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kUserEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDUser" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray *user = [moc executeFetchRequest:fetchRequest error:&error];
@@ -288,7 +292,7 @@
 
 - (void)editContact:(CContact*)contact :(void(^)(BOOL succeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contact.objectId];
@@ -308,7 +312,7 @@
 
 - (void)editAddress:(CAddress*)address :(void(^)(BOOL succeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kAddressEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDAddress" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"addressId=%d",address.addressId];
@@ -328,7 +332,7 @@
 
 - (void)affectAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contactObjectId];
@@ -351,7 +355,7 @@
 
 - (void)deleteAddress:(int)addressId :(void(^)(BOOL succeed))block{
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kAddressEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDAddress" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"addressId=%d",addressId];
@@ -369,7 +373,7 @@
 
 - (void)removeAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId=%@",contactObjectId];
@@ -394,7 +398,7 @@
 
 - (void)logout:(void (^)(BOOL succedeed))block{
     NSError *error = nil;
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:kUserEntity];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"CDUser"];
     NSArray *userObjects = [[[CCoreDataSharedInstance sharedInstance] managedObjectContext] executeFetchRequest:request error:&error];
     if(userObjects.count){
         [moc deleteObject:[userObjects firstObject]];
@@ -410,12 +414,13 @@
 
 - (void)flushAllContacts:(NSString*)userObjectId :(void (^)(BOOL succedeed))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kContactEntity inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact"
+                                        inManagedObjectContext:[[CCoreDataSharedInstance sharedInstance] managedObjectContext]]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray * CDcontacts = [moc executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject * contact in CDcontacts) {
-        if([[contact valueForKey:kParseUserObjectIdAttribute]isEqualToString:userObjectId]){
+        if([[contact valueForKey:kServerUserObjectIdAttribute]isEqualToString:userObjectId]){
             [[[CCoreDataSharedInstance sharedInstance] managedObjectContext] deleteObject:contact];
         }
     }

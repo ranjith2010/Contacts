@@ -11,11 +11,11 @@
 
 @implementation CLocal
 
-+(id) defaultLocalDB{
++ (id)defaultLocalDB{
     return [CLocal withCoreData:@"CoreData"];
 }
 
-+(id) withCoreData:(NSString*)type{
++ (id)withCoreData:(NSString*)type{
     if([type isEqual:@"CoreData"])
         return [CCoreDataEngine sharedInstance];
     else

@@ -255,8 +255,6 @@
 				C6A3F5221A4000ED004D3479 /* CAppDelegate.h */,
 				C6A3F5231A4000ED004D3479 /* CAppDelegate.m */,
 				C6A3F5281A4000ED004D3479 /* Main.storyboard */,
-				C6A3F52B1A4000ED004D3479 /* Images.xcassets */,
-				C6A3F52D1A4000ED004D3479 /* LaunchScreen.xib */,
 				C6A3F51E1A4000ED004D3479 /* Supporting Files */,
 			);
 			path = Contacts;
@@ -265,6 +263,8 @@
 		C6A3F51E1A4000ED004D3479 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C6A3F52D1A4000ED004D3479 /* LaunchScreen.xib */,
+				C6A3F52B1A4000ED004D3479 /* Images.xcassets */,
 				C6A3F51F1A4000ED004D3479 /* Info.plist */,
 				C6A3F5201A4000ED004D3479 /* main.m */,
 			);
@@ -334,9 +334,9 @@
 		C6A3F56D1A400253004D3479 /* Local DB */ = {
 			isa = PBXGroup;
 			children = (
+				C6A3F5791A4002C6004D3479 /* CLocalInterface.h */,
 				C6A3F5771A4002C6004D3479 /* CLocal.h */,
 				C6A3F5781A4002C6004D3479 /* CLocal.m */,
-				C6A3F5791A4002C6004D3479 /* CLocalInterface.h */,
 				C6A3F5701A40026C004D3479 /* CoreData Storage */,
 			);
 			name = "Local DB";
@@ -635,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -670,7 +670,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -688,7 +688,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Contacts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -706,7 +706,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Contacts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

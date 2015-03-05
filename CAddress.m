@@ -11,32 +11,29 @@
 
 @implementation CAddress
 
-@synthesize street,district,typeOfAddress,addressId,contactObjectId;
-
 -(instancetype)init {
     self = [super init];
     return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.street forKey:kParseStreetAttribute];
-    [aCoder encodeObject:self.typeOfAddress forKey:kParseTypeAttribute];
-    [aCoder encodeObject:self.district forKey:kParseDistrictAttribute];
-    [aCoder encodeObject:[NSNumber numberWithInt:addressId] forKey:kParseAddressId];
-    [aCoder encodeObject:self.contactObjectId forKey:kParseContactObjectId];
+    [aCoder encodeObject:self.street forKey:kServerStreetAttribute];
+    [aCoder encodeObject:self.typeOfAddress forKey:kServerTypeAttribute];
+    [aCoder encodeObject:self.district forKey:kServerDistrictAttribute];
+    [aCoder encodeObject:[NSNumber numberWithInt:self.addressId] forKey:kServerAddressId];
+    [aCoder encodeObject:self.contactObjectId forKey:kServerContactObjectId];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if(self=[super init]){
-        self.street = [aDecoder decodeObjectForKey:kParseStreetAttribute];
-        self.typeOfAddress = [aDecoder decodeObjectForKey:kParseTypeAttribute];
-        self.district = [aDecoder decodeObjectForKey:kParseDistrictAttribute];
-        NSNumber *rowNumber = [aDecoder decodeObjectForKey:kParseAddressId];
+        self.street = [aDecoder decodeObjectForKey:kServerStreetAttribute];
+        self.typeOfAddress = [aDecoder decodeObjectForKey:kServerTypeAttribute];
+        self.district = [aDecoder decodeObjectForKey:kServerDistrictAttribute];
+        NSNumber *rowNumber = [aDecoder decodeObjectForKey:kServerAddressId];
         self.addressId = [rowNumber intValue];
-        self.contactObjectId= [aDecoder decodeObjectForKey:kParseContactObjectId];
+        self.contactObjectId= [aDecoder decodeObjectForKey:kServerContactObjectId];
     }
     return self;
 }
-
 
 @end

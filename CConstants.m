@@ -11,43 +11,38 @@
 @implementation CConstants
 
 
-// Credentials
+// Credentials for the Parse Authentication!
 
-NSString * const kClientKey                                 = @"N4qTlR1d3yi6qanVrwvLVlfuszkMuYmjPU0SgAfo";
-NSString * const kApplicationId                             = @"ZJdmZlD0SXuhlyjvuGomQwlC2YhvM7fk2F09qWWS";
+NSString * const kServerClientKey                                 = @"N4qTlR1d3yi6qanVrwvLVlfuszkMuYmjPU0SgAfo";
+NSString * const kServerApplicationId                             = @"ZJdmZlD0SXuhlyjvuGomQwlC2YhvM7fk2F09qWWS";
 
+// Parse : User class Name & Attributes
+
+NSString * const kServerUserName                            = @"username";
+NSString * const kServerPassword                            = @"password";
 
 // Parse : Contact class Name & Attributes
 
-NSString * const kParseContactClassName                     = @"Contacts";
-NSString * const kParseUserObjectIdAttribute                = @"userObjectId";
-NSString * const kParseObjectIdAttribute                    = @"objectId";
-NSString * const kParsePhoneAttribute                       = @"phone";
-NSString * const kParseEmailAttribute                       = @"email";
-NSString * const kParseNameAttribute                        = @"name";
-NSString * const kParseAddressIdCollection                  = @"addressIdCollection";
+NSString * const kServerContactClassName                     = @"Contacts";
+NSString * const kServerUserObjectIdAttribute                = @"userObjectId";
+NSString * const kServerObjectIdAttribute                    = @"objectId";
+NSString * const kServerPhoneAttribute                       = @"phone";
+NSString * const kServerEmailAttribute                       = @"email";
+NSString * const kServerNameAttribute                        = @"name";
+NSString * const kServerAddressIdCollection                  = @"addressIdCollection";
 
 // Parse : Address class Names & Attributes
 
-NSString * const kParseAddressClassName                     = @"Address";
-NSString * const kParseStreetAttribute                      = @"street";
-NSString * const kParseDistrictAttribute                    = @"district";
-NSString * const kParseTypeAttribute                        = @"type";
-NSString * const kParseAddressId                            = @"addressId";
-NSString * const kParseContactObjectId                      = @"contactObjectId";
+NSString * const kServerAddressClassName                     = @"Address";
+NSString * const kServerStreetAttribute                      = @"street";
+NSString * const kServerDistrictAttribute                    = @"district";
+NSString * const kServerTypeAttribute                        = @"type";
+NSString * const kServerAddressId                            = @"addressId";
+NSString * const kServerContactObjectId                      = @"contactObjectId";
 
 // Parse : SharedContacts Names & Attributes
 
-NSString * const kParseSharedContactsClassName              = @"SharedContacts";
-NSString * const kParseContactsArray                        = @"contacts";
+NSString * const kServerSharedContactsClassName              = @"SharedContacts";
+NSString * const kServerContactsArray                        = @"contacts";
 
-// Notification : Names
-
-NSString * const kAppDidReceivedSharedContactsNotification  = @"SharedContactsReceivedSuccessfully";
-
-// Entity : Names
-
-NSString * const kContactEntity                             = @"CDContact";
-NSString * const kAddressEntity                             = @"CDAddress";
-NSString * const kUserEntity                                = @"CDUser";
 @end

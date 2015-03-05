@@ -14,17 +14,17 @@
     CAddress *returnAddress;
     returnAddress = [[CAddress alloc]init];
     if(dictionary.count!=0){
-        if([dictionary valueForKey:kParseTypeAttribute]){
-            [returnAddress setTypeOfAddress:[dictionary valueForKey:kParseTypeAttribute]];
+        if([dictionary valueForKey:kServerTypeAttribute]){
+            [returnAddress setTypeOfAddress:[dictionary valueForKey:kServerTypeAttribute]];
         }
-        if([dictionary valueForKey:kParseStreetAttribute]){
-            [returnAddress setStreet:[dictionary valueForKey:kParseStreetAttribute]];
+        if([dictionary valueForKey:kServerStreetAttribute]){
+            [returnAddress setStreet:[dictionary valueForKey:kServerStreetAttribute]];
         }
-        if([dictionary valueForKey:kParseDistrictAttribute]){
-            [returnAddress setDistrict:[dictionary valueForKey:kParseDistrictAttribute]];
+        if([dictionary valueForKey:kServerDistrictAttribute]){
+            [returnAddress setDistrict:[dictionary valueForKey:kServerDistrictAttribute]];
         }
-        if([[dictionary valueForKey:kParseAddressId] intValue]){
-            [returnAddress setAddressId:[[dictionary valueForKey:kParseAddressId] intValue]];
+        if([[dictionary valueForKey:kServerAddressId] intValue]){
+            [returnAddress setAddressId:[[dictionary valueForKey:kServerAddressId] intValue]];
         }
     }
     return returnAddress;

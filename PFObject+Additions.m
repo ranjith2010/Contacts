@@ -2,7 +2,7 @@
 //  PFObject+Additions.m
 //  ParseUser
 //
-//  Created by Ran on 05/12/14.
+//  Created by Ranjith on 05/12/14.
 //  Copyright (c) 2014 Zippr. All rights reserved.
 //
 
@@ -14,12 +14,12 @@
     CContact *returnContact;
     if(pfObject){
          returnContact = [[CContact alloc]init];
-        [returnContact setName:[pfObject valueForKey:kParseNameAttribute]];
-        [returnContact setEmail:[pfObject valueForKey:kParseEmailAttribute]];
-        [returnContact setPhone:[pfObject valueForKey:kParsePhoneAttribute]];
-        [returnContact setObjectId:[pfObject valueForKey:kParseObjectIdAttribute]];
-        [returnContact setAddressIdCollection:[pfObject valueForKey:kParseAddressIdCollection]];
-        [returnContact setUserObjectId:[pfObject valueForKey:kParseUserObjectIdAttribute]];
+        [returnContact setName:[pfObject valueForKey:kServerNameAttribute]];
+        [returnContact setEmail:[pfObject valueForKey:kServerEmailAttribute]];
+        [returnContact setPhone:[pfObject valueForKey:kServerPhoneAttribute]];
+        [returnContact setObjectId:[pfObject valueForKey:kServerObjectIdAttribute]];
+        [returnContact setAddressIdCollection:[pfObject valueForKey:kServerAddressIdCollection]];
+        [returnContact setUserObjectId:[pfObject valueForKey:kServerUserObjectIdAttribute]];
         return returnContact;
     }
     else{

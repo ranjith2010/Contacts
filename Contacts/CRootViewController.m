@@ -16,6 +16,9 @@
 #import "CSharedContact.h"
 @interface CRootViewController ()
 
+@property (nonatomic,strong)id<CLocalInterface> localInterfaceTrigger;
+@property (nonatomic,strong)id<CServerInterface> serverInterfaceTrigger;
+
 @end
 
 @implementation CRootViewController{
@@ -27,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.localInterfaceTrigger = [CLocal defaultLocalDB];
+    self.serverInterfaceTrigger = [CServer defaultParser];
     NSLog(@"app dir: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:refreshControl];
@@ -37,9 +42,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    CUser *user = [[CLocal defaultLocalDB]fetchCurrentUser:NO];
+    CUser *user = [self.localInterfaceTrigger fetchCurrentUser:NO];
     if(user){
-        [[CServer defaultParser] isCurrentUserAuthenticated:^(BOOL succeed){
+        [self.serverInterfaceTrigger isCurrentUserAuthenticated:^(BOOL succeed){
             if(succeed){
                 _loginOrSignUpBtnProperty.title = user.username;
             }
@@ -66,7 +71,7 @@
 }
 
 - (void)pr_changesReflectOnUI{
-    [[CLocal defaultLocalDB] fetchContacts:nil :^(NSMutableArray *arrayOfContacts,NSError *error){
+    [self.localInterfaceTrigger fetchContacts:nil :^(NSMutableArray *arrayOfContacts,NSError *error){
         if(arrayOfContacts.count){
             [contactsCollection removeAllObjects];
             contactsCollection = arrayOfContacts;
@@ -75,10 +80,10 @@
     }];
 }
 - (void)pr_sharedContactsReceived{
-    __block  int count = [CSharedContact sharedInstance].sharedContacts.count;
+    __block  NSUInteger count = [CSharedContact sharedInstance].sharedContacts.count;
     for(CContact *contact in [CSharedContact sharedInstance].sharedContacts){
         count--;
-        [[CLocal defaultLocalDB] saveContact:contact :^(BOOL succeed){
+        [self.localInterfaceTrigger saveContact:contact :^(BOOL succeed){
             if(succeed){
                 [receivedContacts addObject:contact];
             }
@@ -90,51 +95,51 @@
 }
 
 - (void)pr_initialDataSetup{
-    [[CServer defaultParser] isThereAnyUser:^(BOOL succeeded){
-    if(succeeded){
-        [[CServer defaultParser]currentUserObjectId:^(NSString *userObjectId){
-            if(userObjectId){
-                [[CLocal defaultLocalDB] flushAllContacts:userObjectId :^(BOOL succeed){
-                    if(succeed){
-                        [[CServer defaultParser] fetchAllContacts:^(NSMutableArray *contacts, NSError *error){
-                            if(contacts.count){
-                                __block int count = contacts.count;
-                                for(CContact *contact in contacts){
-                                    count--;
-                                    [[CLocal defaultLocalDB] saveContact:contact :^(BOOL succeeded){
-                                        if(succeeded){
-                                            for(NSNumber *addressId in contact.addressIdCollection){
-                                                [[CServer defaultParser] fetchAddress:[addressId intValue] :^(CAddress *address){
-                                                    if(address){
-                                                        [[CLocal defaultLocalDB] saveAddress:address :^(BOOL succeed){
-                                                            if(succeed){
-                                                                NSLog(@"Fetches are #Contacts #Address completed");
-                                                            }
-                                                        }];
-                                                    }
-                                                }];
+    [self.serverInterfaceTrigger isThereAnyUser:^(BOOL succeeded){
+        if(succeeded){
+            [self.serverInterfaceTrigger currentUserObjectId:^(NSString *userObjectId){
+                if(userObjectId){
+                    [self.localInterfaceTrigger flushAllContacts:userObjectId :^(BOOL succeed){
+                        if(succeed){
+                            [self.serverInterfaceTrigger fetchAllContacts:^(NSMutableArray *contacts, NSError *error){
+                                if(contacts.count){
+                                    __block NSUInteger count = contacts.count;
+                                    for(CContact *contact in contacts){
+                                        count--;
+                                        [self.localInterfaceTrigger saveContact:contact :^(BOOL succeeded){
+                                            if(succeeded){
+                                                for(NSNumber *addressId in contact.addressIdCollection){
+                                                    [self.serverInterfaceTrigger fetchAddress:[addressId intValue] :^(CAddress *address){
+                                                        if(address){
+                                                            [self.localInterfaceTrigger saveAddress:address :^(BOOL succeed){
+                                                                if(succeed){
+                                                                    NSLog(@"Fetches are #Contacts #Address completed");
+                                                                }
+                                                            }];
+                                                        }
+                                                    }];
+                                                }
                                             }
+                                        }];
+                                        if(count==0){
+                                            contactsCollection = contacts;
+                                            [refreshControl endRefreshing];
+                                            [self.tableView reloadData];
                                         }
-                                    }];
-                                    if(count==0){
-                                        contactsCollection = contacts;
-                                        [refreshControl endRefreshing];
-                                        [self.tableView reloadData];
                                     }
                                 }
-                            }
-                        }];
-                    }
-                }];
-            }
-        }];
-    }
-    else{
-        contactsCollection =nil;
-        [self.tableView reloadData];
-        [refreshControl endRefreshing];
-    }
- }];
+                            }];
+                        }
+                    }];
+                }
+            }];
+        }
+        else{
+            contactsCollection =nil;
+            [self.tableView reloadData];
+            [refreshControl endRefreshing];
+        }
+    }];
 }
 
 #pragma mark - Table view data source
@@ -168,8 +173,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     if(indexPath.section==0){
-    CContact *contact = [contactsCollection objectAtIndex:indexPath.row];
-    cell.textLabel.text = contact.name;
+        CContact *contact = [contactsCollection objectAtIndex:indexPath.row];
+        cell.textLabel.text = contact.name;
     }
     else{
         CContact *contact = [receivedContacts objectAtIndex:indexPath.row];
@@ -188,7 +193,7 @@
         [displayVC setContact:[receivedContacts objectAtIndex:indexPath.row]];
         [displayVC setAllContacts:receivedContacts];
     }
-      [self.navigationController pushViewController:displayVC animated:YES];
+    [self.navigationController pushViewController:displayVC animated:YES];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
@@ -208,32 +213,31 @@
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
  forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Confirmation"
-                                                        message:@"Are you sure!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:@"Cancel",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Really delete the selected contact?"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"No, I changed my mind"
+                                                  destructiveButtonTitle:@"Delete"
+                                                       otherButtonTitles:nil, nil];
+        [actionSheet showInView:self.view];
         indexPathToDelete = indexPath;
-        [alert show];
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // the user clicked OK
-    if (buttonIndex == 0) {
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==0) {
         if(indexPathToDelete.section==0){
             if(indexPathToDelete.row < [contactsCollection count]){
                 CContact *contact = [contactsCollection objectAtIndex:indexPathToDelete.row];
-                [[CServer defaultParser] deleteContact:contact.objectId :^(BOOL succeed){
+                [self.serverInterfaceTrigger deleteContact:contact.objectId :^(BOOL succeed){
                     if(succeed){
-                        __block int count = contact.addressIdCollection.count;
+                        __block NSUInteger count = contact.addressIdCollection.count;
                         for(NSNumber *addressId in contact.addressIdCollection){
                             count--;
-                            [[CServer defaultParser] deleteAddress:[addressId intValue] :^(BOOL succeed){
+                            [self.serverInterfaceTrigger deleteAddress:[addressId intValue] :^(BOOL succeed){
                             }];
                         }
                         if(count==0){
-                            [[CLocal defaultLocalDB] deleteContact:contact.objectId :^(BOOL succeed){
+                            [self.localInterfaceTrigger deleteContact:contact.objectId :^(BOOL succeed){
                                 if(succeed){
                                     [contactsCollection removeObjectAtIndex:indexPathToDelete.row];
                                     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]
@@ -247,10 +251,10 @@
         }
         else if (indexPathToDelete.row < [receivedContacts count] && (indexPathToDelete.section==1)){
             CContact *contact = [receivedContacts objectAtIndex:indexPathToDelete.row];
-            [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
+            [self.serverInterfaceTrigger currentUserObjectId:^(NSString *userObjectId){
                 if(userObjectId){
                     if([contact.userObjectId isEqualToString:userObjectId]){
-                        [[CLocal defaultLocalDB] deleteContact:contact.objectId :^(BOOL succeed){
+                        [self.localInterfaceTrigger deleteContact:contact.objectId :^(BOOL succeed){
                             if(succeed){
                                 NSLog(@"shared Contact is Deleted");
                             }
@@ -263,23 +267,22 @@
             }];
         }
     }
-    else{
+    else if(buttonIndex ==1){
         [self.tableView reloadData];
     }
 }
 
-
 - (IBAction)addContactBtn:(id)sender {
-    [[CServer defaultParser] isThereAnyUser:^(BOOL succeeded){
+    [self.serverInterfaceTrigger isThereAnyUser:^(BOOL succeeded){
         if(succeeded){
             CEditViewController *editVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EditVC"];
             [self presentViewController:editVC animated:YES completion:nil];
         }
         else{
-            UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"No User"
+            UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error"
                                                                 message:@"You must go with Anonymous || Existing User || Create a New User"
                                                                delegate:self
-                                                      cancelButtonTitle:@"ok"
+                                                      cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [errorAlert show];
         }

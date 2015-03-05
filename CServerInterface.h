@@ -64,9 +64,6 @@
 
 - (void)isCurrentUserAuthenticated:(void (^)(BOOL succedeed))block;
 
-
-
-
 #pragma mark - Parse Authentication, during App Launch
 - (void)parseAuthentication;
 
