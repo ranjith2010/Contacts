@@ -10,13 +10,11 @@
 #import "CContact.h"
 #import "CAddress.h"
 
-@interface CEditViewController : UIViewController
-//{
-//        IBOutlet UIScrollView *scroller;
-//}
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+
+@interface CEditViewController : UIViewController{
+        IBOutlet UIScrollView *scroller;
+}
 @property(nonatomic,strong)CContact *contact;
 @property(nonatomic,strong)CAddress *address;
 
@@ -26,4 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *typeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *streetTextField;
 @property (weak, nonatomic) IBOutlet UITextField *districtTextField;
+
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end

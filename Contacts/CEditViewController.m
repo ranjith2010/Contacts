@@ -22,9 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self.scrollView setScrollEnabled:YES];
-    //[scroller setContentSize:CGSizeMake(320, 800)];
-    
     NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.containerView
                                                                       attribute:NSLayoutAttributeLeading
                                                                       relatedBy:0

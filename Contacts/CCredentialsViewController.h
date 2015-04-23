@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CCredentialsViewController : UIViewController
 
+@interface CCredentialsViewController : UIViewController{
+    IBOutlet UIScrollView *scroller;
+}
 @property(nonatomic) BOOL isUserChoosenLogin;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *createBtnProperty;

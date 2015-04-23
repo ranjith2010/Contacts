@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F374C45E-1205-4B3C-81BB-61E378C3CF0B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Contacts</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D771ACA9B19B4A476D143C8A9A820910B7C126B2</key>
-		<string>https://github.com/ranjith2010/Contacts.git</string>
+		<key>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</key>
+		<string>github.com:ranjith2010/Contacts.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Contacts.xcodeproj</string>
+	<string>Contacts.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D771ACA9B19B4A476D143C8A9A820910B7C126B2</key>
+		<key>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/ranjith2010/Contacts.git</string>
+	<string>github.com:ranjith2010/Contacts.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D771ACA9B19B4A476D143C8A9A820910B7C126B2</string>
+	<string>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D771ACA9B19B4A476D143C8A9A820910B7C126B2</string>
+			<string>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Contacts</string>
+			<string>Contacts-master</string>
 		</dict>
 	</array>
 </dict>
