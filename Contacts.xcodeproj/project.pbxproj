@@ -291,7 +291,10 @@
 		C6A3F56A1A400208004D3479 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C6A3F56B1A400226004D3479 /* Parse-Library 1-2 */,
+				C6A3F5441A400134004D3479 /* Bolts.framework */,
+				C6A3F5451A400134004D3479 /* Parse.framework */,
+				C6A3F5461A400134004D3479 /* ParseFacebookUtils.framework */,
+				C6A3F5471A400134004D3479 /* ParseUI.framework */,
 				C6A3F5681A400204004D3479 /* AdSupport.framework */,
 				C6A3F5661A4001FA004D3479 /* Social.framework */,
 				C6A3F5641A4001EE004D3479 /* Accounts.framework */,
@@ -309,17 +312,6 @@
 				C6A3F54C1A400150004D3479 /* CoreData.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C6A3F56B1A400226004D3479 /* Parse-Library 1-2 */ = {
-			isa = PBXGroup;
-			children = (
-				C6A3F5441A400134004D3479 /* Bolts.framework */,
-				C6A3F5451A400134004D3479 /* Parse.framework */,
-				C6A3F5461A400134004D3479 /* ParseFacebookUtils.framework */,
-				C6A3F5471A400134004D3479 /* ParseUI.framework */,
-			);
-			name = "Parse-Library 1-2";
 			sourceTree = "<group>";
 		};
 		C6A3F56C1A400248004D3479 /* Factory Method */ = {
@@ -692,6 +684,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -710,6 +703,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

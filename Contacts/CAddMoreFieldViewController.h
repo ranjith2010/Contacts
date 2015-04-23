@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControlProperty;
 @property (weak, nonatomic) IBOutlet UITextField *streetTextField;
 @property (weak, nonatomic) IBOutlet UITextField *districtTextField;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end

@@ -10,9 +10,13 @@
 #import "CContact.h"
 #import "CAddress.h"
 
-@interface CEditViewController : UIViewController{
-        IBOutlet UIScrollView *scroller;
-}
+@interface CEditViewController : UIViewController
+//{
+//        IBOutlet UIScrollView *scroller;
+//}
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property(nonatomic,strong)CContact *contact;
 @property(nonatomic,strong)CAddress *address;
 

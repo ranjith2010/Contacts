@@ -22,8 +22,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [scroller setScrollEnabled:YES];
-       [scroller setContentSize:CGSizeMake(320, 800)];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.containerView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                      relatedBy:0
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                     multiplier:1.0
+                                                                       constant:0];
+    
+    [self.view addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeTrailing relatedBy:0 toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self.view addConstraint:rightConstraint];
+//    [scroller setScrollEnabled:YES];
+//       [scroller setContentSize:CGSizeMake(320, 800)];
     [self initialDataSetup];
 }
 

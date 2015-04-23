@@ -44,13 +44,16 @@
 }
 
 - (IBAction)skipBtn:(id)sender {
+    __block UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                                     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityView.center=self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
     [[CServer defaultParser]createAnonymousUser:^(CUser *user, NSError *error){
         if(!error){
-//            [[CLocal defaultLocalDB]createNewUser:user :^(BOOL succedeed){
-//                if(succedeed){
-                    NSLog(@"Anonymous #User Created Successfully");
-//                }
-//            }];
+            [activityView stopAnimating];
+            NSLog(@"Anonymous #User Created Successfully");
         }
     }];
 }
