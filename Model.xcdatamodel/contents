@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CDAddress" representedClassName="CDAddress" syncable="YES">
         <attribute name="addressId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="contactObjectId" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,6 +18,10 @@
         <relationship name="cdaddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDAddress" inverseName="cdcontact" inverseEntity="CDAddress" syncable="YES"/>
         <relationship name="cduser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="cdcontact" inverseEntity="CDUser" syncable="YES"/>
     </entity>
+    <entity name="CDRecord" representedClassName="CDRecord" syncable="YES">
+        <attribute name="recordId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userObjectId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,8 +29,9 @@
         <relationship name="cdcontact" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDContact" inverseName="cduser" inverseEntity="CDContact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDAddress" positionX="-137" positionY="216" width="128" height="133"/>
+        <element name="CDAddress" positionX="-137" positionY="216" width="128" height="135"/>
         <element name="CDContact" positionX="-477" positionY="171" width="128" height="163"/>
         <element name="CDUser" positionX="-261" positionY="54" width="128" height="103"/>
+        <element name="CDRecord" positionX="-306" positionY="189" width="128" height="75"/>
     </elements>
 </model>

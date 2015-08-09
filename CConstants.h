@@ -35,4 +35,6 @@ extern NSString * const kServerTypeAttribute                         ;
 extern NSString * const kServerSharedContactsClassName               ;
 extern NSString * const kServerContactsArray                         ;
 
+extern NSString* const ZPErrorDomainInvalidInput                     ;
+
 @end

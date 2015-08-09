@@ -9,6 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface CUserViewController : UIViewController
-
-@property (weak, nonatomic) IBOutlet UIButton *loginBtnProperty;
 @end

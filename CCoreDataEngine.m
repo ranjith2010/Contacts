@@ -26,6 +26,7 @@
 #import "CUser+Additions.h"
 
 #import "CConstants.h"
+#import "CDRecord.h"
 
 @implementation CCoreDataEngine{
    NSManagedObjectContext *moc;
@@ -84,8 +85,8 @@
     NSArray *persistedContacts = [[[CCoreDataSharedInstance sharedInstance] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     CDContact *CDcontact = [persistedContacts firstObject];
         [CDcontact setName:contact.name];
-        [CDcontact setEmail:contact.email];
-        [CDcontact setPhone:contact.phone];
+//        [CDcontact setEmail:contact.email];
+//        [CDcontact setPhone:contact.phone];
         NSMutableArray *addressObjects = [NSKeyedUnarchiver unarchiveObjectWithData:CDcontact.addressIdCollection];
             NSMutableDictionary *addressInfoLocal = [addressObjects firstObject];
         if(addressInfoLocal==nil){
@@ -140,10 +141,6 @@
     }
     block(PUcontacts,nil);
 }
-
-
-
-
 
 
 -(void)addMoreAddress:(NSMutableDictionary*)addressDictionary withContactName:(NSString*)whom WhichOperation:(NSString*)operation :(void(^)(BOOL succeeded, NSError *error))block{
@@ -213,6 +210,44 @@
     }
 }
 
+
+/**!
+ 
+ @abstract Create a new user
+ @param userName string value user entered into textField
+ @param email string value user entered into textField
+ @param password string value user entered into textField
+ @param block
+ */
+
+
+
+- (void)createNewUser:(NSString *)userName
+                email:(NSString *)email
+             password:(NSString *)password
+                     :(void (^)(BOOL succeeded, NSError *))block {
+    NSEntityDescription *userEntityDesc = [NSEntityDescription entityForName:@"CDUser"
+                                                      inManagedObjectContext:moc];
+    CDUser *newUserCDModel = (CDUser*)[[NSManagedObject alloc] initWithEntity:userEntityDesc
+                                               insertIntoManagedObjectContext:moc];
+    newUserCDModel.username = userName;
+    newUserCDModel.email = email;
+    newUserCDModel.password = password;
+    NSError *error = nil;
+    // Here it simply saving the 'Coredata Context'
+    if ([moc save:&error] == NO) {
+        block(NO,error);
+    }
+    else{
+        block(YES,error);
+    }
+}
+
+
+
+
+
+
 - (void)fetchAddress:(int)addressId : (void (^)(CAddress *address))block{
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDAddress" inManagedObjectContext:moc]];
@@ -229,12 +264,12 @@
                                                   inManagedObjectContext:moc];
     CDContact *newContact = (CDContact*)[[NSManagedObject alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:moc];
     [newContact setName:contact.name];
-    [newContact setPhone:contact.phone];
-    [newContact setEmail:contact.email];
+//    [newContact setPhone:contact.phone];
+//    [newContact setEmail:contact.email];
     [newContact setObjectId:contact.objectId];
     [newContact setUserObjectId:contact.userObjectId];
     [newContact setCduser:[self fetchCurrentUser:YES]];
-    [newContact setAddressIdCollection:[NSKeyedArchiver archivedDataWithRootObject:contact.addressIdCollection]];
+//    [newContact setAddressIdCollection:[NSKeyedArchiver archivedDataWithRootObject:contact.addressIdCollection]];
     NSError *error = nil;
     // Here it simply saving the 'Coredata Context'
     if ([moc save:&error] == NO) {
@@ -242,6 +277,24 @@
     }
     else{
         block(YES);
+    }
+}
+
+
+- (void)saveRecord:(CRecord *)record
+                  :(void(^)(BOOL succeedeed,NSError *error))block {
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"CDRecord"
+                                                  inManagedObjectContext:moc];
+    CDRecord *newRecord = (CDRecord*)[[NSManagedObject alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:moc];
+    [newRecord setUserObjectId:record.userObjectId];
+    [newRecord setRecordId:record.recordId];
+    NSError *error = nil;
+    // Here it simply saving the 'Coredata Context'
+    if ([moc save:&error] == NO) {
+        block(NO,error);
+    }
+    else{
+        block(YES,error);
     }
 }
 
@@ -300,8 +353,8 @@
     NSArray * arrayOfCDContacts = [moc executeFetchRequest:fetchRequest error:&error];
     CDContact *cdContact = [arrayOfCDContacts firstObject];
     [cdContact setName:contact.name];
-    [cdContact setEmail:contact.email];
-    [cdContact setPhone:contact.phone];
+//    [cdContact setEmail:contact.email];
+//    [cdContact setPhone:contact.phone];
     if([moc save:&error] == NO){
         block(NO);
     }

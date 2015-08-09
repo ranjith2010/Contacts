@@ -21,15 +21,11 @@
  **/
 - (NSDictionary*)dictionary;
 
-// Here you can able to put all following properties into .m file also,
-// But anyway the Dictionary is giving you all the properties.
-// some cases we need to access properties directly, then simply we can use it.
-
-@property(nonatomic,strong)NSString *objectId;
-@property(nonatomic,strong)NSString *name;
-@property(nonatomic,strong)NSString *phone;
-@property(nonatomic,strong)NSString *email;
-@property(nonatomic,strong)NSString *userObjectId;
-@property(nonatomic,strong)NSMutableArray *addressIdCollection;
+@property(nonatomic,readonly)NSString *objectId;
+@property(nonatomic,readonly)NSString *name;
+//@property(nonatomic,readonly)NSString *phone;
+//@property(nonatomic,readonly)NSString *email;
+@property(nonatomic,strong,readwrite)NSString *userObjectId;
+//@property(nonatomic,strong)NSMutableArray *addressIdCollection;
 
 @end

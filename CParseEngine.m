@@ -13,6 +13,7 @@
 #import "CDContact.h"
 #import "PFObject+Additions.h"
 #import "CUser.h"
+#import "CRecord.h"
 
 @implementation CParseEngine
 
@@ -33,25 +34,36 @@
 
 #pragma mark - Public API
 
-- (void)fetchAllContacts:(void (^)(NSMutableArray *contacts, NSError *error))block{
-    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
-    [query whereKey:kServerUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]];
-    NSMutableArray *returnArrayOfContacts = [[NSMutableArray alloc]init];
-    for(PFObject *pfObject in [query findObjects]){
-       [returnArrayOfContacts addObject:[PFObject PFObjectToCContact:pfObject]];
+- (void)fetchAllContacts:(void (^)(NSArray *contacts, NSError *error))block{
+    PFQuery *query = [PFQuery queryWithClassName:@"contacts"];
+    [query whereKey:kServerUserObjectIdAttribute equalTo:[self currentUserObjectId]];
+    __block  NSMutableArray *arrayOfContactObjects;
+    if(!arrayOfContactObjects) {
+        arrayOfContactObjects = [NSMutableArray new];
     }
-    block(returnArrayOfContacts,nil);
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (objects && objects.count) {
+            for(PFObject *pfObject in objects) {
+                CRecord *record = [CRecord new];
+                [record setRecordId:[pfObject valueForKey:@"recordId"]];
+                [record setUserObjectId:[pfObject valueForKey:kServerUserObjectIdAttribute]];
+                [arrayOfContactObjects addObject:record];
+            }
+            block(arrayOfContactObjects,error);
+        }
+        else {
+            block(nil,error);
+        }
+    }];
 }
-
-
 
 - (void)saveArrayOfContacts:(CContact*)contact :(void(^)(BOOL succeeded, NSError *error))block{
     PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
     [pfObject setObject:contact.userObjectId  forKey:kServerUserObjectIdAttribute];
-    [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
-    [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+   // [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+    //[pfObject setObject:contact.email forKey:kServerEmailAttribute];
     [pfObject setObject:contact.name forKey:kServerNameAttribute];
-    [pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
+    //[pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
     if([pfObject save]){
         block(YES,nil);
     }
@@ -78,8 +90,8 @@
         if(!error && objects.count){
             PFObject *pfObject = [objects firstObject];
         [pfObject setObject:contact.name forKey:kServerNameAttribute];
-        [pfObject setObject:contact.email forKey:kServerEmailAttribute];
-        [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+//        [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+//        [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
         [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
         NSMutableArray *arrayOfCollection = [pfObject valueForKey:kServerAddressIdCollection];
             [arrayOfCollection removeObjectAtIndex:0];
@@ -222,18 +234,33 @@
     block(user);
 }
 
-- (void)createNewUser:(CUser*)newUser :(void (^)(BOOL succedeed))block{
+//- (void)createNewUser:(CUser*)newUser :(void (^)(BOOL succedeed))block{
+//    PFUser *user = [PFUser user];
+//    user.username = newUser.username;
+//    user.password = newUser.password;
+//    user.email = newUser.email;
+//    if([user signUp]){
+//        // Hooray! Let them use the app now.
+//        block(YES);
+//    }
+//    else{
+//        block(NO);
+//    }
+//}
+//
+
+
+- (void)createNewUser:(NSString*)userName
+                email:(NSString *)email
+             password:(NSString *)password
+                     :(void(^)(BOOL succeeded,NSError *error))block {
     PFUser *user = [PFUser user];
-    user.username = newUser.username;
-    user.password = newUser.password;
-    user.email = newUser.email;
-    if([user signUp]){
-        // Hooray! Let them use the app now.
-        block(YES);
-    }
-    else{
-        block(NO);
-    }
+    user.username =  userName;
+    user.password = password;
+    user.email = password;
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        block(succeeded,error);
+    }];
 }
 
 - (void)parseAuthentication{
@@ -244,8 +271,12 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 }
 
--(void)currentUserObjectId:(void (^)(NSString *objectId))block{
-    block([[PFUser currentUser] valueForKey:kServerObjectIdAttribute]);
+//-(void)currentUserObjectId:(void (^)(NSString *objectId))block{
+//    block([[PFUser currentUser] valueForKey:kServerObjectIdAttribute]);
+//}
+
+- (NSString *)currentUserObjectId {
+    return [[PFUser currentUser] valueForKey:kServerObjectIdAttribute];
 }
 
 - (NSNumber*)randomIdFromNSUserDefault{
@@ -258,19 +289,57 @@
     return [NSNumber numberWithInt:integerValue];
 }
 
-- (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
-    [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
-    [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
-    [pfObject setObject:contact.email forKey:kServerEmailAttribute];
-    [pfObject setObject:contact.name forKey:kServerNameAttribute];
-    if([pfObject save]){
-        block(YES);
-    }
-    else{
-        block(NO);
-    }
+//- (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block{
+//    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
+//    [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
+//    [pfObject setObject:contact.phone forKey:kServerPhoneAttribute];
+//    [pfObject setObject:contact.email forKey:kServerEmailAttribute];
+//    [pfObject setObject:contact.name forKey:kServerNameAttribute];
+//    if([pfObject save]){
+//        block(YES);
+//    }
+//    else{
+//        block(NO);
+//    }
+//}
+//
+
+- (void)saveRecord:(CRecord *)record :(void(^)(BOOL succeedeed,NSError *error))block {
+    PFObject *pfObject = [PFObject objectWithClassName:@"contacts"];
+    [pfObject setObject:record.userObjectId forKey:kServerUserObjectIdAttribute];
+    [pfObject setObject:record.recordId forKey:@"recordId"];
+    [pfObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        block(succeeded,error);
+    }];
+
 }
+
+
+//- (void)saveContact:(CContact *)contact :(void(^)(BOOL succeedeed,NSError *error))block {
+//    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
+//    [pfObject setObject:contact.userObjectId forKey:kServerUserObjectIdAttribute];
+//    [pfObject setObject:contact.name forKey:kServerNameAttribute];
+//    [pfObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        block(succeeded,error);
+//    }];
+//}
+
+
+
+// helper functions
+
+- (NSString *)name:(ABPerson *)person {
+    NSMutableString *mutableString = [NSMutableString new];
+    if(person.firstName) {
+        [mutableString appendString:person.firstName];
+    }
+    if(person.lastName) {
+        [mutableString appendString:person.lastName];
+    }
+    return mutableString;
+}
+
+
 
 - (void)saveAddress:(CAddress*)address :(void (^)(BOOL succedeed))block{
     PFObject *pfObject = [PFObject objectWithClassName:kServerAddressClassName];
@@ -294,8 +363,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error && objects.count){
             PFObject *pfObject = [objects firstObject];
-            [pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
-            contact.objectId = [pfObject valueForKey:kServerObjectIdAttribute];
+//            [pfObject setObject:contact.addressIdCollection forKey:kServerAddressIdCollection];
+          //  contact.objectId = [pfObject valueForKey:kServerObjectIdAttribute];
             if([pfObject save]){
                     block(contact);
                 }
@@ -312,8 +381,8 @@
     [query getObjectInBackgroundWithId:contact.objectId block:^(PFObject* pfObject,NSError *error){
         if(!error){
             pfObject[kServerNameAttribute]=contact.name;
-            pfObject[kServerPhoneAttribute]=contact.phone;
-            pfObject[kServerEmailAttribute]=contact.email;
+//            pfObject[kServerPhoneAttribute]=contact.phone;
+//            pfObject[kServerEmailAttribute]=contact.email;
            if([pfObject save]){
                block(YES);
            }
@@ -514,12 +583,12 @@
                 if(!error && pfObjects.count){
                     for(PFObject *object in pfObjects){
                         CContact *contactInfo = [[CContact alloc]init];
-                        [contactInfo setName:[object valueForKey:kServerNameAttribute]];
-                        [contactInfo setPhone:[object valueForKey:kServerPhoneAttribute]];
-                        [contactInfo setEmail:[object valueForKey:kServerEmailAttribute]];
-                        [contactInfo setObjectId:[object valueForKey:kServerObjectIdAttribute]];
+//                        [contactInfo setName:[object valueForKey:kServerNameAttribute]];
+//                        [contactInfo setPhone:[object valueForKey:kServerPhoneAttribute]];
+//                        [contactInfo setEmail:[object valueForKey:kServerEmailAttribute]];
+//                        [contactInfo setObjectId:[object valueForKey:kServerObjectIdAttribute]];
                         [contactInfo setUserObjectId:[object valueForKey:kServerUserObjectIdAttribute]];
-                        [contactInfo setAddressIdCollection:[object valueForKey:kServerAddressIdCollection]];
+                       // [contactInfo setAddressIdCollection:[object valueForKey:kServerAddressIdCollection]];
                         pass--;
                         if(!error && contactInfo){
                             [fetchedObjects addObject:contactInfo];

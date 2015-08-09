@@ -55,40 +55,40 @@
 - (IBAction)dismissKeyboard:(id)sender {
 }
 
-- (IBAction)createBtn:(id)sender {
-    user = [[CUser alloc]init];
-    [user setUsername:_userNameTextField.text];
-    [user setEmail:_emailTextField.text];
-    [user setPassword:_passwordTextField.text];
-    if([_createBtnProperty.title isEqualToString:@"Login"]){
-        [[CServer defaultParser] logIn:user :^(CUser *Cuser){
-            if(Cuser){
-                [[CLocal defaultLocalDB] createNewUser:Cuser :^(BOOL succeed){
-                    if(succeed){
-                    NSLog(@"Existing User Logged in successfully");
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                }
-                 else{
-                     NSLog(@"Failure #Existing user Log in");
-                 }
-                }];
-            }
-        }];
-    }
-    else{
-        [[CServer defaultParser] createNewUser:user : ^(BOOL succedeed){
-            if(succedeed){
-                [[CLocal defaultLocalDB]createNewUser:user :^(BOOL succedeed){
-                    if(succedeed){
-                        NSLog(@"New User Successfully Created.!");
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                    }
-                    else{
-                        NSLog(@"Failure #New user Creation");
-                    }
-                }];
-            }
-        }];
-    }
-}
+//- (IBAction)createBtn:(id)sender {
+//    user = [[CUser alloc]init];
+//    [user setUsername:_userNameTextField.text];
+//    [user setEmail:_emailTextField.text];
+//    [user setPassword:_passwordTextField.text];
+//    if([_createBtnProperty.title isEqualToString:@"Login"]){
+//        [[CServer defaultParser] logIn:user :^(CUser *Cuser){
+//            if(Cuser){
+//                [[CLocal defaultLocalDB] createNewUser:Cuser :^(BOOL succeed){
+//                    if(succeed){
+//                    NSLog(@"Existing User Logged in successfully");
+//                    [self dismissViewControllerAnimated:YES completion:nil];
+//                }
+//                 else{
+//                     NSLog(@"Failure #Existing user Log in");
+//                 }
+//                }];
+//            }
+//        }];
+//    }
+//    else{
+//        [[CServer defaultParser] createNewUser:user : ^(BOOL succedeed){
+//            if(succedeed){
+//                [[CLocal defaultLocalDB]createNewUser:user :^(BOOL succedeed){
+//                    if(succedeed){
+//                        NSLog(@"New User Successfully Created.!");
+//                        [self dismissViewControllerAnimated:YES completion:nil];
+//                    }
+//                    else{
+//                        NSLog(@"Failure #New user Creation");
+//                    }
+//                }];
+//            }
+//        }];
+//    }
+//}
 @end

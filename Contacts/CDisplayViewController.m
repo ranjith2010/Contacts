@@ -32,7 +32,7 @@
     addressCollectionDataSource = [[NSMutableArray alloc]init];
     self.addressTableView.delegate = self;
     self.addressTableView.dataSource = self;
-    [self pr_initialDataSetup];
+    //[self pr_initialDataSetup];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -43,7 +43,7 @@
                 for(CContact *contact in arrayOfContacts){
                     if([contact.name isEqualToString:_contact.name]){
                         _contact = contact;
-                        [self pr_initialDataSetup];
+      //                  [self pr_initialDataSetup];
                     }
                 }
             }
@@ -53,28 +53,28 @@
 
 #pragma mark - Private API
 
-- (void)pr_initialDataSetup{
-    if(_contact){
-        _nameLabel.text = _contact.name;
-        _mobileLabel.text = _contact.phone;
-        _emailLabel.text = _contact.email;
-        if(_contact.addressIdCollection.count){
-            __block NSUInteger count = _contact.addressIdCollection.count;
-            [addressCollectionDataSource removeAllObjects];
-            for(NSNumber *addressId in _contact.addressIdCollection){
-                count--;
-                [[CLocal defaultLocalDB] fetchAddress:[addressId intValue] :^(CAddress *address){
-                    if(address){
-                        [addressCollectionDataSource addObject:address];
-                    }
-                }];
-                if(count==0){
-                    [self.addressTableView reloadData];
-                }
-            }
-        }
-    }
-}
+//- (void)pr_initialDataSetup{
+//    if(_contact){
+//        _nameLabel.text = _contact.name;
+//        _mobileLabel.text = _contact.phone;
+//        _emailLabel.text = _contact.email;
+//        if(_contact.addressIdCollection.count){
+//            __block NSUInteger count = _contact.addressIdCollection.count;
+//            [addressCollectionDataSource removeAllObjects];
+//            for(NSNumber *addressId in _contact.addressIdCollection){
+//                count--;
+//                [[CLocal defaultLocalDB] fetchAddress:[addressId intValue] :^(CAddress *address){
+//                    if(address){
+//                        [addressCollectionDataSource addObject:address];
+//                    }
+//                }];
+//                if(count==0){
+//                    [self.addressTableView reloadData];
+//                }
+//            }
+//        }
+//    }
+//}
 
 #pragma mark - Table view data source
 
@@ -203,12 +203,12 @@
                 }
                     break;
                 case 2:{
-                    [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
-                        if(userObjectId){
-                            [self pr_shareContact:userObjectId withAll:YES];
+//                    [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
+//                        if(userObjectId){
+                            [self pr_shareContact:[[CServer defaultParser] currentUserObjectId] withAll:YES];
                         }
-                    }];
-                }
+                   // }];
+                //}
                     break;
                 default:
                     break;

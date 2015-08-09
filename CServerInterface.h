@@ -13,12 +13,14 @@
 #import "CDContact.h"
 #import "CAddress.h"
 #import "CUser.h"
+#import "ABPerson.h"
+#import "CRecord.h"
 
 @protocol CServerInterface <NSObject>
 
 #pragma mark - CONTACTS Operations
 
-- (void)fetchAllContacts:(void (^)(NSMutableArray *contacts, NSError *error))block;
+- (void)fetchAllContacts:(void (^)(NSArray *contacts, NSError *error))block;
 - (void)updateAddressInfo:(CContact*)contact withAddress:(NSMutableDictionary*)addressInfo :(void(^)(BOOL succeeded, NSError *error))block;
 
 - (void)saveArrayOfContacts:(CContact*)contact :(void(^)(BOOL succeeded, NSError *error))block;
@@ -38,12 +40,30 @@
 
 #pragma mark - Well Written code
 - (void)logIn:(CUser*)user :(void(^)(CUser *user))block;
-- (void)createNewUser:(CUser*)newUser :(void(^)(BOOL succedeed))block;
+//- (void)createNewUser:(CUser*)newUser :(void(^)(BOOL succedeed))block;
+
+- (void)createNewUser:(NSString*)userName
+                email:(NSString *)email
+             password:(NSString *)password
+                     :(void(^)(BOOL succeeded,NSError *error))block;
+
+
+
 - (void)createAnonymousUser:(void(^)(CUser *user, NSError *error))block;
-- (void)currentUserObjectId:(void(^)(NSString *objectId))block;
+
+//- (void)currentUserObjectId:(void(^)(NSString *objectId))block;
 - (NSNumber*)randomIdFromNSUserDefault;
 
-- (void)saveContact:(CContact*)contact :(void(^)(BOOL succedeed))block;
+//- (void)saveContact:(CContact*)contact :(void(^)(BOOL succedeed))block;
+
+#pragma mark -  updated API's
+
+- (void)saveRecord:(CRecord *)record
+                  :(void(^)(BOOL succeedeed,NSError *error))block;
+- (NSString *)currentUserObjectId;
+
+
+
 - (void)updateContact:(CContact*)contact :(void(^)(CContact *contact))block;
 - (void)saveAddress:(CAddress*)address :(void(^)(BOOL succedeed))block;
 

@@ -13,13 +13,25 @@
 + (CContact*)PFObjectToCContact:(PFObject*)pfObject{
     CContact *returnContact;
     if(pfObject){
-         returnContact = [[CContact alloc]init];
-        [returnContact setName:[pfObject valueForKey:kServerNameAttribute]];
-        [returnContact setEmail:[pfObject valueForKey:kServerEmailAttribute]];
-        [returnContact setPhone:[pfObject valueForKey:kServerPhoneAttribute]];
-        [returnContact setObjectId:[pfObject valueForKey:kServerObjectIdAttribute]];
-        [returnContact setAddressIdCollection:[pfObject valueForKey:kServerAddressIdCollection]];
-        [returnContact setUserObjectId:[pfObject valueForKey:kServerUserObjectIdAttribute]];
+        NSArray *temp = [[NSArray alloc] init];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+
+        temp = [pfObject allKeys];
+
+        NSEnumerator *e = [temp objectEnumerator];
+        id object;
+        while (object = [e nextObject]) {
+            [dict setValue:[pfObject objectForKey:object] forKey:object];
+        }
+        returnContact = [[CContact alloc]initWithServerDictionary:dict];
+
+        //Check the results NSLog(@"PFObject Info: %@", PFObject); NSLog(@"dict Info: %@", dict);.
+//        [returnContact setName:[pfObject valueForKey:kServerNameAttribute]];
+//        [returnContact setEmail:[pfObject valueForKey:kServerEmailAttribute]];
+//        [returnContact setPhone:[pfObject valueForKey:kServerPhoneAttribute]];
+//        [returnContact setObjectId:[pfObject valueForKey:kServerObjectIdAttribute]];
+        //[returnContact setAddressIdCollection:[pfObject valueForKey:kServerAddressIdCollection]];
+//        [returnContact setUserObjectId:[pfObject valueForKey:kServerUserObjectIdAttribute]];
         return returnContact;
     }
     else{

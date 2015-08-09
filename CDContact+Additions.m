@@ -13,13 +13,13 @@
     CContact *PUcontact;
     if(CDcontact){
         PUcontact  = [[CContact alloc]init];
-        [PUcontact setName:CDcontact.name];
-        [PUcontact setEmail:CDcontact.email];
-        [PUcontact setPhone:CDcontact.phone];
-        [PUcontact setObjectId:CDcontact.objectId];
+//        [PUcontact setName:CDcontact.name];
+//        [PUcontact setEmail:CDcontact.email];
+//        [PUcontact setPhone:CDcontact.phone];
+//        [PUcontact setObjectId:CDcontact.objectId];
         [PUcontact setUserObjectId:CDcontact.userObjectId];
         if([NSKeyedUnarchiver unarchiveObjectWithData:CDcontact.addressIdCollection]!=nil){
-            [PUcontact setAddressIdCollection:[NSKeyedUnarchiver unarchiveObjectWithData:CDcontact.addressIdCollection]];
+//            [PUcontact setAddressIdCollection:[NSKeyedUnarchiver unarchiveObjectWithData:CDcontact.addressIdCollection]];
         }
         return PUcontact;
     }

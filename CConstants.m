@@ -41,4 +41,8 @@ NSString * const kServerContactObjectId                      = @"contactObjectId
 
 NSString * const kServerSharedContactsClassName              = @"SharedContacts";
 NSString * const kServerContactsArray                        = @"contacts";
+
+// Errors
+
+NSString* const ZPErrorDomainInvalidInput                   =   @"com.zippr.errordomain.InvalidInput";
 @end

@@ -11,6 +11,7 @@
 #import "CContact.h"
 #import "CDContact.h"
 #import "CAddress.h"
+#import "CRecord.h"
 
 @protocol CLocalInterface <NSObject>
 // User : Clear & Store
@@ -32,10 +33,23 @@
 
 #pragma mark - Well Written Functions
 
-- (void)createNewUser:(CUser*)newUser :(void (^)(BOOL succedeed))block;
+//- (void)createNewUser:(CUser*)newUser :(void (^)(BOOL succedeed))block;
+
+- (void)createNewUser:(NSString *)userName
+                email:(NSString *)email
+             password:(NSString *)password
+                     :(void (^)(BOOL succeeded, NSError *))block;
+
 - (void)fetchAddress:(int)addressId :(void (^)(CAddress *address))block;
 
 - (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block;
+
+
+
+- (void)saveRecord:(CRecord *)record
+                  :(void(^)(BOOL succeedeed,NSError *error))block;
+
+
 - (void)saveAddress:(CAddress*)address :(CDContact*)cdcontact :(void (^)(BOOL succeed))block;
 
 - (void)editContact:(CContact*)contact :(void(^)(BOOL succeed))block;

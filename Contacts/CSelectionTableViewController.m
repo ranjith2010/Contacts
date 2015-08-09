@@ -90,9 +90,9 @@
     }
     [[CServer defaultParser] saveSharedContacts:selectedPUContacts :^(BOOL succedeed){
         if(succedeed){
-    [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
-        if(userObjectId){
-        [[CServer defaultParser] findPFObjectwithObjectId:userObjectId
+//    [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
+//        if(userObjectId){
+        [[CServer defaultParser] findPFObjectwithObjectId:[[CServer defaultParser] currentUserObjectId]
                                                          :^(NSString *sharedClassObjectId,NSError *error){
                                                              if(sharedClassObjectId){
                                                                  [self pr_shareContact:sharedClassObjectId];
@@ -100,8 +100,8 @@
                                                                       }];
                 }
     }];
-        }
-    }];
+   //     }
+    //}];
 }
 
 #pragma mark - Private API

@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRootViewController : UITableViewController<UIActionSheetDelegate>
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *loginOrSignUpBtnProperty;
+@interface CRootViewController : UITableViewController
 
 @end
 

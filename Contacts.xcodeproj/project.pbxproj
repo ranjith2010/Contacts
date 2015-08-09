@@ -7,6 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0769BEC81B77DBA600858E5C /* CAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 0769BEC71B77DBA600858E5C /* CAddressBook.m */; };
+		0769BECB1B77DBE600858E5C /* CAddressBookEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0769BECA1B77DBE600858E5C /* CAddressBookEngine.m */; };
+		0769BED01B77E25800858E5C /* ZPContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0769BECF1B77E25800858E5C /* ZPContactModel.m */; };
+		077F1C261B5C3183007475A5 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 077F1C241B5C3183007475A5 /* AddressBook.framework */; };
+		077F1C271B5C3183007475A5 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 077F1C251B5C3183007475A5 /* AddressBookUI.framework */; };
+		077F1C2A1B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C291B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m */; };
+		077F1C3E1B5C3637007475A5 /* ABAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C2E1B5C3637007475A5 /* ABAddressBook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C3F1B5C3637007475A5 /* ABSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C301B5C3637007475A5 /* ABSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C401B5C3637007475A5 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C321B5C3637007475A5 /* ABGroup.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C411B5C3637007475A5 /* ABMultiValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C341B5C3637007475A5 /* ABMultiValue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C421B5C3637007475A5 /* ABPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C361B5C3637007475A5 /* ABPerson.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C431B5C3637007475A5 /* ABRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C391B5C3637007475A5 /* ABRecord.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C441B5C3637007475A5 /* ABAddressBookUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C3D1B5C3637007475A5 /* ABAddressBookUI.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		077F1C471B5CD2A1007475A5 /* CSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C461B5CD2A1007475A5 /* CSignUpViewController.m */; };
+		077F1C4A1B5CD349007475A5 /* CLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C491B5CD349007475A5 /* CLoginViewController.m */; };
+		077F1C4D1B5CD870007475A5 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C4C1B5CD870007475A5 /* NSString+Additions.m */; };
+		07FB88AB1B5D76D500DB9090 /* CRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FB88AA1B5D76D500DB9090 /* CRecord.m */; };
+		07FB88AE1B5D8DA400DB9090 /* CDRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FB88AD1B5D8DA400DB9090 /* CDRecord.m */; };
+		07FE5C811B68FB3D004B25D0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FE5C7E1B68FB3D004B25D0 /* Bolts.framework */; };
+		07FE5C821B68FB3D004B25D0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FE5C7F1B68FB3D004B25D0 /* Parse.framework */; };
+		07FE5C831B68FB3D004B25D0 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FE5C801B68FB3D004B25D0 /* ParseUI.framework */; };
 		C6358C351A40225100E052FD /* CDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C341A40225100E052FD /* CDisplayViewController.m */; };
 		C6358C391A403B7600E052FD /* CEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C381A403B7600E052FD /* CEditViewController.m */; };
 		C6358C3C1A404FE400E052FD /* CDAddress+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C6358C3B1A404FE400E052FD /* CDAddress+Additions.m */; };
@@ -23,10 +44,6 @@
 		C6A3F52C1A4000ED004D3479 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6A3F52B1A4000ED004D3479 /* Images.xcassets */; };
 		C6A3F52F1A4000ED004D3479 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6A3F52D1A4000ED004D3479 /* LaunchScreen.xib */; };
 		C6A3F53B1A4000EE004D3479 /* ContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A3F53A1A4000EE004D3479 /* ContactsTests.m */; };
-		C6A3F5481A400134004D3479 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5441A400134004D3479 /* Bolts.framework */; };
-		C6A3F5491A400134004D3479 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5451A400134004D3479 /* Parse.framework */; };
-		C6A3F54A1A400134004D3479 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5461A400134004D3479 /* ParseFacebookUtils.framework */; };
-		C6A3F54B1A400134004D3479 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5471A400134004D3479 /* ParseUI.framework */; };
 		C6A3F54D1A400150004D3479 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F54C1A400150004D3479 /* CoreData.framework */; };
 		C6A3F54F1A40015D004D3479 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F54E1A40015D004D3479 /* SystemConfiguration.framework */; };
 		C6A3F5511A400168004D3479 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5501A400168004D3479 /* Security.framework */; };
@@ -73,6 +90,48 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0769BEC61B77DBA600858E5C /* CAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAddressBook.h; sourceTree = "<group>"; };
+		0769BEC71B77DBA600858E5C /* CAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAddressBook.m; sourceTree = "<group>"; };
+		0769BEC91B77DBE600858E5C /* CAddressBookEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAddressBookEngine.h; sourceTree = "<group>"; };
+		0769BECA1B77DBE600858E5C /* CAddressBookEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAddressBookEngine.m; sourceTree = "<group>"; };
+		0769BECC1B77DC0400858E5C /* CAddressBookInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAddressBookInterface.h; sourceTree = "<group>"; };
+		0769BECE1B77E25800858E5C /* ZPContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPContactModel.h; sourceTree = "<group>"; };
+		0769BECF1B77E25800858E5C /* ZPContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPContactModel.m; sourceTree = "<group>"; };
+		077F1C241B5C3183007475A5 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		077F1C251B5C3183007475A5 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		077F1C281B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+ZPBlockAdditions.h"; path = "Contacts/UIAlertView+ZPBlockAdditions.h"; sourceTree = "<group>"; };
+		077F1C291B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+ZPBlockAdditions.m"; path = "Contacts/UIAlertView+ZPBlockAdditions.m"; sourceTree = "<group>"; };
+		077F1C2B1B5C34C3007475A5 /* ZPBlockAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZPBlockAdditions.h; sourceTree = "<group>"; };
+		077F1C2D1B5C3637007475A5 /* ABAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAddressBook.h; sourceTree = "<group>"; };
+		077F1C2E1B5C3637007475A5 /* ABAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBook.m; sourceTree = "<group>"; };
+		077F1C2F1B5C3637007475A5 /* ABSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSource.h; sourceTree = "<group>"; };
+		077F1C301B5C3637007475A5 /* ABSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSource.m; sourceTree = "<group>"; };
+		077F1C311B5C3637007475A5 /* ABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroup.h; sourceTree = "<group>"; };
+		077F1C321B5C3637007475A5 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroup.m; sourceTree = "<group>"; };
+		077F1C331B5C3637007475A5 /* ABMultiValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultiValue.h; sourceTree = "<group>"; };
+		077F1C341B5C3637007475A5 /* ABMultiValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMultiValue.m; sourceTree = "<group>"; };
+		077F1C351B5C3637007475A5 /* ABPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABPerson.h; sourceTree = "<group>"; };
+		077F1C361B5C3637007475A5 /* ABPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABPerson.m; sourceTree = "<group>"; };
+		077F1C371B5C3637007475A5 /* ABProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABProperties.h; sourceTree = "<group>"; };
+		077F1C381B5C3637007475A5 /* ABRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABRecord.h; sourceTree = "<group>"; };
+		077F1C391B5C3637007475A5 /* ABRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABRecord.m; sourceTree = "<group>"; };
+		077F1C3A1B5C3637007475A5 /* ABRefInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABRefInitialization.h; sourceTree = "<group>"; };
+		077F1C3B1B5C3637007475A5 /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
+		077F1C3C1B5C3637007475A5 /* ABAddressBookUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAddressBookUI.h; sourceTree = "<group>"; };
+		077F1C3D1B5C3637007475A5 /* ABAddressBookUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBookUI.m; sourceTree = "<group>"; };
+		077F1C451B5CD2A1007475A5 /* CSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSignUpViewController.h; sourceTree = "<group>"; };
+		077F1C461B5CD2A1007475A5 /* CSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSignUpViewController.m; sourceTree = "<group>"; };
+		077F1C481B5CD349007475A5 /* CLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginViewController.h; sourceTree = "<group>"; };
+		077F1C491B5CD349007475A5 /* CLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLoginViewController.m; sourceTree = "<group>"; };
+		077F1C4B1B5CD870007475A5 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		077F1C4C1B5CD870007475A5 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
+		07FB88A91B5D76D500DB9090 /* CRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecord.h; sourceTree = "<group>"; };
+		07FB88AA1B5D76D500DB9090 /* CRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRecord.m; sourceTree = "<group>"; };
+		07FB88AC1B5D8DA400DB9090 /* CDRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRecord.h; sourceTree = "<group>"; };
+		07FB88AD1B5D8DA400DB9090 /* CDRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRecord.m; sourceTree = "<group>"; };
+		07FE5C7E1B68FB3D004B25D0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		07FE5C7F1B68FB3D004B25D0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		07FE5C801B68FB3D004B25D0 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C6358C331A40225100E052FD /* CDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDisplayViewController.h; sourceTree = "<group>"; };
 		C6358C341A40225100E052FD /* CDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDisplayViewController.m; sourceTree = "<group>"; };
 		C6358C371A403B7600E052FD /* CEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEditViewController.h; sourceTree = "<group>"; };
@@ -104,10 +163,6 @@
 		C6A3F5341A4000EE004D3479 /* ContactsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A3F5391A4000EE004D3479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6A3F53A1A4000EE004D3479 /* ContactsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsTests.m; sourceTree = "<group>"; };
-		C6A3F5441A400134004D3479 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		C6A3F5451A400134004D3479 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		C6A3F5461A400134004D3479 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		C6A3F5471A400134004D3479 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C6A3F54C1A400150004D3479 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C6A3F54E1A40015D004D3479 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C6A3F5501A400168004D3479 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -167,6 +222,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077F1C261B5C3183007475A5 /* AddressBook.framework in Frameworks */,
+				077F1C271B5C3183007475A5 /* AddressBookUI.framework in Frameworks */,
+				07FE5C831B68FB3D004B25D0 /* ParseUI.framework in Frameworks */,
 				C6A3F5691A400204004D3479 /* AdSupport.framework in Frameworks */,
 				C6A3F5671A4001FA004D3479 /* Social.framework in Frameworks */,
 				C6A3F5651A4001EE004D3479 /* Accounts.framework in Frameworks */,
@@ -178,14 +236,12 @@
 				C6A3F5591A4001B2004D3479 /* libsqlite3.dylib in Frameworks */,
 				C6A3F5571A400185004D3479 /* libz.1.1.3.dylib in Frameworks */,
 				C6A3F5551A400178004D3479 /* MobileCoreServices.framework in Frameworks */,
+				07FE5C821B68FB3D004B25D0 /* Parse.framework in Frameworks */,
 				C6A3F5531A40016E004D3479 /* QuartzCore.framework in Frameworks */,
 				C6A3F5511A400168004D3479 /* Security.framework in Frameworks */,
+				07FE5C811B68FB3D004B25D0 /* Bolts.framework in Frameworks */,
 				C6A3F54F1A40015D004D3479 /* SystemConfiguration.framework in Frameworks */,
 				C6A3F54D1A400150004D3479 /* CoreData.framework in Frameworks */,
-				C6A3F5491A400134004D3479 /* Parse.framework in Frameworks */,
-				C6A3F5481A400134004D3479 /* Bolts.framework in Frameworks */,
-				C6A3F54B1A400134004D3479 /* ParseUI.framework in Frameworks */,
-				C6A3F54A1A400134004D3479 /* ParseFacebookUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +255,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0769BEC51B77DB4500858E5C /* Local AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				0769BECC1B77DC0400858E5C /* CAddressBookInterface.h */,
+				0769BEC61B77DBA600858E5C /* CAddressBook.h */,
+				0769BEC71B77DBA600858E5C /* CAddressBook.m */,
+				0769BECD1B77DE7F00858E5C /* iPhone ABStorage */,
+			);
+			name = "Local AddressBook";
+			sourceTree = "<group>";
+		};
+		0769BECD1B77DE7F00858E5C /* iPhone ABStorage */ = {
+			isa = PBXGroup;
+			children = (
+				0769BEC91B77DBE600858E5C /* CAddressBookEngine.h */,
+				0769BECA1B77DBE600858E5C /* CAddressBookEngine.m */,
+			);
+			name = "iPhone ABStorage";
+			sourceTree = "<group>";
+		};
+		077F1C2C1B5C361D007475A5 /* ABAddressBook Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				077F1C2D1B5C3637007475A5 /* ABAddressBook.h */,
+				077F1C2E1B5C3637007475A5 /* ABAddressBook.m */,
+				077F1C2F1B5C3637007475A5 /* ABSource.h */,
+				077F1C301B5C3637007475A5 /* ABSource.m */,
+				077F1C311B5C3637007475A5 /* ABGroup.h */,
+				077F1C321B5C3637007475A5 /* ABGroup.m */,
+				077F1C331B5C3637007475A5 /* ABMultiValue.h */,
+				077F1C341B5C3637007475A5 /* ABMultiValue.m */,
+				077F1C351B5C3637007475A5 /* ABPerson.h */,
+				077F1C361B5C3637007475A5 /* ABPerson.m */,
+				077F1C371B5C3637007475A5 /* ABProperties.h */,
+				077F1C381B5C3637007475A5 /* ABRecord.h */,
+				077F1C391B5C3637007475A5 /* ABRecord.m */,
+				077F1C3A1B5C3637007475A5 /* ABRefInitialization.h */,
+				077F1C3B1B5C3637007475A5 /* AddressBook.h */,
+				077F1C3C1B5C3637007475A5 /* ABAddressBookUI.h */,
+				077F1C3D1B5C3637007475A5 /* ABAddressBookUI.m */,
+			);
+			name = "ABAddressBook Wrapper";
+			sourceTree = "<group>";
+		};
 		C6358C361A4025BD00E052FD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +327,7 @@
 		C6A3F5121A4000ED004D3479 = {
 			isa = PBXGroup;
 			children = (
+				077F1C2C1B5C361D007475A5 /* ABAddressBook Wrapper */,
 				C6A3F59C1A4003F3004D3479 /* Constants */,
 				C6A3F5B11A400990004D3479 /* CD Model */,
 				C6A3F58F1A4003D3004D3479 /* Model */,
@@ -255,6 +356,10 @@
 				C6A3F5221A4000ED004D3479 /* CAppDelegate.h */,
 				C6A3F5231A4000ED004D3479 /* CAppDelegate.m */,
 				C6A3F5281A4000ED004D3479 /* Main.storyboard */,
+				077F1C481B5CD349007475A5 /* CLoginViewController.h */,
+				077F1C491B5CD349007475A5 /* CLoginViewController.m */,
+				077F1C451B5CD2A1007475A5 /* CSignUpViewController.h */,
+				077F1C461B5CD2A1007475A5 /* CSignUpViewController.m */,
 				C6A3F51E1A4000ED004D3479 /* Supporting Files */,
 			);
 			path = Contacts;
@@ -291,7 +396,11 @@
 		C6A3F56A1A400208004D3479 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C6A3F56B1A400226004D3479 /* Parse-Library 1-2 */,
+				07FE5C7E1B68FB3D004B25D0 /* Bolts.framework */,
+				07FE5C7F1B68FB3D004B25D0 /* Parse.framework */,
+				07FE5C801B68FB3D004B25D0 /* ParseUI.framework */,
+				077F1C241B5C3183007475A5 /* AddressBook.framework */,
+				077F1C251B5C3183007475A5 /* AddressBookUI.framework */,
 				C6A3F5681A400204004D3479 /* AdSupport.framework */,
 				C6A3F5661A4001FA004D3479 /* Social.framework */,
 				C6A3F5641A4001EE004D3479 /* Accounts.framework */,
@@ -311,20 +420,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C6A3F56B1A400226004D3479 /* Parse-Library 1-2 */ = {
-			isa = PBXGroup;
-			children = (
-				C6A3F5441A400134004D3479 /* Bolts.framework */,
-				C6A3F5451A400134004D3479 /* Parse.framework */,
-				C6A3F5461A400134004D3479 /* ParseFacebookUtils.framework */,
-				C6A3F5471A400134004D3479 /* ParseUI.framework */,
-			);
-			name = "Parse-Library 1-2";
-			sourceTree = "<group>";
-		};
 		C6A3F56C1A400248004D3479 /* Factory Method */ = {
 			isa = PBXGroup;
 			children = (
+				0769BEC51B77DB4500858E5C /* Local AddressBook */,
 				C6A3F56E1A40025B004D3479 /* Remote DB */,
 				C6A3F56D1A400253004D3479 /* Local DB */,
 			);
@@ -376,6 +475,11 @@
 		C6A3F58E1A4003B9004D3479 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				077F1C4B1B5CD870007475A5 /* NSString+Additions.h */,
+				077F1C4C1B5CD870007475A5 /* NSString+Additions.m */,
+				077F1C2B1B5C34C3007475A5 /* ZPBlockAdditions.h */,
+				077F1C281B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.h */,
+				077F1C291B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m */,
 				C6A3F5851A4003B2004D3479 /* NSMutableDictionary+Additions.h */,
 				C6A3F5861A4003B2004D3479 /* NSMutableDictionary+Additions.m */,
 				C6A3F57B1A4002E1004D3479 /* PFObject+Additions.h */,
@@ -395,12 +499,16 @@
 		C6A3F58F1A4003D3004D3479 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				07FB88A91B5D76D500DB9090 /* CRecord.h */,
+				07FB88AA1B5D76D500DB9090 /* CRecord.m */,
 				C6A3F5901A4003E1004D3479 /* CUser.h */,
 				C6A3F5911A4003E1004D3479 /* CUser.m */,
 				C6A3F5921A4003E1004D3479 /* CContact.h */,
 				C6A3F5931A4003E1004D3479 /* CContact.m */,
 				C6A3F5941A4003E1004D3479 /* CAddress.h */,
 				C6A3F5951A4003E1004D3479 /* CAddress.m */,
+				0769BECE1B77E25800858E5C /* ZPContactModel.h */,
+				0769BECF1B77E25800858E5C /* ZPContactModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -418,6 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				C6A3F59D1A400595004D3479 /* Model.xcdatamodel */,
+				07FB88AC1B5D8DA400DB9090 /* CDRecord.h */,
+				07FB88AD1B5D8DA400DB9090 /* CDRecord.m */,
 				C6A3F5A81A400971004D3479 /* CDUser.h */,
 				C6A3F5A91A400971004D3479 /* CDUser.m */,
 				C6A10EA71A42A41300A170D2 /* CDContact.h */,
@@ -532,34 +642,50 @@
 			files = (
 				C6A3F5271A4000ED004D3479 /* CRootViewController.m in Sources */,
 				C6A3F5C01A40113F004D3479 /* CCredentialsViewController.m in Sources */,
+				0769BED01B77E25800858E5C /* ZPContactModel.m in Sources */,
 				C6A10EA31A42A02800A170D2 /* CSharedContact.m in Sources */,
+				07FB88AE1B5D8DA400DB9090 /* CDRecord.m in Sources */,
 				C6A3F5961A4003E1004D3479 /* CUser.m in Sources */,
+				077F1C4A1B5CD349007475A5 /* CLoginViewController.m in Sources */,
 				C6A3F5841A4002ED004D3479 /* CParseEngine.m in Sources */,
 				C6A3F5811A4002E1004D3479 /* CServer.m in Sources */,
 				C6A10EA01A429B6100A170D2 /* CSelectionTableViewController.m in Sources */,
 				C6A3F5241A4000ED004D3479 /* CAppDelegate.m in Sources */,
+				0769BECB1B77DBE600858E5C /* CAddressBookEngine.m in Sources */,
 				C6A3F5981A4003E1004D3479 /* CAddress.m in Sources */,
 				C6A3F5AA1A400971004D3479 /* CDUser.m in Sources */,
 				C6A3F59E1A400595004D3479 /* Model.xcdatamodel in Sources */,
+				077F1C411B5C3637007475A5 /* ABMultiValue.m in Sources */,
+				077F1C3F1B5C3637007475A5 /* ABSource.m in Sources */,
 				C6358C391A403B7600E052FD /* CEditViewController.m in Sources */,
 				C69E0E411A41CA0A008BDB5E /* CActivityViewController.m in Sources */,
+				077F1C2A1B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m in Sources */,
 				C6A10EAC1A42E2DE00A170D2 /* CDAddress.m in Sources */,
 				C69E0E3E1A415543008BDB5E /* CAddMoreFieldViewController.m in Sources */,
+				077F1C431B5C3637007475A5 /* ABRecord.m in Sources */,
+				0769BEC81B77DBA600858E5C /* CAddressBook.m in Sources */,
 				C6A3F5801A4002E1004D3479 /* PFObject+Additions.m in Sources */,
+				077F1C441B5C3637007475A5 /* ABAddressBookUI.m in Sources */,
+				077F1C401B5C3637007475A5 /* ABGroup.m in Sources */,
 				C6A10EA91A42A41300A170D2 /* CDContact.m in Sources */,
 				C6A3F57A1A4002C6004D3479 /* CLocal.m in Sources */,
 				C6358C3C1A404FE400E052FD /* CDAddress+Additions.m in Sources */,
 				C6A3F5BD1A401084004D3479 /* CUserViewController.m in Sources */,
 				C6A3F59B1A4003EF004D3479 /* CConstants.m in Sources */,
+				077F1C4D1B5CD870007475A5 /* NSString+Additions.m in Sources */,
 				C6A3F5761A4002BC004D3479 /* CCoreDataSharedInstance.m in Sources */,
 				C6A3F5211A4000ED004D3479 /* main.m in Sources */,
 				C6A3F5971A4003E1004D3479 /* CContact.m in Sources */,
+				07FB88AB1B5D76D500DB9090 /* CRecord.m in Sources */,
 				C6A3F5731A4002AC004D3479 /* CCoreDataEngine.m in Sources */,
+				077F1C471B5CD2A1007475A5 /* CSignUpViewController.m in Sources */,
 				C6358C351A40225100E052FD /* CDisplayViewController.m in Sources */,
 				C6A3F58B1A4003B2004D3479 /* NSMutableDictionary+Additions.m in Sources */,
 				C6A3F5BA1A400E2C004D3479 /* CDContact+Additions.m in Sources */,
 				C6A3F5B41A400A93004D3479 /* CUser+Additions.m in Sources */,
+				077F1C3E1B5C3637007475A5 /* ABAddressBook.m in Sources */,
 				C6A3F5B71A400B41004D3479 /* CAddress+Additions.m in Sources */,
+				077F1C421B5C3637007475A5 /* ABPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,36 +806,50 @@
 		C6A3F53F1A4000EE004D3479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aditya Vuchi (6MNSBPF9ML)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aditya Vuchi (6MNSBPF9ML)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/ranjit/Downloads/parse-library-1-2",
 				);
 				INFOPLIST_FILE = Contacts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"CoreGraphics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "39999737-774d-43d4-a9e9-66fa352b3927";
 			};
 			name = Debug;
 		};
 		C6A3F5401A4000EE004D3479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aditya Vuchi (6MNSBPF9ML)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aditya Vuchi (6MNSBPF9ML)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/ranjit/Downloads/parse-library-1-2",
 				);
 				INFOPLIST_FILE = Contacts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"CoreGraphics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "39999737-774d-43d4-a9e9-66fa352b3927";
 			};
 			name = Release;
 		};
