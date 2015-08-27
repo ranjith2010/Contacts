@@ -9,16 +9,16 @@
 #import "CUser+Additions.h"
 
 @implementation CUser (Additions)
-+ (CUser*)CDUserToCUser:(CDUser*)CDUser{
-    if(CDUser){
-        CUser *user = [[CUser alloc]init];
-        [user setUsername:CDUser.username];
-        [user setEmail:CDUser.email];
-        [user setPassword:CDUser.password];
-        return user;
-    }
-    else{
-        return nil;
-    }
-}
+//+ (CUser*)CDUserToCUser:(CDUser*)CDUser{
+//    if(CDUser){
+//        CUser *user = [[CUser alloc]init];
+//        [user setUsername:CDUser.username];
+//        [user setEmail:CDUser.email];
+//        [user setPassword:CDUser.password];
+//        return user;
+//    }
+//    else{
+//        return nil;
+//    }
+//}
 @end

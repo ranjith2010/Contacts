@@ -7,10 +7,9 @@
 //
 
 #import "CUser.h"
-#import "CDUser.h"
 
 @interface CUser (Additions)
 
-+ (CUser*)CDUserToCUser:(CDUser*)CDUser;
+//+ (CUser*)CDUserToCUser:(CDUser*)CDUser;
 
 @end

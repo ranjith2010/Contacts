@@ -20,13 +20,14 @@ NSString * const kServerPassword                            = @"password";
 
 // Parse : Contact class Name & Attributes
 
-NSString * const kServerContactClassName                     = @"Contacts";
-NSString * const kServerUserObjectIdAttribute                = @"userObjectId";
+NSString * const kServerContactClassName                     = @"contact";
+NSString * const kServerUserObjectIdAttribute                = @"userobjectid";
 NSString * const kServerObjectIdAttribute                    = @"objectId";
 NSString * const kServerPhoneAttribute                       = @"phone";
 NSString * const kServerEmailAttribute                       = @"email";
 NSString * const kServerNameAttribute                        = @"name";
 NSString * const kServerAddressIdCollection                  = @"addressIdCollection";
+NSString * const kServerContactRollNumber                    = @"rollnumber";
 
 // Parse : Address class Names & Attributes
 
@@ -35,7 +36,6 @@ NSString * const kServerStreetAttribute                      = @"street";
 NSString * const kServerDistrictAttribute                    = @"district";
 NSString * const kServerTypeAttribute                        = @"type";
 NSString * const kServerAddressId                            = @"addressId";
-NSString * const kServerContactObjectId                      = @"contactObjectId";
 
 // Parse : SharedContacts Names & Attributes
 

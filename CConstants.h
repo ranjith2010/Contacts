@@ -26,7 +26,7 @@ extern NSString * const kServerEmailAttribute                        ;
 extern NSString * const kServerNameAttribute                         ;
 extern NSString * const kServerAddressIdCollection                   ;
 extern NSString * const kServerAddressId                             ;
-extern NSString * const kServerContactObjectId                       ;
+extern NSString * const kServerContactRollNumber                       ;
 
 extern NSString * const kServerAddressClassName                      ;
 extern NSString * const kServerStreetAttribute                       ;

@@ -2,246 +2,137 @@
 //  CDisplayViewController.m
 //  Contacts
 //
-//  Created by Ranjith on 16/12/14.
-//  Copyright (c) 2014 Zippr. All rights reserved.
+//  Created by ranjit on 27/08/15.
+//  Copyright (c) 2015 Zippr. All rights reserved.
 //
 
 #import "CDisplayViewController.h"
 #import "CEditViewController.h"
-#import "CLocal.h"
-#import "CLocalInterface.h"
-#import "CServer.h"
-#import "CServerInterface.h"
 
-#import "CAddMoreFieldViewController.h"
-#import "CSelectionTableViewController.h"
+@interface CDisplayViewController ()
 
-@interface CDisplayViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic) UILabel *nameLabel;
+@property (nonatomic) UILabel *emailLabel;
+@property (nonatomic) UILabel *mobileLabel;
+@property (nonatomic) UILabel *streetLabel;
+@property (nonatomic) UILabel *districtLabel;
+
+@property (nonatomic)UINavigationController *navigation;
 
 @end
 
-@implementation CDisplayViewController{
-    NSMutableArray *addressCollectionDataSource;
-    NSIndexPath *indexPathToDelete;
-}
+@interface CDisplayViewController()<pop>
+
+@end
+
+@implementation CDisplayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [scroller setScrollEnabled:YES];
-//    [scroller setContentSize:CGSizeMake(320, 800)];
-    addressCollectionDataSource = [[NSMutableArray alloc]init];
-    self.addressTableView.delegate = self;
-    self.addressTableView.dataSource = self;
-    //[self pr_initialDataSetup];
+    [self.view removeConstraints:self.view.constraints];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(edit)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    [self addConstraints];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    if(_contact){
-        [[CLocal defaultLocalDB] fetchContacts :_contact.objectId
-                                               :^(NSMutableArray *arrayOfContacts,NSError *error){
-            if(arrayOfContacts.count){
-                for(CContact *contact in arrayOfContacts){
-                    if([contact.name isEqualToString:_contact.name]){
-                        _contact = contact;
-      //                  [self pr_initialDataSetup];
-                    }
-                }
-            }
-        }];
-    }
+#pragma mark - Private methods
+
+- (void)edit {
+    CEditViewController *editVC = [CEditViewController new];
+    [editVC setContact:self.contact];
+    editVC.delegate = self;
+    self.navigation = [[UINavigationController alloc]initWithRootViewController:editVC];
+    editVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+    [self presentViewController:self.navigation animated:NO completion:nil];
 }
 
-#pragma mark - Private API
-
-//- (void)pr_initialDataSetup{
-//    if(_contact){
-//        _nameLabel.text = _contact.name;
-//        _mobileLabel.text = _contact.phone;
-//        _emailLabel.text = _contact.email;
-//        if(_contact.addressIdCollection.count){
-//            __block NSUInteger count = _contact.addressIdCollection.count;
-//            [addressCollectionDataSource removeAllObjects];
-//            for(NSNumber *addressId in _contact.addressIdCollection){
-//                count--;
-//                [[CLocal defaultLocalDB] fetchAddress:[addressId intValue] :^(CAddress *address){
-//                    if(address){
-//                        [addressCollectionDataSource addObject:address];
-//                    }
-//                }];
-//                if(count==0){
-//                    [self.addressTableView reloadData];
-//                }
-//            }
-//        }
-//    }
-//}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void)dismiss {
+    [self dismissViewControllerAnimated:self.navigation completion:nil];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [addressCollectionDataSource count];
+- (void)addConstraints {
+    self.nameLabel = [UILabel new];
+    self.nameLabel.text = self.contact.name;
+    [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.nameLabel.layer.borderColor = [UIColor brownColor].CGColor;
+    self.nameLabel.layer.borderWidth = 4.0;
+    [self.nameLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
+    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.nameLabel];
+
+    self.emailLabel = [UILabel new];
+    self.emailLabel.text = self.contact.emailString;
+    [self.emailLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.emailLabel.layer.borderColor = [UIColor brownColor].CGColor;
+    self.emailLabel.layer.borderWidth = 4.0;
+    [self.emailLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
+    self.emailLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.emailLabel];
+
+    self.mobileLabel = [UILabel new];
+    self.mobileLabel.text = self.contact.mobile;
+    [self.mobileLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.mobileLabel.layer.borderColor = [UIColor brownColor].CGColor;
+    self.mobileLabel.layer.borderWidth = 4.0;
+    [self.mobileLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
+    self.mobileLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.mobileLabel];
+
+    self.streetLabel = [UILabel new];
+    self.streetLabel.text = self.contact.street;
+    [self.streetLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.streetLabel.layer.borderColor = [UIColor brownColor].CGColor;
+    self.streetLabel.layer.borderWidth = 4.0;
+    [self.streetLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
+    self.streetLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.streetLabel];
+
+    self.districtLabel = [UILabel new];
+    self.districtLabel.text = self.contact.district;
+    [self.districtLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.districtLabel.layer.borderColor = [UIColor brownColor].CGColor;
+    self.districtLabel.layer.borderWidth = 4.0;
+    [self.districtLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
+    self.districtLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.districtLabel];
+
+    NSDictionary *views = NSDictionaryOfVariableBindings(_nameLabel,
+                                                         _emailLabel,
+                                                         _mobileLabel,
+                                                         _streetLabel,
+                                                         _districtLabel);
+
+    NSArray *constraints = [NSArray array];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_nameLabel(50)]-40-[_emailLabel(50)]-40-[_mobileLabel(50)]-40-[_streetLabel(50)]-40-[_districtLabel(50)]" options:0 metrics:nil views:views]];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_nameLabel]-|" options:0 metrics:nil views:views]];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_emailLabel]-|" options:0 metrics:nil views:views]];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_mobileLabel]-|" options:0 metrics:nil views:views]];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_streetLabel]-|" options:0 metrics:nil views:views]];
+
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_districtLabel]-|" options:0 metrics:nil views:views]];
+
+    [self.view addConstraints:constraints];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Address";
+- (void)popout {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [self.addressTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    // Configure the cell...
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    CAddress *address = [addressCollectionDataSource objectAtIndex:indexPath.row];
-    cell.textLabel.text = address.typeOfAddress;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ , %@",address.street,address.district];
-    return cell;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
-           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UITableViewCellEditingStyle result = UITableViewCellEditingStyleNone;
-    
-    if ([tableView isEqual:self.addressTableView]){
-        result = UITableViewCellEditingStyleDelete;
-    }
-    return result;
+// @override this method for hiding Tabbar when this viewcontroller
+-(BOOL)hidesBottomBarWhenPushed
+{
+    return YES;
 }
-
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated{
-    [super setEditing:editing animated:animated];
-    [self.addressTableView setEditing:editing animated:animated];
-}
-
-- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
- forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Confirmation"
-                                                        message:@"Are you sure!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:@"Cancel",nil];
-        indexPathToDelete = indexPath;
-        [alert show];
-        
-    }
-}
-
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // the user clicked OK
-    if (buttonIndex == 0) {
-        if (indexPathToDelete.row < [addressCollectionDataSource count]){
-            CAddress *address = [addressCollectionDataSource objectAtIndex:indexPathToDelete.row];
-            [[CServer defaultParser] deleteAddress:address.addressId :^(BOOL succeed){
-                if(succeed){
-                    [[CLocal defaultLocalDB] deleteAddress:address.addressId :^(BOOL succeed){
-                        if(succeed){
-                            [[CServer defaultParser] removeAddressIdinContact:_contact.objectId
-                                             withAddressId:address.addressId :^(BOOL succeed){
-                                                if(succeed){
-                                                [[CLocal defaultLocalDB] removeAddressIdinContact:_contact.objectId withAddressId:address.addressId :^(BOOL succeed){
-                                                    if(succeed){
-                                                    /* First remove this object from the source */
-                                                    [addressCollectionDataSource removeObjectAtIndex:indexPathToDelete.row];
-                                                    /* Then remove the associated cell from the Table View */
-                                                    [self.addressTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete]withRowAnimation:UITableViewRowAnimationLeft];
-                                                                            }
-                                                                        }];
-                                                                    }
-                                                                }];
-                        }
-                    }];
-                }
-            }];
-        }
-    }
-    else{
-        [self.addressTableView reloadData];
-    }
-}
-
-
-#pragma mark - Button Action
-
-- (IBAction)editBtn:(id)sender {
-    CEditViewController *editVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EditVC"];
-    [editVC setContact:_contact];
-    [self presentViewController:editVC animated:YES completion:nil];
-}
-
-- (IBAction)shareBtn:(id)sender {
-    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
-                            @"Share 1 Contact",
-                            @"Share Mulitple Contacts",
-                            @"Share All Contacts",
-                            nil];
-    popup.tag = 1;
-    popup.accessibilityLabel = _contact.objectId;
-    [popup showInView:[UIApplication sharedApplication].keyWindow];
-}
-
-// ActionSheet related Code
-
-- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (popup.tag) {
-        case 1: {
-            switch (buttonIndex) {
-                case 0:
-                    [self pr_shareContact:popup.accessibilityLabel withAll:NO];
-                    break;
-                case 1:{
-                    CSelectionTableViewController *selectionTVC=  [self.storyboard instantiateViewControllerWithIdentifier:@"SelectionTVC"];
-                    [selectionTVC setContacts:_allContacts];
-                    [self presentViewController:selectionTVC animated:YES completion:nil];
-                }
-                    break;
-                case 2:{
-//                    [[CServer defaultParser] currentUserObjectId:^(NSString *userObjectId){
-//                        if(userObjectId){
-                            [self pr_shareContact:[[CServer defaultParser] currentUserObjectId] withAll:YES];
-                        }
-                   // }];
-                //}
-                    break;
-                default:
-                    break;
-            }
-            break;
-        }
-        default:
-            break;
-    }
-}
-
--(void)pr_shareContact:(NSString*)objectID withAll:(BOOL)allContacts{
-    NSString *finalString;
-    if(allContacts){
-        finalString = [@"Contacts:" stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"//userObjectId/",objectID]];
-    }
-    else{
-        finalString = [@"Contacts:" stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"//contactObjectID/",objectID]];
-    }
-    NSURL *customURL = [[NSURL alloc] initWithString:finalString];
-    self.activityVC = [[CActivityViewController alloc] initWithURL:customURL];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.activityVC] applicationActivities:nil];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:activityViewController animated:YES completion:nil];
-    }
-}
-
-
-- (IBAction)addAddressFieldBtn:(id)sender {
-    CAddMoreFieldViewController *addMoreFieldVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMoreFieldVC"];
-    [addMoreFieldVC setContactObjectId:_contact.objectId];
-    [self presentViewController:addMoreFieldVC animated:YES completion:nil];
-}
-
 
 @end

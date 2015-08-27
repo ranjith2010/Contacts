@@ -11,7 +11,11 @@
 #import "CConstants.h"
 
 @interface PFObject (Additions)
+//
+//+ (CContact*)PFObjectToCContact:(PFObject*)pfObject;
 
-+ (CContact*)PFObjectToCContact:(PFObject*)pfObject;
+- (CContact *)contact;
+
+-(void)c_safeAddKey:(NSString *)key value:(id)value;
 
 @end

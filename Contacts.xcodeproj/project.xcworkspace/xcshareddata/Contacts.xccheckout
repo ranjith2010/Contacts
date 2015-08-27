@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F374C45E-1205-4B3C-81BB-61E378C3CF0B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Contacts</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</key>
 		<string>https://github.com/ranjith2010/Contacts.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Contacts.xcodeproj</string>
+	<string>Contacts.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BAD89BF92AB0638F6D4AF0114CE6497D2C30D703</key>

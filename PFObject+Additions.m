@@ -10,32 +10,36 @@
 
 @implementation PFObject (Additions)
 
-+ (CContact*)PFObjectToCContact:(PFObject*)pfObject{
-    CContact *returnContact;
-    if(pfObject){
-        NSArray *temp = [[NSArray alloc] init];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-
-        temp = [pfObject allKeys];
-
-        NSEnumerator *e = [temp objectEnumerator];
-        id object;
-        while (object = [e nextObject]) {
-            [dict setValue:[pfObject objectForKey:object] forKey:object];
+- (CContact *)contact {
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    NSArray* ignoreKeys = [self ignoreKeys];
+    for (NSString* key in self.allKeys) {
+        if([ignoreKeys indexOfObject:key] == NSNotFound) {
+            dict[key] = [self valueForKey:key];
         }
-        returnContact = [[CContact alloc]initWithServerDictionary:dict];
+    }
+    CContact *contact = [[CContact alloc]initWithServerDictionary:dict];
+    return contact;
+}
 
-        //Check the results NSLog(@"PFObject Info: %@", PFObject); NSLog(@"dict Info: %@", dict);.
-//        [returnContact setName:[pfObject valueForKey:kServerNameAttribute]];
-//        [returnContact setEmail:[pfObject valueForKey:kServerEmailAttribute]];
-//        [returnContact setPhone:[pfObject valueForKey:kServerPhoneAttribute]];
-//        [returnContact setObjectId:[pfObject valueForKey:kServerObjectIdAttribute]];
-        //[returnContact setAddressIdCollection:[pfObject valueForKey:kServerAddressIdCollection]];
-//        [returnContact setUserObjectId:[pfObject valueForKey:kServerUserObjectIdAttribute]];
-        return returnContact;
+
+- (void)c_safeAddKey:(NSString *)key value:(id)value {
+    if (key && value) {
+        [self setValue:value forKey:key];
     }
-    else{
-        return returnContact;
-    }
+}
+
+
+/*!
+ Keys that should not be updated to Parse.
+ **/
+- (NSArray*)ignoreKeys {
+    return @[@"__type",
+             @"className",
+             @"objectId",
+             @"createdAt",
+             @"updatedAt",
+             @"ACL",
+             @"user"];
 }
 @end

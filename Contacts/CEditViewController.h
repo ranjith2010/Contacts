@@ -8,23 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "CContact.h"
-#import "CAddress.h"
 
+@protocol pop <NSObject>
 
+- (void)popout;
 
-@interface CEditViewController : UIViewController{
-        IBOutlet UIScrollView *scroller;
-}
+@end
+
+@interface CEditViewController : UIViewController
+
 @property(nonatomic,strong)CContact *contact;
-@property(nonatomic,strong)CAddress *address;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *typeTextField;
-@property (weak, nonatomic) IBOutlet UITextField *streetTextField;
-@property (weak, nonatomic) IBOutlet UITextField *districtTextField;
+@property (nonatomic)id<pop>delegate;
 
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end

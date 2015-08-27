@@ -10,69 +10,111 @@
 #import "CServer.h"
 #import "CServerInterface.h"
 #import "CConstants.h"
-#import "CSharedContact.h"
+
+#import "CPeopleTableViewController.h"
+#import "CProfileViewController.h"
+#import "CServerUser.h"
+#import "CServerUserInterface.h"
+#import "CSplashViewController.h"
 
 @interface CAppDelegate (){
-    CSharedContact *sharedZippr;
+//    CSharedContact *sharedZippr;
 }
-
+@property (nonatomic)id<CServerUserInterface> serverUser;
 @end
 
 @implementation CAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[CServer defaultParser] parseAuthentication];
-    [self pr_isItFirstLaunch];
+    NSLog(@"app dir: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
 
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
+    [[CServer defaultParser] authentication];
+    [self pr_initalSetup];
+
+//    [self pr_isItFirstLaunch];
+
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+//                                                    UIUserNotificationTypeBadge |
+//                                                    UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+//                                                                             categories:nil];
+//    [application registerUserNotificationSettings:settings];
+//    [application registerForRemoteNotifications];
     return YES;
 }
 
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global" ];
-    [currentInstallation saveInBackground];
+- (void)pr_initalSetup {
+    if(!self.window) {
+        self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    }
+    self.serverUser = [CServerUser defaultUser];
+    if(![self.serverUser hasCurrentUser]) {
+        CSplashViewController *splashVC = [CSplashViewController new];
+        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:splashVC];
+        self.window.rootViewController = navigationController;
+    }
+    else {
+        UITabBarController *tabBarController = [UITabBarController new];
+        CPeopleTableViewController *peopleTVC = [CPeopleTableViewController new];
+        UINavigationController *navigationControllerForPeople = [[UINavigationController alloc]initWithRootViewController:peopleTVC];
+        navigationControllerForPeople.title = @"People";
+
+        CProfileViewController *userViewController = [CProfileViewController new];
+        UINavigationController *navigationControllerForProfile = [[UINavigationController alloc]initWithRootViewController:userViewController];
+        userViewController.title = @"Profile";
+        NSArray *tabControllers = [NSArray arrayWithObjects:navigationControllerForPeople,navigationControllerForProfile, nil];
+        tabBarController.viewControllers = tabControllers;
+        self.window.rootViewController = tabBarController;
+    }
+    [self.window makeKeyAndVisible];
 }
 
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
-}
+
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    // Store the deviceToken in the current installation and save it to Parse.
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    currentInstallation.channels = @[ @"global" ];
+//    [currentInstallation saveInBackground];
+//}
+//
+//
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    [PFPush handlePush:userInfo];
+//}
 
 #pragma mark - Private API
 
-- (void)pr_isItFirstLaunch{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if(![defaults objectForKey:kServerAddressId]){
-        [defaults setObject:[NSNumber numberWithInt:0] forKey:kServerAddressId];
-        [defaults synchronize];
-    }
-}
+//- (void)pr_isItFirstLaunch{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if(![defaults objectForKey:kServerAddressId]){
+//        [defaults setObject:[NSNumber numberWithInt:0] forKey:kServerAddressId];
+//        [defaults synchronize];
+//    }
+//}
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    if(url){
-        sharedZippr = [CSharedContact sharedInstance];
-        sharedZippr.sharedContacts = [[NSMutableArray alloc]init];
-        [self pr_sharedContactsUsingDeepLinking:url];
-    }
-    return YES;
-}
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+//    if(url){
+//        sharedZippr = [CSharedContact sharedInstance];
+//        sharedZippr.sharedContacts = [[NSMutableArray alloc]init];
+////        [self pr_sharedContactsUsingDeepLinking:url];
+//    }
+//    return YES;
+//}
 
--(void)pr_sharedContactsUsingDeepLinking:(NSURL*)url{
-    [[CServer defaultParser] fetchSharedContacts:(NSURL*)url  :^(NSMutableArray *arrayOfContacts){
-        [sharedZippr.sharedContacts addObjectsFromArray:arrayOfContacts];
-    }];
-}
+//-(void)pr_sharedContactsUsingDeepLinking:(NSURL*)url{
+//    [[CServer defaultParser] fetchSharedContacts:(NSURL*)url  :^(NSMutableArray *arrayOfContacts){
+//        [sharedZippr.sharedContacts addObjectsFromArray:arrayOfContacts];
+//    }];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

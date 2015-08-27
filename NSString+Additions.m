@@ -44,8 +44,8 @@
 
 - (BOOL)c_isChar {
     NSString *regex = @"[A-Z]+";
-    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return [test evaluateWithObject:self];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [predicate evaluateWithObject:self];
 }
 
 @end

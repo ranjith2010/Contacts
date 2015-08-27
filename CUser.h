@@ -10,6 +10,11 @@
 
 @interface CUser : NSObject
 
+/*!
+ Initializes with Server dictionary
+ */
+- (id)initWithServerDictionary:(NSDictionary*)dictionary;
+
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * username;

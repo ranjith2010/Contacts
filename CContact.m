@@ -11,9 +11,16 @@
 #import "CConstants.h"
 
 @interface CContact()
-// The backing Dictionary!
-@property (nonatomic,strong)NSMutableDictionary *serverDictionary;
+// The backing dictionary
+@property (strong, readwrite, nonatomic) NSMutableDictionary* serverDictionary;
 @end
+NSString * const kZPContactFirstName            = @"firstname";
+NSString * const kZPContactLastName             = @"lastname";
+NSString * const kZPContactEmail                = @"email";
+NSString * const kZPContactPhone                = @"phone";
+NSString * const kZPContactUserObjectId         = @"userobjectid";
+NSString * const kZPContactRollNumber           = @"rollnumber";
+
 @implementation CContact
 
 - (id)init {
@@ -33,87 +40,114 @@
     return self.serverDictionary;
 }
 
-//Company = Zippr;
-//CreationDate = "2015-07-20 12:28:34 +0000";
-//Email = "ABMultiValueRef 0x7fde7e044e60 with 1 value(s)\n    0: _$!<Home>!$_ (0x105e94510) - ranmyfriend@icloud.com (0x7fde7e005750)\n";
-//First = ranjith;
-//FirstSort = "K)C;9O7=QA)K[9GGK\v\t\t\v\t\U00dc\b";
-//FirstSortLanguageIndex = 0;
-//FirstSortSection = K;
-//IsPreferredName = 0;
-//Kind = 0;
-//Last = kumar;
-//LastSort = "=QA)KK)C;9O7[9GGK\t\v\t\t\v\U00dc\b";
-//LastSortLanguageIndex = 0;
-//LastSortSection = "=";
-//ModificationDate = "2015-07-20 12:28:51 +0000";
-//NameOnlySearch = <4b29433b 394f3702 3d514129 4b00>;
-//PersonLink = "-1";
-//Phone = "ABMultiValueRef 0x7fde7e06a0a0 with 1 value(s)\n    0: _$!<Home>!$_ (0x105e94510) - 1\U00a0(234) (0x7fde7bce4b80)\n";
-//Ringtone = "ABMultiValueRef 0x7fde7bc9e120 with 0 value(s)\n";
-//Search = <4b29433b 394f3702 3d514129 4b025b39 47474b02 5b394747 4b00>;
-//StoreID = 0;
-//StoreReference = "<CPRecord: 0x7fde7bf473a0 ABStore>";
-//SyntheticPropertiesReset = 0;
-
-
-- (NSString*)name {
-    NSMutableString *mutableString = [NSMutableString new];
-    if(self.serverDictionary[@"First"]) {
-        [mutableString appendString:[self.serverDictionary valueForKey:@"First"]];
-        [mutableString appendFormat:@" "];
-    }
-    if(self.serverDictionary[@"Last"]) {
-        [mutableString appendString:[self.serverDictionary valueForKey:@"Last"]];
-    }
-    if(!mutableString.length) {
-        [mutableString appendString:@"No Name"];
-    }
-    return mutableString;
+- (void)setName:(NSString *)name {
+    [self.serverDictionary safeAddForKey:@"name" value:name];
 }
 
-//- (void)setName:(NSString *)name {
-//    [self.serverDictionary safeAddForKey:kServerNameAttribute value:name];
-//}
+- (NSString *)name {
+   return self.serverDictionary[@"name"];
+}
+
+- (void)setMobile:(NSString *)mobile {
+    [self.serverDictionary safeAddForKey:@"mobile" value:mobile];
+}
+
+- (NSString *)mobile {
+    return self.serverDictionary[@"mobile"];
+}
+
+- (void)setEmailString:(NSString *)emailString {
+    [self.serverDictionary safeAddForKey:@"email" value:emailString];
+}
+
+- (NSString *)emailString {
+    return self.serverDictionary[@"email"];
+}
+
+- (void)setStreet:(NSString *)street {
+    [self.serverDictionary safeAddForKey:@"street" value:street];
+}
+
+- (NSString *)street {
+    return self.serverDictionary[@"street"];
+}
+
+- (void)setDistrict:(NSString *)district {
+    [self.serverDictionary safeAddForKey:@"district" value:district];
+}
+
+- (NSString *)district {
+    return self.serverDictionary[@"district"];
+}
 
 
-- (NSString*)userObjectId {
-    return self.serverDictionary[kServerUserObjectIdAttribute];
+
+- (void)setFirstname:(NSString *)firstname {
+    [self.serverDictionary safeAddForKey:kZPContactFirstName value:firstname];
+}
+
+- (NSString*)firstname {
+    return self.serverDictionary[kZPContactFirstName];
+}
+- (void)setLastname:(NSString *)lastname {
+    [self.serverDictionary safeAddForKey:kZPContactLastName value:lastname];
+}
+
+- (NSString*)lastname {
+    return self.serverDictionary[kZPContactLastName];
+}
+- (void)setPhone:(NSArray *)phone {
+    [self.serverDictionary safeAddForKey:kZPContactPhone value:phone];
+}
+
+- (NSArray*)phone {
+    return self.serverDictionary[kZPContactPhone];
+}
+
+- (void)setEmail:(NSArray *)email {
+    [self.serverDictionary safeAddForKey:kZPContactEmail value:email];
+}
+
+- (NSArray*)email {
+    return self.serverDictionary[kZPContactEmail];
 }
 
 - (void)setUserObjectId:(NSString *)userObjectId {
-    [self.serverDictionary safeAddForKey:kServerUserObjectIdAttribute value:userObjectId];
+    [self.serverDictionary safeAddForKey:kZPContactUserObjectId value:userObjectId];
 }
 
-//- (NSString*)phone {
-//    return self.serverDictionary[kServerPhoneAttribute];
-//}
-//
-//- (void)setPhone:(NSString *)phone {
-//    [self.serverDictionary safeAddForKey:kServerPhoneAttribute value:phone];
-//}
-//
-//- (NSString*)objectId {
-//    return self.serverDictionary[kServerContactObjectId];
-//}
-//- (void)setObjectId:(NSString *)objectId {
-//    [self.serverDictionary safeAddForKey:kServerContactObjectId value:objectId];
-//}
+- (NSString *)userObjectId {
+    return self.serverDictionary[kZPContactUserObjectId];
+}
 
-//- (NSString*)email {
-//    return self.serverDictionary[kServerEmailAttribute];
-//}
-//
-//- (void)setEmail:(NSString *)email {
-//    [self.serverDictionary safeAddForKey:kServerEmailAttribute value:email];
-//}
+- (void)setRollNumber:(NSString *)rollNumber {
+    [self.serverDictionary safeAddForKey:kZPContactRollNumber value:rollNumber];
+}
 
-//- (NSArray*)addressIdCollection {
-//    return self.serverDictionary[kServerAddressIdCollection];
-//}
-//
-//- (void)setAddressIdCollection:(NSMutableArray *)addressIdCollection {
-//    [self.serverDictionary safeAddForKey:kServerAddressIdCollection value:addressIdCollection];
-//}
+- (NSString *)rollNumber {
+    return self.serverDictionary[kZPContactRollNumber];
+}
+
+- (NSString*)getFullName {
+    NSString *fullname =nil;
+    // here i am not cross checking first & last name has null value,
+    // becuase in iPhone contact app doesn't allow to create a contact with Null value in Names
+    if(self.firstname !=nil && self.lastname !=nil) {
+        fullname = [NSString stringWithFormat:@"%@ %@",self.firstname,self.lastname];
+    }
+    else if(self.firstname!=nil && self.lastname==nil) {
+        fullname = self.firstname;
+    }
+    else if(self.lastname) {
+        fullname = self.lastname;
+    }
+    else if(self.phone.count !=0) {
+        fullname = self.phone.firstObject;
+    }
+    else if(self.email.count !=0) {
+        fullname =  self.email.firstObject;
+    }
+    return fullname;
+}
 
 @end

@@ -15,94 +15,127 @@
 #import "UIAlertView+ZPBlockAdditions.h"
 #import "CUser.h"
 
+#import "CServerUserInterface.h"
+#import "CServerUser.h"
+#import "MBProgressHUD.h"
+
 @interface CSignUpViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *loginFBBtnProperty;
-@property (weak, nonatomic) IBOutlet UITextField *userNameProperty;
-@property (weak, nonatomic) IBOutlet UITextField *emailProperty;
-@property (weak, nonatomic) IBOutlet UITextField *passwordProperty;
-@property (weak, nonatomic) IBOutlet UIButton *signUpBtnProperty;
+@property (nonatomic) UIButton *loginFaceBookBtn;
+@property (nonatomic) UITextField *userNameTextField;
+@property (nonatomic) UITextField *emailTextField;
+@property (nonatomic) UITextField *passwordTextField;
+@property (nonatomic) UIButton *signUpBtn;
+@property (nonatomic)id<CServerUserInterface>serverUser;
 @end
 
 @implementation CSignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.serverUser = [CServerUser defaultUser];
     [self.view removeConstraints:self.view.constraints];
     [self addConstraints];
 }
 
-
 - (void)addConstraints {
-    _loginFBBtnProperty.translatesAutoresizingMaskIntoConstraints = NO;
-    _userNameProperty.translatesAutoresizingMaskIntoConstraints = NO;
-    _emailProperty.translatesAutoresizingMaskIntoConstraints = NO;
-    _passwordProperty.translatesAutoresizingMaskIntoConstraints = NO;
-    _signUpBtnProperty.translatesAutoresizingMaskIntoConstraints = NO;
+
+    _loginFaceBookBtn = [UIButton new];
+    [_loginFaceBookBtn setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+    [_loginFaceBookBtn setBackgroundColor:[UIColor blackColor]];
+    [_loginFaceBookBtn addTarget:self action:@selector(loginWithFacebookAction) forControlEvents:UIControlEventTouchUpInside];
+    _loginFaceBookBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.loginFaceBookBtn.layer setCornerRadius:10];
+    [self.view addSubview:_loginFaceBookBtn];
+
+    _userNameTextField = [UITextField new];
+    _userNameTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _userNameTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [_userNameTextField addTarget:self action:@selector(didOnExitKeyboardDismissAction) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_userNameTextField setPlaceholder:@"username"];
+    [self.view addSubview:_userNameTextField];
+
+    _emailTextField = [UITextField new];
+    _emailTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [_emailTextField addTarget:self action:@selector(didOnExitKeyboardDismissAction) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_emailTextField setPlaceholder:@"email"];
+    [self.view addSubview:_emailTextField];
+
+    _passwordTextField = [UITextField new];
+    _passwordTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [_passwordTextField addTarget:self action:@selector(didOnExitKeyboardDismissAction) forControlEvents:UIControlEventEditingDidEndOnExit];
+    _passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [_passwordTextField setPlaceholder:@"password"];
+    [self.view addSubview:_passwordTextField];
+
+    _signUpBtn = [UIButton new];
+    [_signUpBtn setTitle:@"Sign up" forState:UIControlStateNormal];
+    [_signUpBtn setBackgroundColor:[UIColor blackColor]];
+    [_signUpBtn addTarget:self action:@selector(signUpBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    _signUpBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.signUpBtn.layer setCornerRadius:10];
+    [self.view addSubview:_signUpBtn];
+
     NSArray *constraints = [NSArray array];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_loginFBBtnProperty,
-                                                         _userNameProperty,
-                                                         _emailProperty,
-                                                         _passwordProperty,
-                                                         _signUpBtnProperty);
-    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_loginFBBtnProperty(50)]-20-[_userNameProperty(40)]-[_emailProperty(40)]-[_passwordProperty(40)]-20-[_signUpBtnProperty(50)]" options:NSLayoutFormatAlignAllCenterX metrics:0 views:views]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_loginFBBtnProperty attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_loginFBBtnProperty attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_userNameProperty attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_emailProperty attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_passwordProperty attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
-    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_signUpBtnProperty attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_loginFaceBookBtn,
+                                                         _userNameTextField,
+                                                         _emailTextField,
+                                                         _passwordTextField,
+                                                         _signUpBtn);
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_loginFaceBookBtn(50)]-20-[_userNameTextField(40)]-[_emailTextField(40)]-[_passwordTextField(40)]-20-[_signUpBtn(50)]" options:NSLayoutFormatAlignAllCenterX metrics:0 views:views]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_loginFaceBookBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_loginFaceBookBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_userNameTextField attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_emailTextField attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_passwordTextField attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
+    constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_signUpBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0f constant:300]];
 
     [self.view addConstraints:constraints];
-
 }
 
-- (IBAction)signUpBtnAction:(id)sender {
-    if ([self.userNameProperty.text c_isEmpty]) {
+- (void)signUpBtnAction {
+    if ([self.userNameTextField.text c_isEmpty]) {
         [UIAlertView zp_alertViewWithTitle:@"Error" message:@"User name is Empty"];
     }
-    else if ([self.emailProperty.text c_isEmpty]) {
+    else if ([self.emailTextField.text c_isEmpty]) {
         [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Email is Empty"];
     }
-    else if (![self.emailProperty.text c_validateEmail]) {
+    else if (![self.emailTextField.text c_validateEmail]) {
         [UIAlertView zp_alertViewWithTitle:@"Validation Error" message:@"Incorrect Email"];
     }
-    else if ([self.passwordProperty.text c_isEmpty]) {
+    else if ([self.passwordTextField.text c_isEmpty]) {
         [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Password Empty"];
     }
     else {
-        [[CServer defaultParser] createNewUser:self.userNameProperty.text
-                                         email:self.emailProperty.text
-                                      password:self.passwordProperty.
-                                          text:^(BOOL succeeded, NSError* error) {
-              if (error) {
-                  [UIAlertView zp_alertViewWithTitle:@"Parse Error" message:error.localizedDescription];
-              }
-              else if (succeeded) {
-                  [[CLocal defaultLocalDB] createNewUser:self.userNameProperty.text
-                                                   email:self.emailProperty.text
-                                                password:self.passwordProperty.
-                                                    text:^(BOOL succeeded, NSError* error) {
-                                                if (error) {
-                                                    [UIAlertView zp_alertViewWithTitle:@"Core Data Error" message:error.localizedDescription];
-                                                }
-                                                else {
-                                                    [UIAlertView zp_alertViewWithTitle:@"Success" message:@"Sign Up successfull"];
-                                                }
-                                                    }];
-                                            }
-                                          }];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.serverUser createNewUserWithEmail:self.emailTextField.text
+                                       password:self.passwordTextField.text
+                                               :^(BOOL succeeded, NSError *error) {
+                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                   if(!error) {
+                                              NSLog(@"%@ user created",self.userNameTextField.text);
+                                              [self.navigationController popViewControllerAnimated:YES];
+                                          }
+                                          else {
+                                              NSLog(@"%@",error.localizedDescription);
+                                          }
+                                      }];
     }
+    
+}
+
+
+- (void)loginWithFacebookAction {
+
 }
 
 
 // TextField - keyboard dissmissing action.
-- (IBAction)didOnExitKeyboardDismissAction:(id)sender {
+- (void)didOnExitKeyboardDismissAction {
 
-}
-
-- (IBAction)cancelBtnAction:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

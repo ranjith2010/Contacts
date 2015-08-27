@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CUser.h"
 #import "CContact.h"
-#import "CDContact.h"
-#import "CAddress.h"
-#import "CRecord.h"
 
 @protocol CLocalInterface <NSObject>
 // User : Clear & Store
@@ -35,29 +32,26 @@
 
 //- (void)createNewUser:(CUser*)newUser :(void (^)(BOOL succedeed))block;
 
-- (void)createNewUser:(NSString *)userName
-                email:(NSString *)email
-             password:(NSString *)password
-                     :(void (^)(BOOL succeeded, NSError *))block;
+- (BOOL)createNewUser:(CUser *)user;
 
-- (void)fetchAddress:(int)addressId :(void (^)(CAddress *address))block;
+//- (void)fetchAddress:(int)addressId :(void (^)(CAddress *address))block;
 
-- (void)saveContact:(CContact*)contact :(void (^)(BOOL succedeed))block;
+- (BOOL)saveContact:(CContact*)contact error:(NSError **)error;
+- (void)fetchCurrentUserContacts:(NSString*)userObjectId :(void(^)(NSArray *contacts))block;
 
 
+//- (void)saveRecord:(CRecord *)record
+//                  :(void(^)(BOOL succeedeed,NSError *error))block;
 
-- (void)saveRecord:(CRecord *)record
-                  :(void(^)(BOOL succeedeed,NSError *error))block;
 
-
-- (void)saveAddress:(CAddress*)address :(CDContact*)cdcontact :(void (^)(BOOL succeed))block;
+//- (void)saveAddress:(CAddress*)address :(CDContact*)cdcontact :(void (^)(BOOL succeed))block;
 
 - (void)editContact:(CContact*)contact :(void(^)(BOOL succeed))block;
-- (void)editAddress:(CAddress*)address :(void(^)(BOOL succeed))block;
+//- (void)editAddress:(CAddress*)address :(void(^)(BOOL succeed))block;
 
 - (void)affectAddressIdinContact:(NSString*)contactObjectId withAddressId:(int)addressId :(void (^)(BOOL succeed))block;
 
-- (void)saveAddress:(CAddress*)address :(void (^)(BOOL succeed))block;
+//- (void)saveAddress:(CAddress*)address :(void (^)(BOOL succeed))block;
 
 - (void)deleteAddress:(int)addressId :(void(^)(BOOL succeed))block;
 - (void)deleteContact:(NSString*)contactObjectId :(void (^)(BOOL succedeed))block;

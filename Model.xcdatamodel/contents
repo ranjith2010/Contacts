@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="CDAddress" representedClassName="CDAddress" syncable="YES">
-        <attribute name="addressId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="contactObjectId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="district" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cdcontact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="cdaddress" inverseEntity="CDContact" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8118.20" systemVersion="14E46" minimumToolsVersion="Xcode 4.3">
     <entity name="CDContact" representedClassName="CDContact" syncable="YES">
-        <attribute name="addressIdCollection" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="userObjectId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cdaddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDAddress" inverseName="cdcontact" inverseEntity="CDAddress" syncable="YES"/>
         <relationship name="cduser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="cdcontact" inverseEntity="CDUser" syncable="YES"/>
-    </entity>
-    <entity name="CDRecord" representedClassName="CDRecord" syncable="YES">
-        <attribute name="recordId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userObjectId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,9 +16,7 @@
         <relationship name="cdcontact" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDContact" inverseName="cduser" inverseEntity="CDContact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDAddress" positionX="-137" positionY="216" width="128" height="135"/>
-        <element name="CDContact" positionX="-477" positionY="171" width="128" height="163"/>
-        <element name="CDUser" positionX="-261" positionY="54" width="128" height="103"/>
-        <element name="CDRecord" positionX="-306" positionY="189" width="128" height="75"/>
+        <element name="CDContact" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="CDUser" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>

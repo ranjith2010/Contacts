@@ -1,5 +1,5 @@
 //
-//  CUserViewController.h
+//  ViewController.h
 //  Contacts
 //
 //  Created by Ranjith on 16/12/14.
@@ -8,5 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CUserViewController : UIViewController
+@interface CPeopleTableViewController : UITableViewController
+
 @end
+
