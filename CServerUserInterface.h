@@ -31,10 +31,12 @@ typedef void(^forgotPasswordCompletioBlock)(BOOL succeeded,NSError *error);
 /*!
  @brief Create a New user. Registering a Brand new user
  @param email new user -email
+ @param name its shows like a Username,
  @param password new user -password
  @param completion block
  */
 - (void)createNewUserWithEmail:(NSString *)email
+                          name:(NSString *)name
                       password:(NSString *)password
                               :(createUserCompletionBlock)block;
 

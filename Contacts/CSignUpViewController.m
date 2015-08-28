@@ -19,6 +19,9 @@
 #import "CServerUser.h"
 #import "MBProgressHUD.h"
 
+#import "CPeopleTableViewController.h"
+#import "CProfileViewController.h"
+
 @interface CSignUpViewController ()
 
 @property (nonatomic) UIButton *loginFaceBookBtn;
@@ -46,7 +49,7 @@
     [_loginFaceBookBtn setBackgroundColor:[UIColor blackColor]];
     [_loginFaceBookBtn addTarget:self action:@selector(loginWithFacebookAction) forControlEvents:UIControlEventTouchUpInside];
     _loginFaceBookBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.loginFaceBookBtn.layer setCornerRadius:10];
+    [self.loginFaceBookBtn.layer setCornerRadius:6];
     [self.view addSubview:_loginFaceBookBtn];
 
     _userNameTextField = [UITextField new];
@@ -76,7 +79,7 @@
     [_signUpBtn setBackgroundColor:[UIColor blackColor]];
     [_signUpBtn addTarget:self action:@selector(signUpBtnAction) forControlEvents:UIControlEventTouchUpInside];
     _signUpBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.signUpBtn.layer setCornerRadius:10];
+    [self.signUpBtn.layer setCornerRadius:6];
     [self.view addSubview:_signUpBtn];
 
     NSArray *constraints = [NSArray array];
@@ -112,20 +115,40 @@
     else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.serverUser createNewUserWithEmail:self.emailTextField.text
+                                           name:self.userNameTextField.text
                                        password:self.passwordTextField.text
                                                :^(BOOL succeeded, NSError *error) {
-                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                    if(!error) {
                                               NSLog(@"%@ user created",self.userNameTextField.text);
-                                              [self.navigationController popViewControllerAnimated:YES];
+                                                       [self.navigationController popViewControllerAnimated:YES];
+//                                                       [self.navigationController dismissViewControllerAnimated:NO completion:^{
+//                                                           [self launchTabBarVC];
+//                                                       }];
+//                                              [self.navigationController popViewControllerAnimated:YES];
+//                                               [self.delegate dismissRegisterVC];
                                           }
                                           else {
                                               NSLog(@"%@",error.localizedDescription);
                                           }
                                       }];
     }
-    
 }
+
+- (void)launchTabBarVC {
+    UITabBarController *tabBarController = [UITabBarController new];
+    CPeopleTableViewController *peopleTVC = [CPeopleTableViewController new];
+    UINavigationController *navigationControllerForPeople = [[UINavigationController alloc]initWithRootViewController:peopleTVC];
+    navigationControllerForPeople.title = @"People";
+
+    CProfileViewController *userViewController = [CProfileViewController new];
+    UINavigationController *navigationControllerForProfile = [[UINavigationController alloc]initWithRootViewController:userViewController];
+    userViewController.title = @"Profile";
+    NSArray *tabControllers = [NSArray arrayWithObjects:navigationControllerForPeople,navigationControllerForProfile, nil];
+    tabBarController.viewControllers = tabControllers;
+    [self presentViewController:tabBarController animated:NO completion:nil];
+}
+
 
 
 - (void)loginWithFacebookAction {

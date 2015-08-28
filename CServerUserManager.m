@@ -53,12 +53,13 @@
 }
 
 - (void)createNewUserWithEmail:(NSString *)email
+                          name:(NSString *)name
                       password:(NSString *)password
-                     :(createUserCompletionBlock)block {
+                              :(createUserCompletionBlock)block {
     PFUser *user = [PFUser user];
     user.username = email;
     user.password = password;
-    user.email = email;
+    [user setValue:name forKey:@"name"];
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [self startRollNumber];
         block(succeeded,error);
@@ -98,11 +99,11 @@
 }
 
 - (NSString *)userName {
-    return [[PFUser currentUser] username];
+    return [[PFUser currentUser] valueForKey:@"name"];
 }
 
 - (NSString *)email {
-    return [[PFUser currentUser] email];
+    return [[PFUser currentUser] username];
 }
 
 - (NSDate*)createdAt {

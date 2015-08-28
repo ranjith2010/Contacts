@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol dismiss <NSObject>
+
+- (void)dismissRegisterVC;
+
+@end
+
+
 @interface CSignUpViewController : UIViewController
 
-
-
+@property (nonatomic)id<dismiss>delegate;
 
 @end

@@ -15,7 +15,7 @@
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
 
-@interface CSplashViewController ()
+@interface CSplashViewController ()<dismiss>
 @property (nonatomic)id<CServerUserInterface> serverUser;
 @property (nonatomic) UIButton *loginBtnProperty;
 @property (nonatomic) UIButton *skipBtnProperty;
@@ -33,6 +33,13 @@
     [self addConstraints];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if([self.serverUser hasCurrentUser]) {
+        [self launchTabBarVC];
+    }
+}
+
 - (void)addConstraints {
 
     self.loginBtnProperty = [UIButton new];
@@ -40,7 +47,7 @@
     [self.loginBtnProperty setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.loginBtnProperty addTarget:self action:@selector(loginBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.loginBtnProperty setTitle:@"Login" forState:UIControlStateNormal];
-    [self.loginBtnProperty.layer setCornerRadius:10];
+    [self.loginBtnProperty.layer setCornerRadius:6];
     [self.view addSubview:self.loginBtnProperty];
 
     self.skipBtnProperty = [UIButton new];
@@ -48,7 +55,7 @@
     [self.skipBtnProperty setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.skipBtnProperty addTarget:self action:@selector(skipBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.skipBtnProperty setTitle:@"Skip" forState:UIControlStateNormal];
-    [self.skipBtnProperty.layer setCornerRadius:10];
+    [self.skipBtnProperty.layer setCornerRadius:6];
     [self.view addSubview:self.skipBtnProperty];
 
     self.signUpBtnProperty = [UIButton new];
@@ -56,7 +63,7 @@
     [self.signUpBtnProperty setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.signUpBtnProperty addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
     [self.signUpBtnProperty setTitle:@"Register" forState:UIControlStateNormal];
-    [self.signUpBtnProperty.layer setCornerRadius:10];
+    [self.signUpBtnProperty.layer setCornerRadius:6];
     [self.view addSubview:self.signUpBtnProperty];
 
 
@@ -107,6 +114,7 @@
 
 - (void)signUp {
     CSignUpViewController *signUpVC = [CSignUpViewController new];
+    signUpVC.delegate = self;
     [self.navigationController pushViewController:signUpVC animated:YES];
 }
 
@@ -129,5 +137,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)dismissRegisterVC {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self launchTabBarVC];
+}
 
 @end

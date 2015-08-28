@@ -61,7 +61,7 @@
     _loginBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_loginBtn setBackgroundColor:[UIColor blackColor]];
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginBtn.layer setCornerRadius:10];
+    [self.loginBtn.layer setCornerRadius:6];
     [self.view addSubview:_loginBtn];
 
     _dontHaveAccountLabel = [UILabel new];
@@ -74,7 +74,7 @@
     [_signUpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _signUpBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_signUpBtn addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
-    [self.signUpBtn.layer setCornerRadius:10];
+    [self.signUpBtn.layer setCornerRadius:6];
     [self.view addSubview:_signUpBtn];
 
     _forgotPasswordBtn = [UIButton new];
@@ -82,7 +82,7 @@
     [_forgotPasswordBtn setBackgroundColor:[UIColor blackColor]];
     _forgotPasswordBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_forgotPasswordBtn addTarget:self action:@selector(forgotpassword) forControlEvents:UIControlEventTouchUpInside];
-    [self.forgotPasswordBtn.layer setCornerRadius:10];
+    [self.forgotPasswordBtn.layer setCornerRadius:6];
     [self.view addSubview:_forgotPasswordBtn];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_emailTextField,
