@@ -17,16 +17,16 @@
 #import "CServerUserInterface.h"
 #import "CSplashViewController.h"
 
-@interface CAppDelegate (){
-//    CSharedContact *sharedZippr;
-}
+@interface CAppDelegate ()
 @property (nonatomic)id<CServerUserInterface> serverUser;
+@property (nonatomic)id<CServerInterface> server;
 @end
 
 @implementation CAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.server = [CServer defaultParser];
     NSLog(@"app dir: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -34,7 +34,8 @@
     [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
-    [[CServer defaultParser] authentication];
+    [self.server initialize];
+
     [self pr_initalSetup];
 
 //    [self pr_isItFirstLaunch];
@@ -101,20 +102,23 @@
 //    }
 //}
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-//    if(url){
-//        sharedZippr = [CSharedContact sharedInstance];
-//        sharedZippr.sharedContacts = [[NSMutableArray alloc]init];
-////        [self pr_sharedContactsUsingDeepLinking:url];
-//    }
-//    return YES;
-//}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    if(url){
+        [self pr_sharedContactsUsingDeepLinking:url];
+    }
+    return YES;
+}
 
-//-(void)pr_sharedContactsUsingDeepLinking:(NSURL*)url{
-//    [[CServer defaultParser] fetchSharedContacts:(NSURL*)url  :^(NSMutableArray *arrayOfContacts){
-//        [sharedZippr.sharedContacts addObjectsFromArray:arrayOfContacts];
-//    }];
-//}
+-(void)pr_sharedContactsUsingDeepLinking:(NSURL*)url{
+    [self.server fetchSharedContacts:url :^(BOOL result, NSError *error) {
+        if(!error) {
+            NSLog(@"shared contact stored into currect user Personal");
+        }
+        else {
+            NSLog(@"%@",error.localizedDescription);
+        }
+    }];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

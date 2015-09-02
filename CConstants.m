@@ -10,8 +10,8 @@
 
 @implementation CConstants
 
-NSString * const kServerClientKey                                 = @"N4qTlR1d3yi6qanVrwvLVlfuszkMuYmjPU0SgAfo";
-NSString * const kServerApplicationId                             = @"ZJdmZlD0SXuhlyjvuGomQwlC2YhvM7fk2F09qWWS";
+NSString * const kServerClientKey                           = @"N4qTlR1d3yi6qanVrwvLVlfuszkMuYmjPU0SgAfo";
+NSString * const kServerApplicationId                       = @"ZJdmZlD0SXuhlyjvuGomQwlC2YhvM7fk2F09qWWS";
 
 // Parse : User class Name & Attributes
 
@@ -26,6 +26,10 @@ NSString * const kServerObjectIdAttribute                    = @"objectId";
 NSString * const kServerPhoneAttribute                       = @"phone";
 NSString * const kServerEmailAttribute                       = @"email";
 NSString * const kServerNameAttribute                        = @"name";
+NSString * const kServerStreetAttr                           = @"street";
+NSString * const kServerDistrictAttr                         = @"district";
+
+
 NSString * const kServerAddressIdCollection                  = @"addressIdCollection";
 NSString * const kServerContactRollNumber                    = @"rollnumber";
 
@@ -39,7 +43,7 @@ NSString * const kServerAddressId                            = @"addressId";
 
 // Parse : SharedContacts Names & Attributes
 
-NSString * const kServerSharedContactsClassName              = @"SharedContacts";
+NSString * const kServerSharedContactsClassName              = @"share";
 NSString * const kServerContactsArray                        = @"contacts";
 
 // Errors

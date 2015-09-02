@@ -17,6 +17,11 @@
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
 
+
+#pragma mark - Cloud Functions
+
+NSString *storeContactCloudFunction = @"storeContact";
+
 @interface CParseEngine ()
 @property (nonatomic)id<CServerUserInterface> serverUser;
 @end
@@ -38,6 +43,10 @@
     return self;
 }
 
+- (void)initialize {
+    [self authentication];
+}
+
 - (void)authentication{
     [Parse setApplicationId:kServerApplicationId clientKey:kServerClientKey];
     PFACL *defaultACL = [PFACL ACL];
@@ -46,19 +55,26 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 }
 
-- (void)storeContact:(CContact*)contact :(storeContactCompletionBlock)block {
-    PFObject *pfObject = [PFObject objectWithClassName:kServerContactClassName];
-    // Safe key is suitale for name & rollnumber & userObjectId
-    [pfObject setObject:[self.serverUser userObjectId] forKey:kServerUserObjectIdAttribute];
-    [pfObject setValue:contact.name forKey:kServerNameAttribute];
-    [contact setRollNumber:[self makeRollNumber]];
-    [pfObject setValue:contact.rollNumber forKey:kServerContactRollNumber];
-    // Phone & Email would be optional!
-    [pfObject c_safeAddKey:@"mobile" value:contact.mobile];
-    [pfObject c_safeAddKey:kServerEmailAttribute value:contact.emailString];
-    [pfObject c_safeAddKey:@"street" value:contact.street];
-    [pfObject c_safeAddKey:@"district" value:contact.district];
-    [pfObject saveInBackgroundWithBlock:block];
+- (void)storeContact:(CContact *)contact :(storeContactCompletionBlock)block {
+  NSMutableDictionary *params = [NSMutableDictionary new];
+  params[kServerUserObjectIdAttribute] = [self.serverUser userObjectId];
+  [params safeAddForKey:kServerNameAttribute value:contact.name];
+  [params safeAddForKey:kServerEmailAttribute value:contact.email];
+  [params safeAddForKey:kServerPhoneAttribute value:contact.phone];
+  [params safeAddForKey:kServerStreetAttr value:contact.street];
+  [params safeAddForKey:kServerDistrictAttr value:contact.district];
+
+  [PFCloud callFunctionInBackground:storeContactCloudFunction
+                     withParameters:params
+                              block:^(id object, NSError *error) {
+                                PFObject *pfObject = object;
+                                if (object) {
+                                  NSLog(@"%@", pfObject.objectId);
+                                  block(YES, nil);
+                                } else {
+                                  block(NO, error);
+                                }
+                              }];
 }
 
 - (void)readAllContacts:(CFetchContacts)block {
@@ -79,45 +95,38 @@
 }
 
 - (void)deleteContact:(CContact *)contact :(CDeleteContact)block {
-    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
-    [query whereKey:@"rollnumber" equalTo:contact.rollNumber];
-    query.limit =1;
-    [query findObjectsInBackgroundWithBlock:^(NSArray * __nullable objects, NSError * __nullable error) {
-        if(objects && objects.count) {
-            NSError *error;
-            PFObject *firstObject = objects.firstObject;
-            BOOL result = [firstObject delete:&error];
-            block(result,error);
-        }
-        else {
-            block(nil,error);
-        }
-    }];
+    NSError *error;
+    PFObject *object = [PFQuery getObjectOfClass:kServerContactClassName objectId:contact.objectId error:&error];
+    BOOL result = [object delete:&error];
+    block(result,error);
 }
 
 - (void)updateContact:(CContact*)contact :(updatContactCompletionBlock)block {
-    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
-    [query whereKey:@"rollnumber" equalTo:contact.rollNumber];
-    [query whereKey:kServerUserObjectIdAttribute equalTo:[self.serverUser userObjectId]];
-    query.limit =1;
-    [query findObjectsInBackgroundWithBlock:^(NSArray * __nullable objects, NSError * __nullable error) {
-        if(objects && objects.count) {
-            PFObject *pfObject = objects.firstObject;
-            [pfObject setValue:contact.name forKey:kServerNameAttribute];
-            [pfObject setValue:contact.rollNumber forKey:kServerContactRollNumber];
-            // Phone & Email would be optional!
-            [pfObject c_safeAddKey:@"mobile" value:contact.mobile];
-            [pfObject c_safeAddKey:kServerEmailAttribute value:contact.emailString];
-            [pfObject c_safeAddKey:@"street" value:contact.street];
-            [pfObject c_safeAddKey:@"district" value:contact.district];
-            [pfObject saveInBackgroundWithBlock:block];
-        }
-        else {
-            block(nil,error);
-        }
-    }];
+    NSError *error;
+    PFObject *object = [PFQuery getObjectOfClass:kServerContactClassName
+                                        objectId:contact.objectId error:&error];
+    if(object) {
+        [object c_safeAddKey:kServerNameAttribute value:contact.name];
+        [object setObject:[self.serverUser userObjectId] forKey:kServerUserObjectIdAttribute];
+        [object c_safeAddKey:kServerPhoneAttribute value:contact.phone];
+        [object c_safeAddKey:kServerEmailAttribute value:contact.email];
+        [object c_safeAddKey:kServerStreetAttr value:contact.street];
+        [object c_safeAddKey:kServerDistrictAttr value:contact.district];
+        [object saveInBackgroundWithBlock:block];
+    }
+    else {
+        block(nil,error);
+    }
 }
 
+
+
+- (void)saveShareContactArray:(NSArray *)rollnumbers :(shareContactCompletionBlock)block {
+    PFObject *pfObject = [PFObject objectWithClassName:kServerSharedContactsClassName];
+    [pfObject setObject:rollnumbers.firstObject forKey:@"rollnumber"];
+    [pfObject setObject:[self.serverUser userObjectId] forKey:kServerUserObjectIdAttribute];
+    [pfObject saveInBackgroundWithBlock:block];
+}
 
 #pragma mark - Public API
 
@@ -279,19 +288,18 @@
 //}
 
 
-
-
-
--(void)findPFObjectwithObjectId:(NSString*)objectId :(void (^)(NSString *sharedClassObjectId, NSError *error))block{
+- (void)findSharedContactObjectId:(NSString *)rollNumber :(findSharedContactCompletionBlock)block {
     PFQuery *query = [PFQuery queryWithClassName:kServerSharedContactsClassName];
-    [query whereKey:kServerUserObjectIdAttribute equalTo:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]];
+    query.limit = 1;
+    [query whereKey:@"rollnumber" equalTo:rollNumber];
+    [query whereKey:kServerUserObjectIdAttribute equalTo:[self.serverUser userObjectId]];
     NSArray *pfObjects=[query findObjects];
-        if(pfObjects.count){
-            block([[pfObjects firstObject] valueForKey:kServerObjectIdAttribute],nil);
-        }
-        else{
-            block(nil,nil);
-        }
+    if(pfObjects.count){
+        block([[pfObjects firstObject] valueForKey:kServerObjectIdAttribute],nil);
+    }
+    else{
+        block(nil,nil);
+    }
 }
 
 
@@ -573,83 +581,78 @@
     }];
 }
 
-
-//
-//- (void)fetchSharedContacts:(NSURL*)url  :(void (^)(NSMutableArray *arrayOfContacts))block{
-//    NSMutableArray *fetchedObjects = [[NSMutableArray alloc]init];
-//    if (url){
-//        NSString *myString = [url absoluteString];
-//        NSArray *items = [myString componentsSeparatedByString:@"/"];
-//        if([items[2] isEqualToString:@"multipleContacts"]){
-//            PFQuery *query = [PFQuery queryWithClassName:kServerSharedContactsClassName];
-//            [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
-//            [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
-//                if(!error && pfObjects.count){
-//                    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+- (void)fetchSharedContacts:(NSURL *)sharedURL :(fetchSharedContactsCompletionBlock)block {
+    NSMutableArray *fetchedObjects = [NSMutableArray new];
+    // This case is individual contacts. like 1 or multiple contacts
+    // So we are making an array and sharing to someone
+    if (sharedURL){
+        NSString *myString = [sharedURL absoluteString];
+        NSArray *items = [myString componentsSeparatedByString:@"/"];
+        if([items[2] isEqualToString:@"multipleContacts"]){
+            PFQuery *query = [PFQuery queryWithClassName:kServerSharedContactsClassName];
+            [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
+                if(!error && pfObjects.count){
+                    PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+                    query.limit = 1;
+                    [query whereKey:kServerUserObjectIdAttribute equalTo:[self.serverUser userObjectId]];
+                    [query whereKey:@"rollnumber" equalTo:[pfObjects.firstObject valueForKey:@"rollnumber"]];
 //                    [query whereKey:kServerObjectIdAttribute containedIn:[[pfObjects firstObject] valueForKey:kServerContactsArray]];
-//                    [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
-//                        __block NSUInteger pass = pfObjects.count;
-//                        if(!error && pfObjects.count){
-//                            for(PFObject *object in pfObjects){
-//                                CContact *contact  =[PFObject PFObjectToCContact:object];
-//                                if(contact){
-//                                    pass--;
-//                                    if(!error && contact){
-//                                        [fetchedObjects addObject:contact];
-//                                    }
-//                                    if(pass==0){
-//                                        block(fetchedObjects);
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }];
-//                }
-//            }];
-//        }
-//        else{
-//            PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
-//            if([items[2] isEqualToString:kServerUserObjectIdAttribute]){
-//                [query whereKey:kServerUserObjectIdAttribute equalTo:items[3]];
-//            }
-//            else{
-//                [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
-//            }
-//            [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
-//                __block NSUInteger pass = pfObjects.count;
-//                if(!error && pfObjects.count){
-//                    for(PFObject *object in pfObjects){
-//                        CContact *contactInfo = [[CContact alloc]init];
-////                        [contactInfo setName:[object valueForKey:kServerNameAttribute]];
-////                        [contactInfo setPhone:[object valueForKey:kServerPhoneAttribute]];
-////                        [contactInfo setEmail:[object valueForKey:kServerEmailAttribute]];
-////                        [contactInfo setObjectId:[object valueForKey:kServerObjectIdAttribute]];
-//                        [contactInfo setUserObjectId:[object valueForKey:kServerUserObjectIdAttribute]];
-//                       // [contactInfo setAddressIdCollection:[object valueForKey:kServerAddressIdCollection]];
-//                        pass--;
-//                        if(!error && contactInfo){
+                    [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
+                        __block NSUInteger pass = pfObjects.count;
+                        if(!error && pfObjects.count){
+                            for(PFObject *object in pfObjects){
+                                CContact *contact  =[object contact];
+                                if(contact){
+                                    pass--;
+                                    if(!error && contact){
+                                        [fetchedObjects addObject:contact];
+                                        [self storeContact:contact :^(BOOL result, NSError *error) {
+                                            block(result,error);
+                                        }];
+                                    }
+                                    if(pass==0){
+//                                        block(fetchedObjects,error);
+                                    }
+                                }
+                            }
+                        }
+                    }];
+                }
+            }];
+        }
+        else{
+            // the following code to share all the contacts
+            // So here we sending the userobjectId to someOne
+            PFQuery *query = [PFQuery queryWithClassName:kServerContactClassName];
+            if([items[2] isEqualToString:kServerUserObjectIdAttribute]){
+                [query whereKey:kServerUserObjectIdAttribute equalTo:items[3]];
+            }
+            else{
+                [query whereKey:kServerObjectIdAttribute equalTo:items[3]];
+            }
+            [query findObjectsInBackgroundWithBlock:^(NSArray *pfObjects,NSError *error){
+                __block NSUInteger pass = pfObjects.count;
+                if(!error && pfObjects.count){
+                    for(PFObject *object in pfObjects){
+                        CContact *contactInfo = [[CContact alloc]init];
+//                        [contactInfo setName:[object valueForKey:kServerNameAttribute]];
+//                        [contactInfo setPhone:[object valueForKey:kServerPhoneAttribute]];
+//                        [contactInfo setEmail:[object valueForKey:kServerEmailAttribute]];
+//                        [contactInfo setObjectId:[object valueForKey:kServerObjectIdAttribute]];
+                        [contactInfo setUserObjectId:[object valueForKey:kServerUserObjectIdAttribute]];
+                       // [contactInfo setAddressIdCollection:[object valueForKey:kServerAddressIdCollection]];
+                        pass--;
+                        if(!error && contactInfo){
 //                            [fetchedObjects addObject:contactInfo];
-//                        }
-//                        if(pass==0){
-//                            block(fetchedObjects);
-//                        }
-//                    }
-//                }
-//            }];
-//        }
-//    }
-//}
-
-- (void)saveSharedContacts:(NSMutableArray*)sharedContactsArray :(void (^)(BOOL succedeed))block{
-    PFObject *pfObject = [PFObject objectWithClassName:kServerSharedContactsClassName];
-    [pfObject setObject:sharedContactsArray forKey:kServerContactsArray];
-    [pfObject setObject:[[PFUser currentUser] valueForKey:kServerObjectIdAttribute]
-                                                   forKey:kServerUserObjectIdAttribute];
-    if([pfObject save]){
-        block(YES);
-    }
-    else{
-        block(NO);
+                        }
+                        if(pass==0){
+//                            block(fetchedObjects,error);
+                        }
+                    }
+                }
+            }];
+        }
     }
 }
 

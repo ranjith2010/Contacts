@@ -14,7 +14,9 @@
 
 typedef void(^storeContactCompletionBlock)(BOOL result,NSError *error);
 typedef void(^updatContactCompletionBlock)(BOOL result,NSError *error);
-
+typedef void(^shareContactCompletionBlock)(BOOL result,NSError *error);
+typedef void(^findSharedContactCompletionBlock)(NSString *objectId,NSError *error);
+typedef void(^fetchSharedContactsCompletionBlock)(BOOL result,NSError *error);
 
 // deprecated
 typedef void(^CContactCreation)(BOOL result, NSError *error);
@@ -23,18 +25,27 @@ typedef void(^CDeleteContact)(BOOL result, NSError *error);
 
 @protocol CServerInterface <NSObject>
 
+
+/*!
+    @Notes: In Objective C the Parameters will be,
+    name:(NSString*)name email:(NSString*)email -> second params
+    but, Why first param is not officially supporting to write like this. because the first param will be comes  with func name.
+    like. storePhone:(NSString*)phone withname:(NSString*)name withEmail:(NSString*)email
+    #Caution: if you wont follow above format you will face difficulties to find what method and what purpose, what are the params do i need to pass.!
+ */
+
 // Basic CRUD Operations
 - (void)storeContact:(CContact*)contact :(storeContactCompletionBlock)block;
 - (void)updateContact:(CContact*)contact :(updatContactCompletionBlock)block;
 - (void)deleteContact:(CContact*)contact :(CDeleteContact)block;
 - (void)readAllContacts:(CFetchContacts)block;
 
+- (void)saveShareContactArray:(NSArray *)rollnumbers :(shareContactCompletionBlock)block;
+- (void)findSharedContactObjectId:(NSString *)rollNumber :(findSharedContactCompletionBlock)block;
+- (void)fetchSharedContacts:(NSURL *)sharedURL :(fetchSharedContactsCompletionBlock)block;
 
 
-
-
-
-
+- (void)initialize;
 
 //
 //
@@ -79,9 +90,5 @@ typedef void(^CDeleteContact)(BOOL result, NSError *error);
 //
 //- (void)syncABAddressBookObjectsToParse:(void(^)(NSArray *contacts,NSError *error))block;
 //- (void)saveContact:(CContact *)contact completionBlock:(CContactCreation)block;
-
-
-#pragma mark - Parse Authentication, during App Launch
-- (void)authentication;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "PFObject+Additions.h"
+#import "CConstants.h"
 
 @implementation PFObject (Additions)
 
@@ -17,6 +18,7 @@
         if([ignoreKeys indexOfObject:key] == NSNotFound) {
             dict[key] = [self valueForKey:key];
         }
+        dict[kServerObjectIdAttribute] = self.objectId;
     }
     CContact *contact = [[CContact alloc]initWithServerDictionary:dict];
     return contact;
@@ -36,7 +38,6 @@
 - (NSArray*)ignoreKeys {
     return @[@"__type",
              @"className",
-             @"objectId",
              @"createdAt",
              @"updatedAt",
              @"ACL",

@@ -15,7 +15,7 @@
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
 
-@interface CSplashViewController ()<dismiss>
+@interface CSplashViewController ()
 @property (nonatomic)id<CServerUserInterface> serverUser;
 @property (nonatomic) UIButton *loginBtnProperty;
 @property (nonatomic) UIButton *skipBtnProperty;
@@ -114,7 +114,6 @@
 
 - (void)signUp {
     CSignUpViewController *signUpVC = [CSignUpViewController new];
-    signUpVC.delegate = self;
     [self.navigationController pushViewController:signUpVC animated:YES];
 }
 
@@ -135,12 +134,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (void)dismissRegisterVC {
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [self launchTabBarVC];
 }
 
 @end

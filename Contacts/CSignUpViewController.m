@@ -122,11 +122,6 @@
                                                    if(!error) {
                                               NSLog(@"%@ user created",self.userNameTextField.text);
                                                        [self.navigationController popViewControllerAnimated:YES];
-//                                                       [self.navigationController dismissViewControllerAnimated:NO completion:^{
-//                                                           [self launchTabBarVC];
-//                                                       }];
-//                                              [self.navigationController popViewControllerAnimated:YES];
-//                                               [self.delegate dismissRegisterVC];
                                           }
                                           else {
                                               NSLog(@"%@",error.localizedDescription);

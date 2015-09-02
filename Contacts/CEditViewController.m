@@ -77,7 +77,7 @@
 
     self.mobileTextField = [UITextField new];
     [self.mobileTextField setPlaceholder:@"mobile"];
-    self.mobileTextField.text = self.contact.mobile;
+    self.mobileTextField.text = self.contact.phone;
     [self.mobileTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.mobileTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.mobileTextField addTarget:self
@@ -87,7 +87,7 @@
 
     self.emailTextField = [UITextField new];
     [self.emailTextField setPlaceholder:@"email"];
-    self.emailTextField.text = self.contact.emailString;
+    self.emailTextField.text = self.contact.email;
     [self.emailTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.emailTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.emailTextField addTarget:self
@@ -173,15 +173,15 @@
     }
     else {
         contact.name = _nameTextField.text;
-        contact.mobile = _mobileTextField.text;
-        contact.emailString = _emailTextField.text;
+        contact.phone = _mobileTextField.text;
+        contact.email = _emailTextField.text;
         contact.street = _streetTextField.text;
         contact.district = _districtTextField.text;
     }
     // if it has some displayInstance. So the user wants to update some value
     // So, its updated scenario
     if(self.delegate) {
-        contact.rollNumber = self.contact.rollNumber;
+        contact.objectId = self.contact.objectId;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.server updateContact:contact :^(BOOL result, NSError *error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];

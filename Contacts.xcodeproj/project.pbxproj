@@ -15,6 +15,8 @@
 		077F1C4A1B5CD349007475A5 /* CLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C491B5CD349007475A5 /* CLoginViewController.m */; };
 		077F1C4D1B5CD870007475A5 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 077F1C4C1B5CD870007475A5 /* NSString+Additions.m */; };
 		07D78A8B1B8F849B00145618 /* CDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D78A8A1B8F849B00145618 /* CDisplayViewController.m */; };
+		07DDE2FA1B907984000EA5DB /* CActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DDE2F51B907984000EA5DB /* CActivityViewController.m */; };
+		07DDE2FB1B907984000EA5DB /* CSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DDE2F71B907984000EA5DB /* CSelectionTableViewController.m */; };
 		07FCD5AC1B8D94B700017376 /* CForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCD5AB1B8D94B700017376 /* CForgotViewController.m */; };
 		07FCD5AF1B8DD26900017376 /* CSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCD5AE1B8DD26900017376 /* CSplashViewController.m */; };
 		07FE5C811B68FB3D004B25D0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FE5C7E1B68FB3D004B25D0 /* Bolts.framework */; };
@@ -86,6 +88,10 @@
 		077F1C4C1B5CD870007475A5 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		07D78A891B8F849B00145618 /* CDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDisplayViewController.h; sourceTree = "<group>"; };
 		07D78A8A1B8F849B00145618 /* CDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDisplayViewController.m; sourceTree = "<group>"; };
+		07DDE2F41B907984000EA5DB /* CActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CActivityViewController.h; sourceTree = "<group>"; };
+		07DDE2F51B907984000EA5DB /* CActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CActivityViewController.m; sourceTree = "<group>"; };
+		07DDE2F61B907984000EA5DB /* CSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSelectionTableViewController.h; sourceTree = "<group>"; };
+		07DDE2F71B907984000EA5DB /* CSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSelectionTableViewController.m; sourceTree = "<group>"; };
 		07FCD5AA1B8D94B700017376 /* CForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CForgotViewController.h; sourceTree = "<group>"; };
 		07FCD5AB1B8D94B700017376 /* CForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CForgotViewController.m; sourceTree = "<group>"; };
 		07FCD5AD1B8DD26900017376 /* CSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSplashViewController.h; sourceTree = "<group>"; };
@@ -218,9 +224,30 @@
 			name = "Parse User";
 			sourceTree = "<group>";
 		};
+		07D9CC231B97977500E817B6 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				0770FE551B7E671300C4BBB9 /* MBProgressHUD.h */,
+				0770FE561B7E671300C4BBB9 /* MBProgressHUD.m */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		07DDE2FD1B907990000EA5DB /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				07DDE2F41B907984000EA5DB /* CActivityViewController.h */,
+				07DDE2F51B907984000EA5DB /* CActivityViewController.m */,
+				07DDE2F61B907984000EA5DB /* CSelectionTableViewController.h */,
+				07DDE2F71B907984000EA5DB /* CSelectionTableViewController.m */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 		C6358C361A4025BD00E052FD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				07DDE2FD1B907990000EA5DB /* Share */,
 				C6A3F5251A4000ED004D3479 /* CPeopleTableViewController.h */,
 				C6A3F5261A4000ED004D3479 /* CPeopleTableViewController.m */,
 				C6A3F5BB1A401084004D3479 /* CProfileViewController.h */,
@@ -244,8 +271,7 @@
 		C6A3F5121A4000ED004D3479 = {
 			isa = PBXGroup;
 			children = (
-				0770FE551B7E671300C4BBB9 /* MBProgressHUD.h */,
-				0770FE561B7E671300C4BBB9 /* MBProgressHUD.m */,
+				07D9CC231B97977500E817B6 /* External */,
 				C6A3F59C1A4003F3004D3479 /* Constants */,
 				C6A3F5B11A400990004D3479 /* CD Model */,
 				C6A3F58F1A4003D3004D3479 /* Model */,
@@ -534,10 +560,12 @@
 				C6A3F5811A4002E1004D3479 /* CServer.m in Sources */,
 				C6A3F5241A4000ED004D3479 /* CAppDelegate.m in Sources */,
 				0770FE4B1B7E45C400C4BBB9 /* CServerUserManager.m in Sources */,
+				07DDE2FB1B907984000EA5DB /* CSelectionTableViewController.m in Sources */,
 				C6A3F59E1A400595004D3479 /* Model.xcdatamodel in Sources */,
 				C6358C391A403B7600E052FD /* CEditViewController.m in Sources */,
 				077F1C2A1B5C3459007475A5 /* UIAlertView+ZPBlockAdditions.m in Sources */,
 				C6A3F5801A4002E1004D3479 /* PFObject+Additions.m in Sources */,
+				07DDE2FA1B907984000EA5DB /* CActivityViewController.m in Sources */,
 				C6A3F57A1A4002C6004D3479 /* CLocal.m in Sources */,
 				C6A3F5BD1A401084004D3479 /* CProfileViewController.m in Sources */,
 				0770FE481B7E457B00C4BBB9 /* CServerUser.m in Sources */,

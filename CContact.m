@@ -16,10 +16,6 @@
 @end
 NSString * const kZPContactFirstName            = @"firstname";
 NSString * const kZPContactLastName             = @"lastname";
-NSString * const kZPContactEmail                = @"email";
-NSString * const kZPContactPhone                = @"phone";
-NSString * const kZPContactUserObjectId         = @"userobjectid";
-NSString * const kZPContactRollNumber           = @"rollnumber";
 
 @implementation CContact
 
@@ -40,47 +36,53 @@ NSString * const kZPContactRollNumber           = @"rollnumber";
     return self.serverDictionary;
 }
 
+- (void)setObjectId:(NSString *)objectId {
+    [self.serverDictionary setObject:objectId forKey:kServerObjectIdAttribute];
+}
+
+- (NSString *)objectId {
+    return self.serverDictionary[kServerObjectIdAttribute];
+}
+
 - (void)setName:(NSString *)name {
-    [self.serverDictionary safeAddForKey:@"name" value:name];
+    [self.serverDictionary safeAddForKey:kServerNameAttribute value:name];
 }
 
 - (NSString *)name {
-   return self.serverDictionary[@"name"];
+   return self.serverDictionary[kServerNameAttribute];
 }
 
-- (void)setMobile:(NSString *)mobile {
-    [self.serverDictionary safeAddForKey:@"mobile" value:mobile];
+- (void)setPhone:(NSString *)phone {
+    [self.serverDictionary safeAddForKey:kServerPhoneAttribute value:phone];
 }
 
-- (NSString *)mobile {
-    return self.serverDictionary[@"mobile"];
+- (NSString *)phone {
+    return self.serverDictionary[kServerPhoneAttribute];
 }
 
-- (void)setEmailString:(NSString *)emailString {
-    [self.serverDictionary safeAddForKey:@"email" value:emailString];
+- (void)setEmail:(NSString *)email{
+    [self.serverDictionary safeAddForKey:kServerEmailAttribute value:email];
 }
 
-- (NSString *)emailString {
-    return self.serverDictionary[@"email"];
+- (NSString *)email {
+    return self.serverDictionary[kServerEmailAttribute];
 }
 
 - (void)setStreet:(NSString *)street {
-    [self.serverDictionary safeAddForKey:@"street" value:street];
+    [self.serverDictionary safeAddForKey:kServerStreetAttr value:street];
 }
 
 - (NSString *)street {
-    return self.serverDictionary[@"street"];
+    return self.serverDictionary[kServerStreetAttr];
 }
 
 - (void)setDistrict:(NSString *)district {
-    [self.serverDictionary safeAddForKey:@"district" value:district];
+    [self.serverDictionary safeAddForKey:kServerDistrictAttr value:district];
 }
 
 - (NSString *)district {
-    return self.serverDictionary[@"district"];
+    return self.serverDictionary[kServerDistrictAttr];
 }
-
-
 
 - (void)setFirstname:(NSString *)firstname {
     [self.serverDictionary safeAddForKey:kZPContactFirstName value:firstname];
@@ -96,36 +98,13 @@ NSString * const kZPContactRollNumber           = @"rollnumber";
 - (NSString*)lastname {
     return self.serverDictionary[kZPContactLastName];
 }
-- (void)setPhone:(NSArray *)phone {
-    [self.serverDictionary safeAddForKey:kZPContactPhone value:phone];
-}
-
-- (NSArray*)phone {
-    return self.serverDictionary[kZPContactPhone];
-}
-
-- (void)setEmail:(NSArray *)email {
-    [self.serverDictionary safeAddForKey:kZPContactEmail value:email];
-}
-
-- (NSArray*)email {
-    return self.serverDictionary[kZPContactEmail];
-}
 
 - (void)setUserObjectId:(NSString *)userObjectId {
-    [self.serverDictionary safeAddForKey:kZPContactUserObjectId value:userObjectId];
+    [self.serverDictionary safeAddForKey:kServerUserObjectIdAttribute value:userObjectId];
 }
 
 - (NSString *)userObjectId {
-    return self.serverDictionary[kZPContactUserObjectId];
-}
-
-- (void)setRollNumber:(NSString *)rollNumber {
-    [self.serverDictionary safeAddForKey:kZPContactRollNumber value:rollNumber];
-}
-
-- (NSString *)rollNumber {
-    return self.serverDictionary[kZPContactRollNumber];
+    return self.serverDictionary[kServerUserObjectIdAttribute];
 }
 
 - (NSString*)getFullName {
@@ -140,12 +119,6 @@ NSString * const kZPContactRollNumber           = @"rollnumber";
     }
     else if(self.lastname) {
         fullname = self.lastname;
-    }
-    else if(self.phone.count !=0) {
-        fullname = self.phone.firstObject;
-    }
-    else if(self.email.count !=0) {
-        fullname =  self.email.firstObject;
     }
     return fullname;
 }

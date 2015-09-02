@@ -10,12 +10,15 @@
 
 @interface CContact : NSObject
 
+@property (nonatomic,strong) NSString *userObjectId;
+
+@property (nonatomic,strong) NSString *objectId;
 
 @property (nonatomic,strong) NSString *name;
 
-@property (nonatomic,strong) NSString *mobile;
+@property (nonatomic,strong) NSString *phone;
 
-@property (nonatomic,strong) NSString *emailString;
+@property (nonatomic,strong) NSString *email;
 
 @property (nonatomic,strong) NSString *street;
 
@@ -31,21 +34,6 @@
  **/
 @property (nonatomic,strong)NSString *lastname;
 
-/*!
- It mainly used for handling the contact Phone Numbers,
- It's array of phone numbers, {Mobile and Home and work and etc} mobile numbers included here.
- **/
-@property (nonatomic,strong)NSArray *phone;
-
-/*!
- It mainly used for handling the contact Email Id's,
- It's array of Email Ids, {Home and Work and Personal, icloud. etc} Email Ids included here.
- */
-@property (nonatomic,strong)NSArray *email;
-
-@property (nonatomic,strong)NSString *userObjectId;
-
-@property (nonatomic,strong)NSString *rollNumber;
 
 /*!
  Initializes with Server dictionary

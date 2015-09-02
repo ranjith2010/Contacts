@@ -35,7 +35,6 @@
 @end
 
 @implementation CPeopleTableViewController
-@synthesize refreshControl;
 
 #pragma mark - ViewController Delegates
 - (void)viewDidLoad {
@@ -46,7 +45,6 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self pr_viewDidLoad];
     [self fetchAllContacts];
-
 }
 
 #pragma mark -
@@ -101,7 +99,7 @@
     }
     CContact *contact = [self.dataSource objectAtIndex:indexPath.row];
     cell.textLabel.text = contact.name;
-    cell.detailTextLabel.text = contact.mobile;
+    cell.detailTextLabel.text = contact.phone;
     return cell;
 }
 
