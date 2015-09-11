@@ -1,0 +1,26 @@
+//
+//  Contacts-Prefix.pch
+//  Contacts
+//
+//  Created by ranjith on 11/09/15.
+//  Copyright © 2015 Zippr. All rights reserved.
+//
+
+#ifndef Contacts_Prefix_pch
+#define Contacts_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* Contacts_Prefix_pch */
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif

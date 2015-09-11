@@ -17,9 +17,15 @@
 #import "CServerUserInterface.h"
 #import "CSplashViewController.h"
 
+#import "CRootWindow.h"
+#import "UIAlertView+ZPBlockAdditions.h"
+
 @interface CAppDelegate ()
 @property (nonatomic)id<CServerUserInterface> serverUser;
 @property (nonatomic)id<CServerInterface> server;
+
+@property (nonatomic) CRootWindow* rootWindow;
+
 @end
 
 @implementation CAppDelegate
@@ -30,13 +36,16 @@
     NSLog(@"app dir: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor lightGrayColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
     [self.server initialize];
-
-    [self pr_initalSetup];
+    
+    [self setRootWindow:[CRootWindow sharedInstance]];
+    UIWindow* window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = window;
+    [self prepareAppInWindow:window];
 
 //    [self pr_isItFirstLaunch];
 
@@ -51,32 +60,44 @@
 }
 
 
-- (void)pr_initalSetup {
-    if(!self.window) {
-        self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    }
-    self.serverUser = [CServerUser defaultUser];
-    if(![self.serverUser hasCurrentUser]) {
-        CSplashViewController *splashVC = [CSplashViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:splashVC];
-        self.window.rootViewController = navigationController;
-    }
-    else {
-        UITabBarController *tabBarController = [UITabBarController new];
-        CPeopleTableViewController *peopleTVC = [CPeopleTableViewController new];
-        UINavigationController *navigationControllerForPeople = [[UINavigationController alloc]initWithRootViewController:peopleTVC];
-        navigationControllerForPeople.title = @"People";
-
-        CProfileViewController *userViewController = [CProfileViewController new];
-        UINavigationController *navigationControllerForProfile = [[UINavigationController alloc]initWithRootViewController:userViewController];
-        userViewController.title = @"Profile";
-        NSArray *tabControllers = [NSArray arrayWithObjects:navigationControllerForPeople,navigationControllerForProfile, nil];
-        tabBarController.viewControllers = tabControllers;
-        self.window.rootViewController = tabBarController;
-    }
-    [self.window makeKeyAndVisible];
+- (void)prepareAppInWindow:(UIWindow*)window {
+    self.rootWindow.window = window;
+    [self.rootWindow presentAppStartup];
+    __weak CAppDelegate* welf = self;
+#warning need to implement
+//    [ZHCore initializeWithCompletionBlock:^(NSError *error) {
+//        
+        [welf coreInitializedWithError:nil window:window];
+//
+//    }];
 }
 
+- (void)coreInitializedWithError:(NSError*)error window:(UIWindow*)window{
+    if(error) {
+        NSLog(@"Zippr Core Initialization Error: %@", error);
+        [UIAlertView zp_alertViewWithTitle:@"Database Error" message:[NSString stringWithFormat:@"%@ Unable to open database, please close the app and restart it",error.localizedDescription]];
+    } else {
+        //        isInitialized = YES;
+        //        if([[ZPUserManager currentUser] isValid]) {
+        //            [self.rootWindow presentPostlogin];
+        //            [self onPostLoginAppPresentedWithLaunchOptions:self.launchOptions];
+        //            // if there is any upload model is there just upload it
+        //            [[ZPPictureManager imageUploader]retryFailedImage];
+        //
+        //        } else {
+        //            [self.rootWindow presentPrelogin];
+//        [self.rootWindow presentPostlogin];
+        
+        // Let me go simply check with current user is non Nil value?
+        self.serverUser = [CServerUser defaultUser];
+        if(![self.serverUser hasCurrentUser]) {
+            [self.rootWindow presentPrelogin];
+        }
+        else {
+            [self.rootWindow presentPostlogin];
+        }
+    }
+}
 
 
 //- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -90,16 +111,6 @@
 //
 //- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 //    [PFPush handlePush:userInfo];
-//}
-
-#pragma mark - Private API
-
-//- (void)pr_isItFirstLaunch{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if(![defaults objectForKey:kServerAddressId]){
-//        [defaults setObject:[NSNumber numberWithInt:0] forKey:kServerAddressId];
-//        [defaults synchronize];
-//    }
 //}
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
