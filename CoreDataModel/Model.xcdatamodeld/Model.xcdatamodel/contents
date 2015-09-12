@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9048" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+    <entity name="CDContact" representedClassName="CDContact" syncable="YES">
+        <attribute name="district" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userobjectid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cduser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" syncable="YES"/>
+    </entity>
+    <entity name="CDUser" representedClassName="CDUser" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cdcontact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="cdcontact" inverseEntity="CDUser" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CDContact" positionX="-45" positionY="45" width="128" height="165"/>
+        <element name="CDUser" positionX="-63" positionY="-18" width="128" height="120"/>
+    </elements>
+</model>

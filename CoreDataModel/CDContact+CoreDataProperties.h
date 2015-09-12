@@ -2,7 +2,7 @@
 //  CDContact+CoreDataProperties.h
 //  Contacts
 //
-//  Created by ranjith on 09/09/15.
+//  Created by ranjith on 12/09/15.
 //  Copyright © 2015 Zippr. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *district;
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSString *name;
+@property (nullable, nonatomic, retain) NSString *objectid;
 @property (nullable, nonatomic, retain) NSString *phone;
 @property (nullable, nonatomic, retain) NSString *street;
-@property (nullable, nonatomic, retain) NSString *userObjectId;
-@property (nullable, nonatomic, retain) NSString *objectId;
+@property (nullable, nonatomic, retain) NSString *userobjectid;
 @property (nullable, nonatomic, retain) CDUser *cduser;
 
 @end

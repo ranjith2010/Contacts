@@ -114,4 +114,36 @@
     [PFUser requestPasswordResetForEmailInBackground:email block:block];
 }
 
+- (void)changePasswordForUsername:(NSString *)username
+                      oldPassword:(NSString *)oldPassword
+                      newPassword:(NSString *)newPassword
+              withCompletionBlock:(userTaskCompletionBlock)block {
+    // First login with oldPassword
+    [PFUser logInWithUsernameInBackground:username password:oldPassword block:^(PFUser *user, NSError *error){
+        if (!error) {
+            // login successfull, change password
+            [user setPassword:newPassword];
+            // make a save in background
+            [user saveInBackgroundWithBlock:^(BOOL succeded, NSError *error){
+                block(succeded, error);
+            }];
+        } else {
+            block(NO, error);
+        }
+    }];
+}
+
+- (void)loginWithFacebook {
+//    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions block:^(PFUser *user, NSError *error) {
+//        if (!user) {
+//            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+//        } else if (user.isNew) {
+//            NSLog(@"User signed up and logged in through Facebook!");
+//        } else {
+//            NSLog(@"User logged in through Facebook!");
+//        }
+//    }];
+}
+
+
 @end

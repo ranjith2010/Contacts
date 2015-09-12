@@ -2,7 +2,7 @@
 //  CDContact+CoreDataProperties.m
 //  Contacts
 //
-//  Created by ranjith on 09/09/15.
+//  Created by ranjith on 12/09/15.
 //  Copyright © 2015 Zippr. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,10 +16,10 @@
 @dynamic district;
 @dynamic email;
 @dynamic name;
+@dynamic objectid;
 @dynamic phone;
 @dynamic street;
-@dynamic userObjectId;
-@dynamic objectId;
+@dynamic userobjectid;
 @dynamic cduser;
 
 @end

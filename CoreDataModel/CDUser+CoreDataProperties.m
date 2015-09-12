@@ -2,7 +2,7 @@
 //  CDUser+CoreDataProperties.m
 //  Contacts
 //
-//  Created by ranjith on 09/09/15.
+//  Created by ranjith on 12/09/15.
 //  Copyright © 2015 Zippr. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,9 @@
 @implementation CDUser (CoreDataProperties)
 
 @dynamic email;
+@dynamic objectid;
 @dynamic password;
 @dynamic username;
-@dynamic objectId;
 @dynamic cdcontact;
 
 @end

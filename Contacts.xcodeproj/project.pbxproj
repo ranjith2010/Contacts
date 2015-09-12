@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		07D9CC271B98392B00E817B6 /* Reference.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D9CC261B98392B00E817B6 /* Reference.strings */; };
+		C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C62861611BA38A5200007F7E /* Model.xcdatamodeld */; };
+		C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C64200691BA38BA4000119EA /* CDUser+CoreDataProperties.m */; };
+		C64200711BA38BA4000119EA /* CDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C642006B1BA38BA4000119EA /* CDUser.m */; };
+		C64200721BA38BA4000119EA /* CDContact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C642006D1BA38BA4000119EA /* CDContact+CoreDataProperties.m */; };
+		C64200731BA38BA4000119EA /* CDContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C642006F1BA38BA4000119EA /* CDContact.m */; };
+		C64200791BA38C09000119EA /* CDContact+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C64200781BA38C09000119EA /* CDContact+Additions.m */; };
 		C6A3F5211A4000ED004D3479 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A3F5201A4000ED004D3479 /* main.m */; };
 		C6A3F5241A4000ED004D3479 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A3F5231A4000ED004D3479 /* CAppDelegate.m */; };
 		C6A3F52C1A4000ED004D3479 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6A3F52B1A4000ED004D3479 /* Images.xcassets */; };
@@ -30,12 +36,6 @@
 		C6A3F5691A400204004D3479 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A3F5681A400204004D3479 /* AdSupport.framework */; };
 		C6C81C8A1BA3652F005B804C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C891BA3652F005B804C /* MBProgressHUD.m */; };
 		C6C81C8D1BA36548005B804C /* CConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C8C1BA36548005B804C /* CConstants.m */; };
-		C6C81C991BA36571005B804C /* CDContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C8F1BA36571005B804C /* CDContact.m */; };
-		C6C81C9A1BA36571005B804C /* CDContact+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C911BA36571005B804C /* CDContact+Additions.m */; };
-		C6C81C9B1BA36571005B804C /* CDContact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C931BA36571005B804C /* CDContact+CoreDataProperties.m */; };
-		C6C81C9C1BA36571005B804C /* CDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C951BA36571005B804C /* CDUser.m */; };
-		C6C81C9D1BA36571005B804C /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C971BA36571005B804C /* CDUser+CoreDataProperties.m */; };
-		C6C81C9E1BA36571005B804C /* Model.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = C6C81C981BA36571005B804C /* Model.xcdatamodel */; };
 		C6C81CA31BA365B4005B804C /* CContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81CA01BA365B4005B804C /* CContact.m */; };
 		C6C81CA41BA365B4005B804C /* CUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81CA21BA365B4005B804C /* CUser.m */; };
 		C6C81CB01BA365C3005B804C /* CUser+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C81CA61BA365C3005B804C /* CUser+Additions.m */; };
@@ -82,6 +82,17 @@
 		6C270443ADF7896A26B96B69 /* Pods-Contacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contacts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contacts/Pods-Contacts.debug.xcconfig"; sourceTree = "<group>"; };
 		89D792563B51D3D806AFF429 /* libPods-Contacts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Contacts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8EE817B520FBBF89E68A47 /* Pods-Contacts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contacts.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contacts/Pods-Contacts.release.xcconfig"; sourceTree = "<group>"; };
+		C62861621BA38A5200007F7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		C64200681BA38BA4000119EA /* CDUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDUser+CoreDataProperties.h"; path = "CoreDataModel/CDUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C64200691BA38BA4000119EA /* CDUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDUser+CoreDataProperties.m"; path = "CoreDataModel/CDUser+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C642006A1BA38BA4000119EA /* CDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDUser.h; path = CoreDataModel/CDUser.h; sourceTree = "<group>"; };
+		C642006B1BA38BA4000119EA /* CDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDUser.m; path = CoreDataModel/CDUser.m; sourceTree = "<group>"; };
+		C642006C1BA38BA4000119EA /* CDContact+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDContact+CoreDataProperties.h"; path = "CoreDataModel/CDContact+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C642006D1BA38BA4000119EA /* CDContact+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDContact+CoreDataProperties.m"; path = "CoreDataModel/CDContact+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C642006E1BA38BA4000119EA /* CDContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDContact.h; path = CoreDataModel/CDContact.h; sourceTree = "<group>"; };
+		C642006F1BA38BA4000119EA /* CDContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDContact.m; path = CoreDataModel/CDContact.m; sourceTree = "<group>"; };
+		C64200771BA38C09000119EA /* CDContact+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDContact+Additions.h"; path = "CoreDataModel/CDContact+Additions.h"; sourceTree = "<group>"; };
+		C64200781BA38C09000119EA /* CDContact+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDContact+Additions.m"; path = "CoreDataModel/CDContact+Additions.m"; sourceTree = "<group>"; };
 		C6A3F51B1A4000ED004D3479 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A3F51F1A4000ED004D3479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6A3F5201A4000ED004D3479 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,17 +123,6 @@
 		C6C81C891BA3652F005B804C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = External/MBProgressHUD.m; sourceTree = "<group>"; };
 		C6C81C8B1BA36548005B804C /* CConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CConstants.h; path = Constants/CConstants.h; sourceTree = "<group>"; };
 		C6C81C8C1BA36548005B804C /* CConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CConstants.m; path = Constants/CConstants.m; sourceTree = "<group>"; };
-		C6C81C8E1BA36571005B804C /* CDContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDContact.h; path = CoreDataModel/CDContact.h; sourceTree = "<group>"; };
-		C6C81C8F1BA36571005B804C /* CDContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDContact.m; path = CoreDataModel/CDContact.m; sourceTree = "<group>"; };
-		C6C81C901BA36571005B804C /* CDContact+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDContact+Additions.h"; path = "CoreDataModel/CDContact+Additions.h"; sourceTree = "<group>"; };
-		C6C81C911BA36571005B804C /* CDContact+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDContact+Additions.m"; path = "CoreDataModel/CDContact+Additions.m"; sourceTree = "<group>"; };
-		C6C81C921BA36571005B804C /* CDContact+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDContact+CoreDataProperties.h"; path = "CoreDataModel/CDContact+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C6C81C931BA36571005B804C /* CDContact+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDContact+CoreDataProperties.m"; path = "CoreDataModel/CDContact+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C6C81C941BA36571005B804C /* CDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDUser.h; path = CoreDataModel/CDUser.h; sourceTree = "<group>"; };
-		C6C81C951BA36571005B804C /* CDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDUser.m; path = CoreDataModel/CDUser.m; sourceTree = "<group>"; };
-		C6C81C961BA36571005B804C /* CDUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDUser+CoreDataProperties.h"; path = "CoreDataModel/CDUser+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C6C81C971BA36571005B804C /* CDUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDUser+CoreDataProperties.m"; path = "CoreDataModel/CDUser+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C6C81C981BA36571005B804C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Model.xcdatamodel; path = CoreDataModel/Model.xcdatamodel; sourceTree = "<group>"; };
 		C6C81C9F1BA365B4005B804C /* CContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CContact.h; path = PONSOModel/CContact.h; sourceTree = "<group>"; };
 		C6C81CA01BA365B4005B804C /* CContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CContact.m; path = PONSOModel/CContact.m; sourceTree = "<group>"; };
 		C6C81CA11BA365B4005B804C /* CUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CUser.h; path = PONSOModel/CUser.h; sourceTree = "<group>"; };
@@ -478,17 +478,17 @@
 		C6A3F5B11A400990004D3479 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				C6C81C981BA36571005B804C /* Model.xcdatamodel */,
-				C6C81C8E1BA36571005B804C /* CDContact.h */,
-				C6C81C8F1BA36571005B804C /* CDContact.m */,
-				C6C81C901BA36571005B804C /* CDContact+Additions.h */,
-				C6C81C911BA36571005B804C /* CDContact+Additions.m */,
-				C6C81C921BA36571005B804C /* CDContact+CoreDataProperties.h */,
-				C6C81C931BA36571005B804C /* CDContact+CoreDataProperties.m */,
-				C6C81C941BA36571005B804C /* CDUser.h */,
-				C6C81C951BA36571005B804C /* CDUser.m */,
-				C6C81C961BA36571005B804C /* CDUser+CoreDataProperties.h */,
-				C6C81C971BA36571005B804C /* CDUser+CoreDataProperties.m */,
+				C62861611BA38A5200007F7E /* Model.xcdatamodeld */,
+				C64200681BA38BA4000119EA /* CDUser+CoreDataProperties.h */,
+				C64200691BA38BA4000119EA /* CDUser+CoreDataProperties.m */,
+				C642006A1BA38BA4000119EA /* CDUser.h */,
+				C642006B1BA38BA4000119EA /* CDUser.m */,
+				C642006C1BA38BA4000119EA /* CDContact+CoreDataProperties.h */,
+				C642006D1BA38BA4000119EA /* CDContact+CoreDataProperties.m */,
+				C642006E1BA38BA4000119EA /* CDContact.h */,
+				C642006F1BA38BA4000119EA /* CDContact.m */,
+				C64200771BA38C09000119EA /* CDContact+Additions.h */,
+				C64200781BA38C09000119EA /* CDContact+Additions.m */,
 			);
 			name = CoreDataModel;
 			sourceTree = "<group>";
@@ -653,13 +653,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6C81C991BA36571005B804C /* CDContact.m in Sources */,
 				C6C81CCC1BA3665E005B804C /* CCoreDataSharedInstance.m in Sources */,
 				C6C81CCB1BA3665E005B804C /* CCoreDataEngine.m in Sources */,
 				C6C81CD01BA3670D005B804C /* CLongTaskViewHelper.m in Sources */,
+				C64200791BA38C09000119EA /* CDContact+Additions.m in Sources */,
 				C6C81CB11BA365C3005B804C /* NSMutableDictionary+Additions.m in Sources */,
 				C6C81CEE1BA3673E005B804C /* CActivityViewController.m in Sources */,
-				C6C81C9B1BA36571005B804C /* CDContact+CoreDataProperties.m in Sources */,
 				C6C81C8A1BA3652F005B804C /* MBProgressHUD.m in Sources */,
 				C6C81CC21BA3662C005B804C /* CServerUserManager.m in Sources */,
 				C6C81CA41BA365B4005B804C /* CUser.m in Sources */,
@@ -668,29 +667,30 @@
 				C6C81CF31BA3673E005B804C /* CLoginViewController.m in Sources */,
 				C6C81CBF1BA36620005B804C /* CServerUser.m in Sources */,
 				C6C81CB81BA365F7005B804C /* CServer.m in Sources */,
-				C6C81C9A1BA36571005B804C /* CDContact+Additions.m in Sources */,
 				C6C81CF21BA3673E005B804C /* CForgotViewController.m in Sources */,
+				C64200731BA38BA4000119EA /* CDContact.m in Sources */,
+				C64200711BA38BA4000119EA /* CDUser.m in Sources */,
 				C6C81CB01BA365C3005B804C /* CUser+Additions.m in Sources */,
 				C6C81CF51BA3673E005B804C /* CProfileViewController.m in Sources */,
 				C6C81C8D1BA36548005B804C /* CConstants.m in Sources */,
 				C6C81CA31BA365B4005B804C /* CContact.m in Sources */,
 				C6C81CBB1BA3660C005B804C /* CParseEngine.m in Sources */,
 				C6C81CF41BA3673E005B804C /* CPeopleTableViewController.m in Sources */,
+				C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */,
 				C6C81CF01BA3673E005B804C /* CDisplayViewController.m in Sources */,
 				C6C81CEF1BA3673E005B804C /* CChangePasswordViewController.m in Sources */,
 				C6C81CD81BA36719005B804C /* CPreLoginAppNavigation.m in Sources */,
-				C6C81C9D1BA36571005B804C /* CDUser+CoreDataProperties.m in Sources */,
 				C6C81CC61BA3664F005B804C /* CLocal.m in Sources */,
 				C6C81CF11BA3673E005B804C /* CEditViewController.m in Sources */,
 				C6C81CF61BA3673E005B804C /* CSignUpViewController.m in Sources */,
+				C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */,
 				C6C81CB21BA365C3005B804C /* NSString+Additions.m in Sources */,
 				C6C81CD91BA36719005B804C /* CRootWindow.m in Sources */,
-				C6C81C9C1BA36571005B804C /* CDUser.m in Sources */,
 				C6C81CF71BA3673E005B804C /* CSplashViewController.m in Sources */,
 				C6A3F5211A4000ED004D3479 /* main.m in Sources */,
 				C6C81CB31BA365C3005B804C /* PFObject+Additions.m in Sources */,
-				C6C81C9E1BA36571005B804C /* Model.xcdatamodel in Sources */,
 				C6C81CD71BA36719005B804C /* CPostLoginAppNavigation.m in Sources */,
+				C64200721BA38BA4000119EA /* CDContact+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +919,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C62861611BA38A5200007F7E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C62861621BA38A5200007F7E /* Model.xcdatamodel */,
+			);
+			currentVersion = C62861621BA38A5200007F7E /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = CoreDataModel/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C6A3F5131A4000ED004D3479 /* Project object */;
 }

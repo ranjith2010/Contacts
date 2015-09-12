@@ -17,6 +17,9 @@ typedef void(^isAnonymousUserCompletionBlock)(BOOL result);
 typedef void(^logoutCompletionBlock)(NSError *error);
 typedef void(^forgotPasswordCompletioBlock)(BOOL succeeded,NSError *error);
 
+typedef void(^userTaskCompletionBlock)(BOOL result, NSError* error);
+
+
 @protocol CServerUserInterface <NSObject>
 
 /*!
@@ -91,5 +94,10 @@ typedef void(^forgotPasswordCompletioBlock)(BOOL succeeded,NSError *error);
  @param completion block
  */
 - (void)forgotPassword:(NSString *)email :(forgotPasswordCompletioBlock)block;
+
+- (void)changePasswordForUsername:(NSString *)username
+                      oldPassword:(NSString *)oldPassword
+                      newPassword:(NSString *)newPassword
+              withCompletionBlock:(userTaskCompletionBlock)block;
 
 @end

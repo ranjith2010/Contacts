@@ -7,7 +7,11 @@
 //
 
 #import "CChangePasswordViewController.h"
-
+#import "CServerUserInterface.h"
+#import "CServerUser.h"
+#import "MBProgressHUD.h"
+#import "NSString+Additions.h"
+#import "UIAlertView+ZPBlockAdditions.h"
 
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
@@ -31,6 +35,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UIView *containerView;
 
+@property (nonatomic)id<CServerUserInterface> serverUser;
+
 @end
 
 @implementation CChangePasswordViewController
@@ -38,6 +44,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.title = @"Change Password";
+    self.serverUser = [CServerUser defaultUser];
     [self addUIElements];
 }
 
@@ -176,7 +184,30 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 - (void)confirm {
-    
+    if([self.oldPasswordTextField.text c_isEmpty]){
+        [UIAlertView showInformationWithTitle:@"Error" message:@"Old password can't be Empty" dismissTitle:@"OK"];
+    }
+    else if([self.brandNewPasswordTextField.text c_isEmpty]) {
+        [UIAlertView showInformationWithTitle:@"Error" message:@"New password can't be Empty" dismissTitle:@"OK"];
+    }
+    else if([self.confirmPasswordTextField.text c_isEmpty]) {
+        [UIAlertView showInformationWithTitle:@"Error" message:@"Confirm password can't be Empty" dismissTitle:@"OK"];
+    }
+    else if(![self.brandNewPasswordTextField.text isEqualToString:self.confirmPasswordTextField.text]) {
+        [UIAlertView showInformationWithTitle:@"Error" message:@"New & Confirm password mis-match" dismissTitle:@"OK"];
+    }
+    else {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.serverUser changePasswordForUsername:[self.serverUser email] oldPassword:self.oldPasswordTextField.text newPassword:self.oldPasswordTextField.text withCompletionBlock:^(BOOL result, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(error) {
+            [UIAlertView showError:error withTitle:nil positiveTitle:nil negativeTitle:@"OK" positiveBlock:nil negativeBlock:nil];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    }
 }
 
 
