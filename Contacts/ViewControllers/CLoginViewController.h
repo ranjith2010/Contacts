@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
 
-@interface CLoginViewController : UIViewController
+@interface CLoginViewController : CBaseViewController
 
 @end

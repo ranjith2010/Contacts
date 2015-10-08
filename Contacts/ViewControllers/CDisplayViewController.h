@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CContact.h"
+#import "CBaseViewController.h"
 
-@interface CDisplayViewController : UIViewController
+@interface CDisplayViewController : CBaseViewController
 
 @property (nonatomic) CContact *contact;
 

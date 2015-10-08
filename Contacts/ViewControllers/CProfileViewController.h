@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
 
-@interface CProfileViewController : UIViewController
+@interface CProfileViewController : CBaseViewController
 @end

@@ -14,7 +14,6 @@
 #import "CForgotViewController.h"
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
-#import "MBProgressHUD.h"
 
 @interface CLoginViewController ()
 
@@ -113,7 +112,7 @@
 - (void)login {
     NSString *errorMsg;
     if([self.emailTextField.text c_isEmpty]) {
-       errorMsg =  @"Email is Empty";
+        errorMsg =  @"Email is Empty";
     }
     else if(![self.emailTextField.text c_validateEmail]) {
         errorMsg = @"Invalid Email";
@@ -121,24 +120,24 @@
     else if ([self.passwordTextField.text c_isEmpty]) {
         errorMsg = @"Password is Empty";
     }
-
+    
     if(errorMsg.length) {
         NSLog(@"%@",errorMsg);
         return;
     }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showBusyIndicatorWithMessage:nil andImage:nil];
     [self.serverUser logInWithExistingUser:self.emailTextField.text
                                   password:self.passwordTextField.text
                                           :^(CUser *user, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(!error){
-            NSLog(@"user logged in successful");
-            [self launchTabBarVC];
-        }
-        else {
-            NSLog(@"%@",error.localizedDescription);
-        }
-    }];
+                                              [self dismissBusyIndicator];
+                                              if(!error){
+                                                  NSLog(@"user logged in successful");
+                                                  [self launchTabBarVC];
+                                              }
+                                              else {
+                                                  NSLog(@"%@",error.localizedDescription);
+                                              }
+                                          }];
 }
 
 - (void)signup {

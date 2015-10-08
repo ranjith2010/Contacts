@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
 
-@interface CChangePasswordViewController : UIViewController
+@interface CChangePasswordViewController : CBaseViewController
 
 @end

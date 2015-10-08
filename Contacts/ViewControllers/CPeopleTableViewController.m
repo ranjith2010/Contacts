@@ -17,8 +17,6 @@
 #import "UIAlertView+ZPBlockAdditions.h"
 #import "NSMutableDictionary+Additions.h"
 
-#import "MBProgressHUD.h"
-
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
 #import "CDisplayViewController.h"

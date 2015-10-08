@@ -8,14 +8,6 @@
 
 #import "CServerUserManager.h"
 #import "CConstants.h"
-#import "CLocalInterface.h"
-#import "CLocal.h"
-
-@interface CServerUserManager ()
-
-@property (nonatomic)id<CLocalInterface> localDB;
-
-@end
 
 @implementation CServerUserManager
 
@@ -30,7 +22,6 @@
 
 - (id)init {
     self = [super init];
-//    self.localDB = [CLocal defaultLocalDB];
     return self;
 }
 

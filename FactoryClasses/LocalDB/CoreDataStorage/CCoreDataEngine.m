@@ -18,19 +18,11 @@
 
 #import "CDContact.h"
 #import "CDContact+Additions.h"
-#import "CServerUserInterface.h"
-#import "CServerUser.h"
 #import "CDUser.h"
-
-@interface CCoreDataEngine ()
-@property (nonatomic)id<CServerUserInterface> serverUser;
-
-@end
 
 @implementation CCoreDataEngine{
    NSManagedObjectContext *moc;
 }
-
 
 + (CCoreDataEngine*)sharedInstance {
     static CCoreDataEngine* sharedInstance = nil;
@@ -44,7 +36,6 @@
 - (id)init {
     self = [super init];
     moc = [[CCoreDataSharedInstance sharedInstance] managedObjectContext];
-    self.serverUser = [CServerUser defaultUser];
     return self;
 }
 
@@ -55,8 +46,8 @@
     [contactCoreDataModel safeAddForKey:kServerPhoneAttr value:contact.phone];
     [contactCoreDataModel safeAddForKey:kServerStreetAttr value:contact.street];
     [contactCoreDataModel safeAddForKey:kServerDistrictAttr value:contact.district];
-    [contactCoreDataModel setValue:contact.objectId forKey:kServerObjectIdAttr];
-    [contactCoreDataModel setValue:[self.serverUser userObjectId] forKey:kServerUserObjectIdAttr];
+    [contactCoreDataModel setValue:contact.objectId forKey:@"objectid"];
+    [contactCoreDataModel setValue:contact.userObjectId forKey:@"userobjectid"];
     NSError *error;
     BOOL result = [self saveCoreDataStateWithError:&error];
     block(result,error);
@@ -76,13 +67,10 @@
     [contactCoreDataModel safeAddForKey:kServerPhoneAttr value:contact.phone];
     [contactCoreDataModel safeAddForKey:kServerStreetAttr value:contact.street];
     [contactCoreDataModel safeAddForKey:kServerDistrictAttr value:contact.district];
-    [contactCoreDataModel setValue:[self.serverUser userObjectId] forKey:kServerUserObjectIdAttr];
+    [contactCoreDataModel setValue:contact.userObjectId forKey:kServerUserObjectIdAttr];
     BOOL result = [self saveCoreDataStateWithError:&error];
     block(result,error);
 }
-
-
-
 
 
 - (void)storeUser:(CUser *)user :(storeCDUserComletionBlock)block {

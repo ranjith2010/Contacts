@@ -15,7 +15,6 @@
 #import "UIAlertView+ZPBlockAdditions.h"
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
-#import "MBProgressHUD.h"
 #import "CSplashViewController.h"
 #import "CChangePasswordViewController.h"
 
@@ -51,24 +50,27 @@
     self.userNameLabel = [UILabel new];
     self.userNameLabel.text = [self.serverUser userName];
     [self.userNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.userNameLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:25]];
+    [self.userNameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.view addSubview:self.userNameLabel];
 
     self.emailHeader = [UILabel new];
     self.emailHeader.text = @"Email Address";
     [self.emailHeader setTextColor:[UIColor brownColor]];
     [self.emailHeader setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.emailHeader setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.view addSubview:self.emailHeader];
 
     self.emailLabel = [UILabel new];
     self.emailLabel.text = [self.serverUser email];
     [self.emailLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.emailLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.view addSubview:self.emailLabel];
 
     self.createdAtHeader = [UILabel new];
     self.createdAtHeader.text = @"Created At";
     [self.createdAtHeader setTextColor:[UIColor brownColor]];
     [self.createdAtHeader setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.createdAtHeader setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.view addSubview:self.createdAtHeader];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -79,22 +81,20 @@
     [self.createdAt setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.createdAt];
     
-    
     self.changePasswordBtn = [UIButton new];
     [self.changePasswordBtn setTitle:@"Change Password" forState:UIControlStateNormal];
     [self.changePasswordBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.changePasswordBtn.layer setCornerRadius:2];
-    [self.changePasswordBtn.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+    [self.changePasswordBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.changePasswordBtn setBackgroundColor:[UIColor brownColor]];
     [self.changePasswordBtn addTarget:self action:@selector(changePassword) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.changePasswordBtn];
-    
     
     self.editBtn = [UIButton new];
     [self.editBtn setTitle:@"Edit" forState:UIControlStateNormal];
     [self.editBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.editBtn.layer setCornerRadius:2];
-    [self.editBtn.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+    [self.editBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.editBtn setBackgroundColor:[UIColor brownColor]];
     [self.editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.editBtn];
@@ -105,7 +105,7 @@
     [self.logoutBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.logoutBtn setBackgroundColor:[UIColor redColor]];
     [self.logoutBtn.layer setCornerRadius:2];
-    [self.logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    [self.logoutBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     [self.logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.logoutBtn];
 
@@ -151,7 +151,6 @@
         }
     }];
 }
-
 
 - (void)changePassword {
     CChangePasswordViewController *changePasswordVC = [CChangePasswordViewController new];

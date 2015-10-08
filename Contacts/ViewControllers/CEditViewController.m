@@ -15,7 +15,6 @@
 #import "CServerInterface.h"
 #import "NSString+Additions.h"
 #import "NSString+Additions.h"
-#import "MBProgressHUD.h"
 
 #import "CLocalInterface.h"
 #import "CLocal.h"
@@ -72,7 +71,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     self.containerView = [UIView new];
     [self.containerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.scrollView setBackgroundColor:[UIColor yellowColor]];
+//    [self.containerView setBackgroundColor:[UIColor yellowColor]];
     [self.scrollView addSubview:self.containerView];
 
     self.nameTextField = [UITextField new];
@@ -217,9 +216,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // So, its updated scenario
     if(self.delegate) {
         contact.objectId = self.contact.objectId;
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showBusyIndicatorWithMessage:nil andImage:nil];
         [self.server updateContact:contact :^(BOOL result, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self dismissBusyIndicator];
             if(!error){
                 [self.local updateContact:contact :^(BOOL result, NSError *error) {
                     if(!error) {
@@ -240,9 +239,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     else {
         // Its came fresh look
         // New Contact
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showBusyIndicatorWithMessage:nil andImage:nil];
         [self.server storeContact:contact :^(CContact *contact, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self dismissBusyIndicator];
             if(!error) {
                 [self.local storeContact:contact :^(BOOL result, NSError *error) {
                     if(!error) {
@@ -262,9 +261,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 - (void)delete {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showBusyIndicatorWithMessage:nil andImage:nil];
     [self.server deleteContact:self.contact :^(BOOL result, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissBusyIndicator];
         if(!error) {
             NSLog(@"contact deleted successfully");
             [self dismissViewControllerAnimated:NO completion:nil];

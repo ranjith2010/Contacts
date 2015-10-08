@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CContact.h"
+#import "CBaseViewController.h"
 
 @protocol pop <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface CEditViewController : UIViewController
+@interface CEditViewController : CBaseViewController
 
 @property(nonatomic,strong)CContact *contact;
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseTableViewController.h"
 
-@interface CPeopleTableViewController : UITableViewController
+@interface CPeopleTableViewController : CBaseTableViewController
 
 @end
 

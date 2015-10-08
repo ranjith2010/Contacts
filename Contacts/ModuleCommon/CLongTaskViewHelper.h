@@ -2,7 +2,7 @@
 //  CLongTaskViewHelper.h
 //  Contacts
 //
-//  Created by ranjith on 11/09/15.
+//  Created by Srikanth on 11/09/15.
 //  Copyright © 2015 Zippr. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 
 /*!
  Designated initializer.
- @param viewController The view controller for which requires implementation of ZPLongTaskViewProtocol
+ @param viewController The view controller for which requires implementation of CLongTaskViewProtocol
  */
 - (instancetype)initWithContainerViewController:(UIViewController*)viewController;
 

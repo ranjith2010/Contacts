@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
 
-@interface CSignUpViewController : UIViewController
+@interface CSignUpViewController : CBaseViewController
 
 @end

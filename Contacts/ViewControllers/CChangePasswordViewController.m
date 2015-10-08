@@ -9,7 +9,6 @@
 #import "CChangePasswordViewController.h"
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
-#import "MBProgressHUD.h"
 #import "NSString+Additions.h"
 #import "UIAlertView+ZPBlockAdditions.h"
 
@@ -197,10 +196,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [UIAlertView showInformationWithTitle:@"Error" message:@"New & Confirm password mis-match" dismissTitle:@"OK"];
     }
     else {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.serverUser changePasswordForUsername:[self.serverUser email] oldPassword:self.oldPasswordTextField.text newPassword:self.oldPasswordTextField.text withCompletionBlock:^(BOOL result, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(error) {
+        [self showBusyIndicatorWithMessage:nil andImage:nil];
+        [self.serverUser changePasswordForUsername:[self.serverUser email] oldPassword:self.oldPasswordTextField.text newPassword:self.oldPasswordTextField.text withCompletionBlock:^(BOOL result, NSError *error) {
+            [self dismissBusyIndicator];
+            if(error) {
             [UIAlertView showError:error withTitle:nil positiveTitle:nil negativeTitle:@"OK" positiveBlock:nil negativeBlock:nil];
         }
         else {

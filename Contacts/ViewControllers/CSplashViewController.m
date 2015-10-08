@@ -7,7 +7,6 @@
 //
 
 #import "CSplashViewController.h"
-#import "MBProgressHUD.h"
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
 #import "CSignUpViewController.h"
@@ -94,9 +93,9 @@
 #pragma mark - User Selection
 
 - (void)skipBtn {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showBusyIndicatorWithMessage:nil andImage:nil];
     [self.serverUser createAnonymousUser:^(CUser *user, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissBusyIndicator];
         if(!error) {
             NSLog(@"Anonymous user created");
             [self launchTabBarVC];

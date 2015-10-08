@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
 
-@interface CSplashViewController : UIViewController
+@interface CSplashViewController : CBaseViewController
 
 @end

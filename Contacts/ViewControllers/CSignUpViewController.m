@@ -17,7 +17,6 @@
 
 #import "CServerUserInterface.h"
 #import "CServerUser.h"
-#import "MBProgressHUD.h"
 
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
@@ -105,48 +104,47 @@
 }
 
 - (void)signUpBtnAction {
-  if ([self.userNameTextField.text c_isEmpty]) {
-    [UIAlertView zp_alertViewWithTitle:@"Error" message:@"User name is Empty"];
-  } else if ([self.emailTextField.text c_isEmpty]) {
-    [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Email is Empty"];
-  } else if (![self.emailTextField.text c_validateEmail]) {
-    [UIAlertView zp_alertViewWithTitle:@"Validation Error"
-                               message:@"Incorrect Email"];
-  } else if ([self.passwordTextField.text c_isEmpty]) {
-    [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Password Empty"];
-  } else {
-    CUser *newUser = [CUser new];
-    [newUser setUsername:self.emailTextField.text];
-    [newUser setEmail:self.emailTextField.text];
-    [newUser setUsername:self.userNameTextField.text];
-    [newUser setPassword:self.passwordTextField.text];
-
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.serverUser
-        createNewUserWithCredentials:
-                             newUser:^(BOOL succeeded, NSError *error) {
-                               [MBProgressHUD hideHUDForView:self.view
-                                                    animated:YES];
-                               if (!error) {
-                                 [self.local
-                                     storeUser:
-                                       newUser:^(BOOL result, NSError *error) {
-                                         if (!error) {
-                                           NSLog(@"%@ user created",
-                                                 self.userNameTextField.text);
-                                           [self.navigationController
-                                               popViewControllerAnimated:YES];
-                                         } else {
-                                           NSLog(@"%@",
-                                                 error.localizedDescription);
-                                         }
-                                       }];
-
-                               } else {
-                                 NSLog(@"%@", error.localizedDescription);
-                               }
-                             }];
-  }
+    if ([self.userNameTextField.text c_isEmpty]) {
+        [UIAlertView zp_alertViewWithTitle:@"Error" message:@"User name is Empty"];
+    } else if ([self.emailTextField.text c_isEmpty]) {
+        [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Email is Empty"];
+    } else if (![self.emailTextField.text c_validateEmail]) {
+        [UIAlertView zp_alertViewWithTitle:@"Validation Error"
+                                   message:@"Incorrect Email"];
+    } else if ([self.passwordTextField.text c_isEmpty]) {
+        [UIAlertView zp_alertViewWithTitle:@"Error" message:@"Password Empty"];
+    } else {
+        CUser *newUser = [CUser new];
+        [newUser setUsername:self.emailTextField.text];
+        [newUser setEmail:self.emailTextField.text];
+        [newUser setUsername:self.userNameTextField.text];
+        [newUser setPassword:self.passwordTextField.text];
+        
+        [self showBusyIndicatorWithMessage:nil andImage:nil];
+        [self.serverUser
+         createNewUserWithCredentials:
+         newUser:^(BOOL succeeded, NSError *error) {
+             [self dismissBusyIndicator];
+             if (!error) {
+                 [self.local
+                  storeUser:
+                  newUser:^(BOOL result, NSError *error) {
+                      if (!error) {
+                          NSLog(@"%@ user created",
+                                self.userNameTextField.text);
+                          [self.navigationController
+                           popViewControllerAnimated:YES];
+                      } else {
+                          NSLog(@"%@",
+                                error.localizedDescription);
+                      }
+                  }];
+                 
+             } else {
+                 NSLog(@"%@", error.localizedDescription);
+             }
+         }];
+    }
 }
 
 - (void)launchTabBarVC {

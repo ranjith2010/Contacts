@@ -110,11 +110,6 @@ NSString * const kZPContactLastName             = @"lastname";
     return self.serverDictionary[kContactInternalUserObjectId];
 }
 
-
-
-
-
-
 - (NSString*)firstname {
     return self.serverDictionary[kZPContactFirstName];
 }
