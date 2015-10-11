@@ -9,7 +9,15 @@
 /* Begin PBXBuildFile section */
 		07033A731BC6DD92002BE065 /* CBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07033A721BC6DD92002BE065 /* CBaseViewController.m */; settings = {ASSET_TAGS = (); }; };
 		07033A761BC6DDA3002BE065 /* CBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07033A751BC6DDA3002BE065 /* CBaseTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0764E9AA1BC826AF008A17F8 /* CSignUpLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0764E9A81BC826AF008A17F8 /* CSignUpLogic.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E171BC92F970083B844 /* CSignUpPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E161BC92F970083B844 /* CSignUpPresenter.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E1B1BC931120083B844 /* CPreloginLogicProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E1A1BC931120083B844 /* CPreloginLogicProvider.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E1F1BC933DF0083B844 /* CDefaultSignUpNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E1E1BC933DF0083B844 /* CDefaultSignUpNavigation.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E221BC9341C0083B844 /* CInplaceSignUpNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E211BC9341C0083B844 /* CInplaceSignUpNavigation.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E2C1BCA90BC0083B844 /* CLoginOptionsLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E2B1BCA90BC0083B844 /* CLoginOptionsLogic.m */; settings = {ASSET_TAGS = (); }; };
+		07A55E301BCA90F50083B844 /* CLoginOptionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E2F1BCA90F50083B844 /* CLoginOptionsPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		07D9CC271B98392B00E817B6 /* Reference.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D9CC261B98392B00E817B6 /* Reference.strings */; };
+		07EAF30F1BC792FC00D18303 /* CCoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */; settings = {ASSET_TAGS = (); }; };
 		34C7D82F5DFB4775871928E7 /* libPods-Contacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB1CB9FE7F690C907ABFE07 /* libPods-Contacts.a */; };
 		C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C62861611BA38A5200007F7E /* Model.xcdatamodeld */; };
 		C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C64200691BA38BA4000119EA /* CDUser+CoreDataProperties.m */; };
@@ -84,7 +92,30 @@
 		07033A721BC6DD92002BE065 /* CBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBaseViewController.m; path = ModuleCommon/CBaseViewController.m; sourceTree = "<group>"; };
 		07033A741BC6DDA3002BE065 /* CBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBaseTableViewController.h; path = ModuleCommon/CBaseTableViewController.h; sourceTree = "<group>"; };
 		07033A751BC6DDA3002BE065 /* CBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBaseTableViewController.m; path = ModuleCommon/CBaseTableViewController.m; sourceTree = "<group>"; };
+		0764E9A71BC826AF008A17F8 /* CSignUpLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpLogic.h; path = Modules/SignUp/CSignUpLogic.h; sourceTree = "<group>"; };
+		0764E9A81BC826AF008A17F8 /* CSignUpLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSignUpLogic.m; path = Modules/SignUp/CSignUpLogic.m; sourceTree = "<group>"; };
+		0764E9A91BC826AF008A17F8 /* CSignUpLogicIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpLogicIO.h; path = Modules/SignUp/CSignUpLogicIO.h; sourceTree = "<group>"; };
+		0764E9AF1BC8274B008A17F8 /* CSignUpNavigationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpNavigationProtocol.h; path = Modules/SignUp/CSignUpNavigationProtocol.h; sourceTree = "<group>"; };
+		07A55E151BC92F970083B844 /* CSignUpPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpPresenter.h; path = Modules/SignUp/CSignUpPresenter.h; sourceTree = "<group>"; };
+		07A55E161BC92F970083B844 /* CSignUpPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSignUpPresenter.m; path = Modules/SignUp/CSignUpPresenter.m; sourceTree = "<group>"; };
+		07A55E181BC92FB00083B844 /* CSignUpPresenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpPresenterProtocol.h; path = Modules/SignUp/CSignUpPresenterProtocol.h; sourceTree = "<group>"; };
+		07A55E191BC931120083B844 /* CPreloginLogicProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPreloginLogicProvider.h; path = ModuleCommon/CPreloginLogicProvider.h; sourceTree = "<group>"; };
+		07A55E1A1BC931120083B844 /* CPreloginLogicProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPreloginLogicProvider.m; path = ModuleCommon/CPreloginLogicProvider.m; sourceTree = "<group>"; };
+		07A55E1C1BC933130083B844 /* CSignUpViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSignUpViewProtocol.h; path = Modules/SignUp/CSignUpViewProtocol.h; sourceTree = "<group>"; };
+		07A55E1D1BC933DF0083B844 /* CDefaultSignUpNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDefaultSignUpNavigation.h; path = Modules/SignUp/CDefaultSignUpNavigation.h; sourceTree = "<group>"; };
+		07A55E1E1BC933DF0083B844 /* CDefaultSignUpNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDefaultSignUpNavigation.m; path = Modules/SignUp/CDefaultSignUpNavigation.m; sourceTree = "<group>"; };
+		07A55E201BC9341C0083B844 /* CInplaceSignUpNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CInplaceSignUpNavigation.h; path = Modules/SignUp/CInplaceSignUpNavigation.h; sourceTree = "<group>"; };
+		07A55E211BC9341C0083B844 /* CInplaceSignUpNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CInplaceSignUpNavigation.m; path = Modules/SignUp/CInplaceSignUpNavigation.m; sourceTree = "<group>"; };
+		07A55E2A1BCA90BC0083B844 /* CLoginOptionsLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsLogic.h; path = Modules/PreLoginLanding/CLoginOptionsLogic.h; sourceTree = "<group>"; };
+		07A55E2B1BCA90BC0083B844 /* CLoginOptionsLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLoginOptionsLogic.m; path = Modules/PreLoginLanding/CLoginOptionsLogic.m; sourceTree = "<group>"; };
+		07A55E2D1BCA90CF0083B844 /* CLoginOptionsIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsIO.h; path = Modules/PreLoginLanding/CLoginOptionsIO.h; sourceTree = "<group>"; };
+		07A55E2E1BCA90F50083B844 /* CLoginOptionsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsPresenter.h; path = Modules/PreLoginLanding/CLoginOptionsPresenter.h; sourceTree = "<group>"; };
+		07A55E2F1BCA90F50083B844 /* CLoginOptionsPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLoginOptionsPresenter.m; path = Modules/PreLoginLanding/CLoginOptionsPresenter.m; sourceTree = "<group>"; };
+		07A55E311BCA910E0083B844 /* CLoginOptionsPresenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsPresenterProtocol.h; path = Modules/PreLoginLanding/CLoginOptionsPresenterProtocol.h; sourceTree = "<group>"; };
+		07A55E321BCA91290083B844 /* CLoginOptionsViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsViewProtocol.h; path = Modules/PreLoginLanding/CLoginOptionsViewProtocol.h; sourceTree = "<group>"; };
 		07D9CC261B98392B00E817B6 /* Reference.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reference.strings; sourceTree = "<group>"; };
+		07EAF30D1BC792FC00D18303 /* CCoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCoreDataConstants.h; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.h; sourceTree = "<group>"; };
+		07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCoreDataConstants.m; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.m; sourceTree = "<group>"; };
 		5AB1CB9FE7F690C907ABFE07 /* libPods-Contacts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Contacts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9207E19E6C80155EBB894D6A /* Pods-Contacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contacts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contacts/Pods-Contacts.debug.xcconfig"; sourceTree = "<group>"; };
 		C62861621BA38A5200007F7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -226,6 +257,90 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0764E9961BC82425008A17F8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C6A3F56C1A400248004D3479 /* FactoryClasses */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		0764E9981BC8245E008A17F8 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E251BCA905E0083B844 /* PreLoginLanding */,
+				0764E99C1BC824F7008A17F8 /* ContactDetail */,
+				0764E99B1BC824E8008A17F8 /* SignUp */,
+				0764E99A1BC824E1008A17F8 /* SignIn */,
+				0764E9991BC824D9008A17F8 /* Home */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		0764E9991BC824D9008A17F8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		0764E99A1BC824E1008A17F8 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		0764E99B1BC824E8008A17F8 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E141BC92F6F0083B844 /* Presenter */,
+				0764E9AB1BC826CC008A17F8 /* Navigation */,
+				0764E99E1BC82534008A17F8 /* Logic */,
+				0764E99D1BC8252E008A17F8 /* View */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		0764E99C1BC824F7008A17F8 /* ContactDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ContactDetail;
+			sourceTree = "<group>";
+		};
+		0764E99D1BC8252E008A17F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C6C81CEA1BA3673E005B804C /* CSignUpViewController.h */,
+				C6C81CEB1BA3673E005B804C /* CSignUpViewController.m */,
+				07A55E1C1BC933130083B844 /* CSignUpViewProtocol.h */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0764E99E1BC82534008A17F8 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				0764E9A71BC826AF008A17F8 /* CSignUpLogic.h */,
+				0764E9A81BC826AF008A17F8 /* CSignUpLogic.m */,
+				0764E9A91BC826AF008A17F8 /* CSignUpLogicIO.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		0764E9AB1BC826CC008A17F8 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				0764E9AF1BC8274B008A17F8 /* CSignUpNavigationProtocol.h */,
+				07A55E1D1BC933DF0083B844 /* CDefaultSignUpNavigation.h */,
+				07A55E1E1BC933DF0083B844 /* CDefaultSignUpNavigation.m */,
+				07A55E201BC9341C0083B844 /* CInplaceSignUpNavigation.h */,
+				07A55E211BC9341C0083B844 /* CInplaceSignUpNavigation.m */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		0770FE4C1B7E45CA00C4BBB9 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +370,62 @@
 				C6C81CC11BA3662C005B804C /* CServerUserManager.m */,
 			);
 			name = ParseUser;
+			sourceTree = "<group>";
+		};
+		07A55E141BC92F6F0083B844 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E151BC92F970083B844 /* CSignUpPresenter.h */,
+				07A55E161BC92F970083B844 /* CSignUpPresenter.m */,
+				07A55E181BC92FB00083B844 /* CSignUpPresenterProtocol.h */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		07A55E251BCA905E0083B844 /* PreLoginLanding */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E291BCA90850083B844 /* Presenter */,
+				07A55E281BCA90810083B844 /* View */,
+				07A55E271BCA907B0083B844 /* Logic */,
+				07A55E261BCA90760083B844 /* Navigation */,
+			);
+			name = PreLoginLanding;
+			sourceTree = "<group>";
+		};
+		07A55E261BCA90760083B844 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		07A55E271BCA907B0083B844 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E2A1BCA90BC0083B844 /* CLoginOptionsLogic.h */,
+				07A55E2B1BCA90BC0083B844 /* CLoginOptionsLogic.m */,
+				07A55E2D1BCA90CF0083B844 /* CLoginOptionsIO.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		07A55E281BCA90810083B844 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E321BCA91290083B844 /* CLoginOptionsViewProtocol.h */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		07A55E291BCA90850083B844 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07A55E2E1BCA90F50083B844 /* CLoginOptionsPresenter.h */,
+				07A55E2F1BCA90F50083B844 /* CLoginOptionsPresenter.m */,
+				07A55E311BCA910E0083B844 /* CLoginOptionsPresenterProtocol.h */,
+			);
+			name = Presenter;
 			sourceTree = "<group>";
 		};
 		07D9CC231B97977500E817B6 /* External */ = {
@@ -294,8 +465,6 @@
 				C6C81CE71BA3673E005B804C /* CPeopleTableViewController.m */,
 				C6C81CE81BA3673E005B804C /* CProfileViewController.h */,
 				C6C81CE91BA3673E005B804C /* CProfileViewController.m */,
-				C6C81CEA1BA3673E005B804C /* CSignUpViewController.h */,
-				C6C81CEB1BA3673E005B804C /* CSignUpViewController.m */,
 				C6C81CEC1BA3673E005B804C /* CSplashViewController.h */,
 				C6C81CED1BA3673E005B804C /* CSplashViewController.m */,
 			);
@@ -312,7 +481,6 @@
 				C6A3F5B11A400990004D3479 /* CoreDataModel */,
 				C6A3F58F1A4003D3004D3479 /* PONSOModel */,
 				C6A3F58E1A4003B9004D3479 /* Categories */,
-				C6A3F56C1A400248004D3479 /* FactoryClasses */,
 				C6A3F51D1A4000ED004D3479 /* Contacts */,
 				C6A3F56A1A400208004D3479 /* Frameworks */,
 				C6A3F5371A4000EE004D3479 /* ContactsTests */,
@@ -333,6 +501,8 @@
 		C6A3F51D1A4000ED004D3479 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				0764E9981BC8245E008A17F8 /* Modules */,
+				0764E9961BC82425008A17F8 /* Core */,
 				C6C81C801BA34D00005B804C /* ModuleCommon */,
 				C6C81C761BA34B64005B804C /* Navigation */,
 				C6358C361A4025BD00E052FD /* ViewControllers */,
@@ -401,6 +571,7 @@
 				C6A3F56D1A400253004D3479 /* LocalDB */,
 			);
 			name = FactoryClasses;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		C6A3F56D1A400253004D3479 /* LocalDB */ = {
@@ -439,6 +610,8 @@
 				C6C81CC81BA3665E005B804C /* CCoreDataEngine.m */,
 				C6C81CC91BA3665E005B804C /* CCoreDataSharedInstance.h */,
 				C6C81CCA1BA3665E005B804C /* CCoreDataSharedInstance.m */,
+				07EAF30D1BC792FC00D18303 /* CCoreDataConstants.h */,
+				07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */,
 			);
 			name = "CoreData Storage";
 			sourceTree = "<group>";
@@ -522,6 +695,8 @@
 				07033A721BC6DD92002BE065 /* CBaseViewController.m */,
 				07033A741BC6DDA3002BE065 /* CBaseTableViewController.h */,
 				07033A751BC6DDA3002BE065 /* CBaseTableViewController.m */,
+				07A55E191BC931120083B844 /* CPreloginLogicProvider.h */,
+				07A55E1A1BC931120083B844 /* CPreloginLogicProvider.m */,
 			);
 			name = ModuleCommon;
 			sourceTree = "<group>";
@@ -666,6 +841,7 @@
 				C6C81CCC1BA3665E005B804C /* CCoreDataSharedInstance.m in Sources */,
 				C6C81CCB1BA3665E005B804C /* CCoreDataEngine.m in Sources */,
 				07033A761BC6DDA3002BE065 /* CBaseTableViewController.m in Sources */,
+				07A55E301BCA90F50083B844 /* CLoginOptionsPresenter.m in Sources */,
 				07033A731BC6DD92002BE065 /* CBaseViewController.m in Sources */,
 				C6C81CD01BA3670D005B804C /* CLongTaskViewHelper.m in Sources */,
 				C64200791BA38C09000119EA /* CDContact+Additions.m in Sources */,
@@ -675,11 +851,14 @@
 				C6C81CC21BA3662C005B804C /* CServerUserManager.m in Sources */,
 				C6C81CA41BA365B4005B804C /* CUser.m in Sources */,
 				C6A3F5241A4000ED004D3479 /* CAppDelegate.m in Sources */,
+				07A55E221BC9341C0083B844 /* CInplaceSignUpNavigation.m in Sources */,
 				C6C81CB41BA365C3005B804C /* UIAlertView+ZPBlockAdditions.m in Sources */,
 				C6C81CF31BA3673E005B804C /* CLoginViewController.m in Sources */,
 				C6C81CBF1BA36620005B804C /* CServerUser.m in Sources */,
 				C6C81CB81BA365F7005B804C /* CServer.m in Sources */,
+				0764E9AA1BC826AF008A17F8 /* CSignUpLogic.m in Sources */,
 				C6C81CF21BA3673E005B804C /* CForgotViewController.m in Sources */,
+				07A55E171BC92F970083B844 /* CSignUpPresenter.m in Sources */,
 				C64200731BA38BA4000119EA /* CDContact.m in Sources */,
 				C64200711BA38BA4000119EA /* CDUser.m in Sources */,
 				C6C81CB01BA365C3005B804C /* CUser+Additions.m in Sources */,
@@ -688,6 +867,7 @@
 				C6C81CA31BA365B4005B804C /* CContact.m in Sources */,
 				C6C81CBB1BA3660C005B804C /* CParseEngine.m in Sources */,
 				C6C81CF41BA3673E005B804C /* CPeopleTableViewController.m in Sources */,
+				07EAF30F1BC792FC00D18303 /* CCoreDataConstants.m in Sources */,
 				C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */,
 				C6C81CF01BA3673E005B804C /* CDisplayViewController.m in Sources */,
 				C6C81CEF1BA3673E005B804C /* CChangePasswordViewController.m in Sources */,
@@ -695,11 +875,14 @@
 				C6C81CC61BA3664F005B804C /* CLocal.m in Sources */,
 				C6C81CF11BA3673E005B804C /* CEditViewController.m in Sources */,
 				C6C81CF61BA3673E005B804C /* CSignUpViewController.m in Sources */,
+				07A55E1B1BC931120083B844 /* CPreloginLogicProvider.m in Sources */,
 				C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */,
 				C6C81CB21BA365C3005B804C /* NSString+Additions.m in Sources */,
 				C6C81CD91BA36719005B804C /* CRootWindow.m in Sources */,
 				C6C81CF71BA3673E005B804C /* CSplashViewController.m in Sources */,
 				C6A3F5211A4000ED004D3479 /* main.m in Sources */,
+				07A55E1F1BC933DF0083B844 /* CDefaultSignUpNavigation.m in Sources */,
+				07A55E2C1BCA90BC0083B844 /* CLoginOptionsLogic.m in Sources */,
 				C6C81CB31BA365C3005B804C /* PFObject+Additions.m in Sources */,
 				C6C81CD71BA36719005B804C /* CPostLoginAppNavigation.m in Sources */,
 				C64200721BA38BA4000119EA /* CDContact+CoreDataProperties.m in Sources */,

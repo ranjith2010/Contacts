@@ -20,6 +20,8 @@
 #import "CDContact+Additions.h"
 #import "CDUser.h"
 
+#import "CCoreDataConstants.h"
+
 @implementation CCoreDataEngine{
    NSManagedObjectContext *moc;
 }
@@ -40,14 +42,14 @@
 }
 
 - (void)storeContact:(CContact *)contact :(storeCDContactCompletionBlock)block {
-    CDContact *contactCoreDataModel = [NSEntityDescription insertNewObjectForEntityForName:@"CDContact" inManagedObjectContext:moc];
-    [contactCoreDataModel safeAddForKey:kServerNameAttr value:contact.name];
-    [contactCoreDataModel safeAddForKey:kServerEmailAttr value:contact.email];
-    [contactCoreDataModel safeAddForKey:kServerPhoneAttr value:contact.phone];
-    [contactCoreDataModel safeAddForKey:kServerStreetAttr value:contact.street];
-    [contactCoreDataModel safeAddForKey:kServerDistrictAttr value:contact.district];
-    [contactCoreDataModel setValue:contact.objectId forKey:@"objectid"];
-    [contactCoreDataModel setValue:contact.userObjectId forKey:@"userobjectid"];
+    CDContact *contactCoreDataModel = [NSEntityDescription insertNewObjectForEntityForName:kCoreDataEntityNameContact inManagedObjectContext:moc];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactName value:contact.name];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactEmail value:contact.email];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactPhone value:contact.phone];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactStreet value:contact.street];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactDistrict value:contact.district];
+    [contactCoreDataModel setValue:contact.objectId forKey:kCoreDataContactObjectId];
+    [contactCoreDataModel setValue:contact.userObjectId forKey:kCoreDataContactUserObjectId];
     NSError *error;
     BOOL result = [self saveCoreDataStateWithError:&error];
     block(result,error);
@@ -55,17 +57,17 @@
 
 - (void)updateContact:(CContact *)contact :(updateCDContactCompletionBlock)block {
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CDContact" inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:kCoreDataEntityNameContact inManagedObjectContext:moc]];
     [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectid=%@",contact.objectId];
     [fetchRequest setPredicate:predicate];
     NSArray * objects = [moc executeFetchRequest:fetchRequest error:&error];
     CDContact *contactCoreDataModel = objects.firstObject;
-    [contactCoreDataModel safeAddForKey:kServerNameAttr value:contact.name];
-    [contactCoreDataModel safeAddForKey:kServerEmailAttr value:contact.email];
-    [contactCoreDataModel safeAddForKey:kServerPhoneAttr value:contact.phone];
-    [contactCoreDataModel safeAddForKey:kServerStreetAttr value:contact.street];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactName value:contact.name];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactEmail value:contact.email];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactPhone value:contact.phone];
+    [contactCoreDataModel safeAddForKey:kCoreDataContactStreet value:contact.street];
     [contactCoreDataModel safeAddForKey:kServerDistrictAttr value:contact.district];
     [contactCoreDataModel setValue:contact.userObjectId forKey:kServerUserObjectIdAttr];
     BOOL result = [self saveCoreDataStateWithError:&error];

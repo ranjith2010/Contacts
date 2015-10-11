@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CBaseViewController.h"
+#import "CSignUpPresenterProtocol.h"
+#import "CSignUpPresenter.h"
 
-@interface CSignUpViewController : CBaseViewController
+@interface CSignUpViewController : CBaseViewController<CSignUpViewProtocol>
+
+@property (nonatomic,strong)id<CSignUpPresenterProtocol> presenter;
 
 @end

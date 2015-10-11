@@ -16,4 +16,7 @@
 
 - (void)presentRootViewControllerInWindow:(UIWindow*)window;
 
+- (void)setMainNavigationController;
+
+
 @end

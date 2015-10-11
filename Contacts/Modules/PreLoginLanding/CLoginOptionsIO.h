@@ -1,15 +1,13 @@
 //
-//  CServerUser.h
+//  CLoginOptionsIO.h
 //  Contacts
 //
-//  Created by ranjit on 14/08/15.
+//  Created by ranjith on 11/10/15.
 //  Copyright © 2015 Zippr. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface CServerUser : NSObject
-
-+(id) defaultUser;
+@protocol CLoginOptionInputLogicProtocol <NSObject>
 
 @end

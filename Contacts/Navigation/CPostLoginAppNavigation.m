@@ -15,6 +15,7 @@
 
 @property (nonatomic) UITabBarController* tabBarController;
 @property (nonatomic) UIWindow* window;
+@property (nonatomic) UINavigationController* navController;
 
 @end
 
@@ -66,4 +67,27 @@
     self.tabBarController.tabBar.tintColor = [UIColor blueColor];
 }
 
+
+- (void)setMainNavigationController {
+    switch (self.tabBarController.selectedIndex) {
+        case 0:
+//            self.navController = self.homeNavigation.navigationController;
+//            if (![self.navController.topViewController isKindOfClass:[ZPZipprDetailVC class]]) {
+//                [self.navController.topViewController viewWillAppear:YES];
+//            }
+
+            break;
+//        case 1:
+//            self.navController = self.searchNavigation.navigationController;
+//            break;
+//        case 3:
+//            self.navController = self.inviteFriendsNavigation.navigationController;
+//            break;
+//        case 4:
+//            self.navController = self.settingsNavigation.navigationController;
+//            
+//        default:
+//            break;
+    }
+}
 @end

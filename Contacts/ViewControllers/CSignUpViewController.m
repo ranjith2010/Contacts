@@ -120,30 +120,34 @@
         [newUser setUsername:self.userNameTextField.text];
         [newUser setPassword:self.passwordTextField.text];
         
-        [self showBusyIndicatorWithMessage:nil andImage:nil];
-        [self.serverUser
-         createNewUserWithCredentials:
-         newUser:^(BOOL succeeded, NSError *error) {
-             [self dismissBusyIndicator];
-             if (!error) {
-                 [self.local
-                  storeUser:
-                  newUser:^(BOOL result, NSError *error) {
-                      if (!error) {
-                          NSLog(@"%@ user created",
-                                self.userNameTextField.text);
-                          [self.navigationController
-                           popViewControllerAnimated:YES];
-                      } else {
-                          NSLog(@"%@",
-                                error.localizedDescription);
-                      }
-                  }];
-                 
-             } else {
-                 NSLog(@"%@", error.localizedDescription);
-             }
-         }];
+        [self.presenter signUpWithNewUserInfo:newUser];
+        
+        
+       // Legacy code
+//        [self showBusyIndicatorWithMessage:nil andImage:nil];
+//        [self.serverUser
+//         createNewUserWithCredentials:
+//         newUser:^(BOOL succeeded, NSError *error) {
+//             [self dismissBusyIndicator];
+//             if (!error) {
+//                 [self.local
+//                  storeUser:
+//                  newUser:^(BOOL result, NSError *error) {
+//                      if (!error) {
+//                          NSLog(@"%@ user created",
+//                                self.userNameTextField.text);
+//                          [self.navigationController
+//                           popViewControllerAnimated:YES];
+//                      } else {
+//                          NSLog(@"%@",
+//                                error.localizedDescription);
+//                      }
+//                  }];
+//                 
+//             } else {
+//                 NSLog(@"%@", error.localizedDescription);
+//             }
+//         }];
     }
 }
 

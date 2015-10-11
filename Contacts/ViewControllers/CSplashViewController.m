@@ -32,12 +32,13 @@
     [self addConstraints];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if([self.serverUser hasCurrentUser]) {
-        [self launchTabBarVC];
-    }
-}
+#warning removed
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    if([self.serverUser hasCurrentUser]) {
+//        [self launchTabBarVC];
+//    }
+//}
 
 - (void)addConstraints {
 
@@ -112,8 +113,11 @@
 }
 
 - (void)signUp {
-    CSignUpViewController *signUpVC = [CSignUpViewController new];
-    [self.navigationController pushViewController:signUpVC animated:YES];
+    [self.presenter onSignupSelected];
+    
+    // Legacy code
+//    CSignUpViewController *signUpVC = [CSignUpViewController new];
+//    [self.navigationController pushViewController:signUpVC animated:YES];
 }
 
 - (void)launchTabBarVC {

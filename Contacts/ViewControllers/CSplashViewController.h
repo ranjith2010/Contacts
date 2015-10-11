@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CBaseViewController.h"
+#import "CLoginOptionsPresenter.h"
 
-@interface CSplashViewController : CBaseViewController
+@interface CSplashViewController : CBaseViewController<CLoginOptionsViewProtocol>
+
+@property (nonatomic,strong)id<CLoginOptionsPresenterProtocol> presenter;
 
 @end
