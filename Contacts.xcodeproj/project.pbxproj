@@ -18,6 +18,10 @@
 		07A55E301BCA90F50083B844 /* CLoginOptionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E2F1BCA90F50083B844 /* CLoginOptionsPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		07D9CC271B98392B00E817B6 /* Reference.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D9CC261B98392B00E817B6 /* Reference.strings */; };
 		07EAF30F1BC792FC00D18303 /* CCoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */; settings = {ASSET_TAGS = (); }; };
+		07EB65311BD0D653005B537E /* CLoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB65301BD0D653005B537E /* CLoginPresenter.m */; settings = {ASSET_TAGS = (); }; };
+		07EB65351BD0D6A6005B537E /* CLoginLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB65341BD0D6A6005B537E /* CLoginLogic.m */; settings = {ASSET_TAGS = (); }; };
+		07EB653F1BD0FEF0005B537E /* CForgotPasswordPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB653E1BD0FEF0005B537E /* CForgotPasswordPresenter.m */; settings = {ASSET_TAGS = (); }; };
+		07EB65431BD0FFF8005B537E /* CForgotPasswordLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB65421BD0FFF8005B537E /* CForgotPasswordLogic.m */; settings = {ASSET_TAGS = (); }; };
 		34C7D82F5DFB4775871928E7 /* libPods-Contacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB1CB9FE7F690C907ABFE07 /* libPods-Contacts.a */; };
 		C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C62861611BA38A5200007F7E /* Model.xcdatamodeld */; };
 		C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C64200691BA38BA4000119EA /* CDUser+CoreDataProperties.m */; };
@@ -116,6 +120,20 @@
 		07D9CC261B98392B00E817B6 /* Reference.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reference.strings; sourceTree = "<group>"; };
 		07EAF30D1BC792FC00D18303 /* CCoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCoreDataConstants.h; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.h; sourceTree = "<group>"; };
 		07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCoreDataConstants.m; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.m; sourceTree = "<group>"; };
+		07EB652F1BD0D653005B537E /* CLoginPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginPresenter.h; path = Modules/Login/CLoginPresenter.h; sourceTree = "<group>"; };
+		07EB65301BD0D653005B537E /* CLoginPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLoginPresenter.m; path = Modules/Login/CLoginPresenter.m; sourceTree = "<group>"; };
+		07EB65321BD0D670005B537E /* CLoginPresenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginPresenterProtocol.h; path = Modules/Login/CLoginPresenterProtocol.h; sourceTree = "<group>"; };
+		07EB65331BD0D6A6005B537E /* CLoginLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginLogic.h; path = Modules/Login/CLoginLogic.h; sourceTree = "<group>"; };
+		07EB65341BD0D6A6005B537E /* CLoginLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLoginLogic.m; path = Modules/Login/CLoginLogic.m; sourceTree = "<group>"; };
+		07EB65361BD0D6C1005B537E /* CLoginIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginIO.h; path = Modules/Login/CLoginIO.h; sourceTree = "<group>"; };
+		07EB65371BD0D6EF005B537E /* CLoginViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginViewProtocol.h; path = Modules/Login/CLoginViewProtocol.h; sourceTree = "<group>"; };
+		07EB653D1BD0FEF0005B537E /* CForgotPasswordPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgotPasswordPresenter.h; path = Modules/ForgotPassword/CForgotPasswordPresenter.h; sourceTree = "<group>"; };
+		07EB653E1BD0FEF0005B537E /* CForgotPasswordPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CForgotPasswordPresenter.m; path = Modules/ForgotPassword/CForgotPasswordPresenter.m; sourceTree = "<group>"; };
+		07EB65401BD0FF12005B537E /* CForgotPasswordPresenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgotPasswordPresenterProtocol.h; path = Modules/ForgotPassword/CForgotPasswordPresenterProtocol.h; sourceTree = "<group>"; };
+		07EB65411BD0FFF8005B537E /* CForgotPasswordLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgotPasswordLogic.h; path = Modules/ForgotPassword/CForgotPasswordLogic.h; sourceTree = "<group>"; };
+		07EB65421BD0FFF8005B537E /* CForgotPasswordLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CForgotPasswordLogic.m; path = Modules/ForgotPassword/CForgotPasswordLogic.m; sourceTree = "<group>"; };
+		07EB65441BD1003B005B537E /* CForgotPasswordLogicProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgotPasswordLogicProtocol.h; path = Modules/ForgotPassword/CForgotPasswordLogicProtocol.h; sourceTree = "<group>"; };
+		07EB65451BD10062005B537E /* CForgotPasswordViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CForgotPasswordViewProtocol.h; path = Modules/ForgotPassword/CForgotPasswordViewProtocol.h; sourceTree = "<group>"; };
 		5AB1CB9FE7F690C907ABFE07 /* libPods-Contacts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Contacts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9207E19E6C80155EBB894D6A /* Pods-Contacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contacts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contacts/Pods-Contacts.debug.xcconfig"; sourceTree = "<group>"; };
 		C62861621BA38A5200007F7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -268,10 +286,11 @@
 		0764E9981BC8245E008A17F8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				07EB65381BD0FEB4005B537E /* ForgotPassword */,
 				07A55E251BCA905E0083B844 /* PreLoginLanding */,
 				0764E99C1BC824F7008A17F8 /* ContactDetail */,
 				0764E99B1BC824E8008A17F8 /* SignUp */,
-				0764E99A1BC824E1008A17F8 /* SignIn */,
+				0764E99A1BC824E1008A17F8 /* Login */,
 				0764E9991BC824D9008A17F8 /* Home */,
 			);
 			name = Modules;
@@ -284,11 +303,15 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		0764E99A1BC824E1008A17F8 /* SignIn */ = {
+		0764E99A1BC824E1008A17F8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				07EB652E1BD0D623005B537E /* Logic */,
+				07EB652D1BD0D61E005B537E /* Navigation */,
+				07EB652C1BD0D618005B537E /* Presenter */,
+				07EB652B1BD0D611005B537E /* View */,
 			);
-			name = SignIn;
+			name = Login;
 			sourceTree = "<group>";
 		};
 		0764E99B1BC824E8008A17F8 /* SignUp */ = {
@@ -437,6 +460,91 @@
 			name = External;
 			sourceTree = "<group>";
 		};
+		07EB652B1BD0D611005B537E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07EB65371BD0D6EF005B537E /* CLoginViewProtocol.h */,
+				C6C81CE41BA3673E005B804C /* CLoginViewController.h */,
+				C6C81CE51BA3673E005B804C /* CLoginViewController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		07EB652C1BD0D618005B537E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07EB652F1BD0D653005B537E /* CLoginPresenter.h */,
+				07EB65301BD0D653005B537E /* CLoginPresenter.m */,
+				07EB65321BD0D670005B537E /* CLoginPresenterProtocol.h */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		07EB652D1BD0D61E005B537E /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		07EB652E1BD0D623005B537E /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				07EB65331BD0D6A6005B537E /* CLoginLogic.h */,
+				07EB65341BD0D6A6005B537E /* CLoginLogic.m */,
+				07EB65361BD0D6C1005B537E /* CLoginIO.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		07EB65381BD0FEB4005B537E /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				07EB653C1BD0FECF005B537E /* Logic */,
+				07EB653B1BD0FECA005B537E /* Presenter */,
+				07EB653A1BD0FEC4005B537E /* Navigation */,
+				07EB65391BD0FEC0005B537E /* View */,
+			);
+			name = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		07EB65391BD0FEC0005B537E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07EB65451BD10062005B537E /* CForgotPasswordViewProtocol.h */,
+				C6C81CE21BA3673E005B804C /* CForgotViewController.h */,
+				C6C81CE31BA3673E005B804C /* CForgotViewController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		07EB653A1BD0FEC4005B537E /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		07EB653B1BD0FECA005B537E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07EB653D1BD0FEF0005B537E /* CForgotPasswordPresenter.h */,
+				07EB653E1BD0FEF0005B537E /* CForgotPasswordPresenter.m */,
+				07EB65401BD0FF12005B537E /* CForgotPasswordPresenterProtocol.h */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		07EB653C1BD0FECF005B537E /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				07EB65411BD0FFF8005B537E /* CForgotPasswordLogic.h */,
+				07EB65421BD0FFF8005B537E /* CForgotPasswordLogic.m */,
+				07EB65441BD1003B005B537E /* CForgotPasswordLogicProtocol.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
 		7934956B76986BB16A2B2E18 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,10 +565,6 @@
 				C6C81CDF1BA3673E005B804C /* CDisplayViewController.m */,
 				C6C81CE01BA3673E005B804C /* CEditViewController.h */,
 				C6C81CE11BA3673E005B804C /* CEditViewController.m */,
-				C6C81CE21BA3673E005B804C /* CForgotViewController.h */,
-				C6C81CE31BA3673E005B804C /* CForgotViewController.m */,
-				C6C81CE41BA3673E005B804C /* CLoginViewController.h */,
-				C6C81CE51BA3673E005B804C /* CLoginViewController.m */,
 				C6C81CE61BA3673E005B804C /* CPeopleTableViewController.h */,
 				C6C81CE71BA3673E005B804C /* CPeopleTableViewController.m */,
 				C6C81CE81BA3673E005B804C /* CProfileViewController.h */,
@@ -864,12 +968,15 @@
 				C6C81CB01BA365C3005B804C /* CUser+Additions.m in Sources */,
 				C6C81CF51BA3673E005B804C /* CProfileViewController.m in Sources */,
 				C6C81C8D1BA36548005B804C /* CConstants.m in Sources */,
+				07EB65431BD0FFF8005B537E /* CForgotPasswordLogic.m in Sources */,
 				C6C81CA31BA365B4005B804C /* CContact.m in Sources */,
 				C6C81CBB1BA3660C005B804C /* CParseEngine.m in Sources */,
 				C6C81CF41BA3673E005B804C /* CPeopleTableViewController.m in Sources */,
 				07EAF30F1BC792FC00D18303 /* CCoreDataConstants.m in Sources */,
+				07EB65351BD0D6A6005B537E /* CLoginLogic.m in Sources */,
 				C62861631BA38A5200007F7E /* Model.xcdatamodeld in Sources */,
 				C6C81CF01BA3673E005B804C /* CDisplayViewController.m in Sources */,
+				07EB65311BD0D653005B537E /* CLoginPresenter.m in Sources */,
 				C6C81CEF1BA3673E005B804C /* CChangePasswordViewController.m in Sources */,
 				C6C81CD81BA36719005B804C /* CPreLoginAppNavigation.m in Sources */,
 				C6C81CC61BA3664F005B804C /* CLocal.m in Sources */,
@@ -877,6 +984,7 @@
 				C6C81CF61BA3673E005B804C /* CSignUpViewController.m in Sources */,
 				07A55E1B1BC931120083B844 /* CPreloginLogicProvider.m in Sources */,
 				C64200701BA38BA4000119EA /* CDUser+CoreDataProperties.m in Sources */,
+				07EB653F1BD0FEF0005B537E /* CForgotPasswordPresenter.m in Sources */,
 				C6C81CB21BA365C3005B804C /* NSString+Additions.m in Sources */,
 				C6C81CD91BA36719005B804C /* CRootWindow.m in Sources */,
 				C6C81CF71BA3673E005B804C /* CSplashViewController.m in Sources */,

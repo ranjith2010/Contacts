@@ -17,6 +17,7 @@
 #import "CServerUser.h"
 #import "CSplashViewController.h"
 #import "CChangePasswordViewController.h"
+#import "CRootWindow.h"
 
 @interface CProfileViewController ()
 
@@ -142,9 +143,12 @@
     [self.serverUser logout:^(NSError *error) {
         if(!error) {
             NSLog(@"logout success");
-            CSplashViewController *splashVC = [CSplashViewController new];
-             UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:splashVC];
-            [self presentViewController:navigationController animated:NO completion:nil];
+            [[CRootWindow sharedInstance] presentPrelogin];
+
+            
+//            CSplashViewController *splashVC = [CSplashViewController new];
+//             UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:splashVC];
+//            [self presentViewController:navigationController animated:NO completion:nil];
         }
         else {
             NSLog(@"%@",error.localizedDescription);

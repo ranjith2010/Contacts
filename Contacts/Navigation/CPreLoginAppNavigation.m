@@ -1,4 +1,3 @@
-
 //
 //  CPreLoginAppNavigation.m
 //  Contacts
@@ -20,14 +19,23 @@
 #import "CLoginOptionsPresenter.h"
 #import "CLoginOptionsLogic.h"
 
+#import "CLoginViewController.h"
+#import "CLoginPresenter.h"
+#import "CLoginLogic.h"
+
+#import "CForgotViewController.h"
+#import "CForgotPasswordPresenter.h"
+#import "CForgotPasswordLogic.h"
+
 @interface CPreLoginAppNavigation ()
 @property (nonatomic,strong) UINavigationController* navController;
 @property (nonatomic, readonly) UIStoryboard* storyboard;
 @property (nonatomic, readwrite, weak) UIWindow* window;
 
-
 // Dont use these properties directly. Use the method instead.
-@property (nonatomic, strong) CSignUpViewController* signup;
+@property (nonatomic, strong) CSignUpViewController* signupVC;
+@property (nonatomic, strong) CLoginViewController* loginVC;
+@property (nonatomic, strong) CForgotViewController* forgotPasswordVC;
 
 @end
 
@@ -77,11 +85,20 @@
     [self checkAndNavigateToViewController:vc animated:YES];
 }
 
+- (void)navigateToLogin {
+    CLoginViewController *loginVC = [self loginViewController];
+    [self checkAndNavigateToViewController:loginVC animated:YES];
+}
+
+- (void)navigateToForgotPassword {
+    CForgotViewController *forgotPasswordVC = [self forgotPasswordViewController];
+    [self checkAndNavigateToViewController:forgotPasswordVC animated:YES];
+}
+
 - (void)navigateToPostLogin {
     [self navigateBack];
     [[CRootWindow sharedInstance] presentPostlogin];
 }
-
 
 - (void)navigateBack {
     if(!self.navController.viewControllers.count)
@@ -95,9 +112,9 @@
     }
 }
 
-
 #pragma mark Private
 
+// TODO:: Make it as Generic give storyboard name and get back the storyboard
 - (UIStoryboard*)storyboard {
     return [UIStoryboard storyboardWithName:@"Login" bundle:nil];
 }
@@ -118,14 +135,38 @@
 #pragma mark Controller creation
 
 - (CSignUpViewController*)signupViewController:(CSignUpPresenter*)presenter {
-    self.signup = [CSignUpViewController new];
+    self.signupVC = [CSignUpViewController new];
     presenter.logic = [CPreloginLogicProvider signupLogic];
-    presenter.view = self.signup;
+    presenter.view = self.signupVC;
     presenter.navigation = [CDefaultSignUpNavigation new];
     
     // Set presenter to view controller
-    self.signup.presenter = presenter;
-    return self.signup;
+    self.signupVC.presenter = presenter;
+    return self.signupVC;
+}
+
+- (CLoginViewController*)loginViewController {
+    if(self.loginVC)
+        return self.loginVC;
+    self.loginVC = [CLoginViewController new];
+    CLoginPresenter *presenter = [CLoginPresenter new];
+    presenter.logic = [CLoginLogic new];
+    presenter.view = self.loginVC;
+    presenter.navigation = self;
+    self.loginVC.presenter = presenter;
+    return self.loginVC;
+}
+
+- (CForgotViewController*)forgotPasswordViewController {
+    if(self.forgotPasswordVC)
+        return self.forgotPasswordVC;
+    self.forgotPasswordVC = [CForgotViewController new];
+    CForgotPasswordPresenter *presenter = [CForgotPasswordPresenter new];
+    self.forgotPasswordVC.presenter = presenter;
+    presenter.view = self.forgotPasswordVC;
+    presenter.logic = [CForgotPasswordLogic new];
+    presenter.navigation = self;
+    return self.forgotPasswordVC;
 }
 
 @end

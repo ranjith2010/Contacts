@@ -28,25 +28,25 @@
 - (void)logInWithExistingUser:(NSString *)userName
                      password:(NSString *)password
                              :(loginUserCompletionBlock)block {
-  [PFUser
-      logInWithUsernameInBackground:userName
-                           password:password
-                              block:^(PFUser *pfUser, NSError *error) {
-                                if (!error) {
-                                  CUser *user = [[CUser alloc] init];
-                                  [user
-                                      setUsername:
-                                          [pfUser valueForKey:kServerUserName]];
-                                  [user
-                                      setPassword:
-                                          [pfUser valueForKey:kServerPassword]];
-                                  [user setEmail:[pfUser valueForKey:
-                                                             kServerEmailAttr]];
-                                  block(user, nil);
-                                } else {
-                                  block(nil, error);
-                                }
-                              }];
+    [PFUser
+     logInWithUsernameInBackground:userName
+     password:password
+     block:^(PFUser *pfUser, NSError *error) {
+         if (!error) {
+             CUser *user = [[CUser alloc] init];
+             [user
+              setUsername:
+              [pfUser valueForKey:kServerUserName]];
+             [user
+              setPassword:
+              [pfUser valueForKey:kServerPassword]];
+             [user setEmail:[pfUser valueForKey:
+                             kServerEmailAttr]];
+             block(user, nil);
+         } else {
+             block(nil, error);
+         }
+     }];
 }
 
 - (void)createNewUserWithCredentials:(CUser *)userModel :(createUserCompletionBlock)block {

@@ -7,8 +7,6 @@
 //
 
 #import "CLoginViewController.h"
-#import "CServerUser.h"
-#import "CServerUserInterface.h"
 #import "NSString+Additions.h"
 #import "CSignUpViewController.h"
 #import "CForgotViewController.h"
@@ -24,8 +22,6 @@
 @property (nonatomic) UIButton *signUpBtn;
 @property (nonatomic) UIButton *forgotPasswordBtn;
 
-@property (nonatomic)id<CServerUserInterface> serverUser;
-
 @end
 
 @implementation CLoginViewController
@@ -33,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.serverUser = [CServerUser defaultUser];
     [self.view removeConstraints:self.view.constraints];
     [self addConstraints];
 }
@@ -66,13 +61,14 @@
     _dontHaveAccountLabel = [UILabel new];
     _dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _dontHaveAccountLabel.text = @"Don't have an account?";
+    _dontHaveAccountLabel.textColor = [UIColor redColor];
     [self.view addSubview:_dontHaveAccountLabel];
 
     _signUpBtn = [UIButton new];
     [_signUpBtn setTitle:@"Signup" forState:UIControlStateNormal];
     [_signUpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _signUpBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    [_signUpBtn addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
+    [_signUpBtn addTarget:self action:@selector(signup) forControlEvents:UIControlEventTouchUpInside];
     [self.signUpBtn.layer setCornerRadius:6];
     [self.view addSubview:_signUpBtn];
 
@@ -98,7 +94,7 @@
     constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_passwordTextField]-|" options:0 metrics:nil views:views]];
     constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_loginBtn]-|" options:0 metrics:nil views:views]];
     constraints = [constraints arrayByAddingObject:[NSLayoutConstraint constraintWithItem:_loginBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_passwordTextField attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_dontHaveAccountLabel]-0-[_signUpBtn]" options:0 metrics:nil views:views]];
+    constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_dontHaveAccountLabel]-5-[_signUpBtn]" options:0 metrics:nil views:views]];
     constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_loginBtn]-[_signUpBtn(50)]" options:0 metrics:nil views:views]];
     constraints = [constraints arrayByAddingObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_forgotPasswordBtn]-|" options:0 metrics:nil views:views]];
 
@@ -110,6 +106,7 @@
 
 
 - (void)login {
+    [self.view endEditing:YES];
     NSString *errorMsg;
     if([self.emailTextField.text c_isEmpty]) {
         errorMsg =  @"Email is Empty";
@@ -125,29 +122,16 @@
         NSLog(@"%@",errorMsg);
         return;
     }
-    [self showBusyIndicatorWithMessage:nil andImage:nil];
-    [self.serverUser logInWithExistingUser:self.emailTextField.text
-                                  password:self.passwordTextField.text
-                                          :^(CUser *user, NSError *error) {
-                                              [self dismissBusyIndicator];
-                                              if(!error){
-                                                  NSLog(@"user logged in successful");
-                                                  [self launchTabBarVC];
-                                              }
-                                              else {
-                                                  NSLog(@"%@",error.localizedDescription);
-                                              }
-                                          }];
+    
+    [self.presenter onLoginClickedWithUsername:self.emailTextField.text password:self.passwordTextField.text];
 }
 
 - (void)signup {
-    CSignUpViewController *signup = [CSignUpViewController new];
-    [self.navigationController pushViewController:signup animated:YES];
+    [self.presenter onSignupClicked];
 }
 
 - (void)forgotpassword {
-    CForgotViewController *forgotVC = [CForgotViewController new];
-    [self.navigationController pushViewController:forgotVC animated:YES];
+    [self.presenter onForgotPasswordClicked];
 }
 
 #pragma mark - Helpers

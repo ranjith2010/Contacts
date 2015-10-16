@@ -25,6 +25,8 @@
 - (void)presentRootViewControllerInWindow:(UIWindow*)window;
 - (void)navigateToSignup;
 - (void)navigateToPostLogin;
-
+- (void)navigateToLogin;
+- (void)navigateToForgotPassword;
+- (void)navigateBack;
 
 @end

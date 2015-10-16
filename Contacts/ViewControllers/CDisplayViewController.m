@@ -75,8 +75,9 @@
     self.nameLabel = [UILabel new];
     self.nameLabel.text = self.contact.name;
     [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.nameLabel.layer.borderColor = [UIColor brownColor].CGColor;
-    self.nameLabel.layer.borderWidth = 4.0;
+    self.nameLabel.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.nameLabel.layer.borderWidth = 2.0;
+    [self.nameLabel.layer setCornerRadius:2];
     [self.nameLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
     self.nameLabel.textAlignment = NSTextAlignmentCenter;
     [self.containerView addSubview:self.nameLabel];
@@ -84,8 +85,9 @@
     self.emailLabel = [UILabel new];
     self.emailLabel.text = self.contact.email;
     [self.emailLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.emailLabel.layer.borderColor = [UIColor brownColor].CGColor;
-    self.emailLabel.layer.borderWidth = 4.0;
+    self.emailLabel.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.emailLabel.layer.borderWidth = 2.0;
+    [self.emailLabel.layer setCornerRadius:2];
     [self.emailLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
     self.emailLabel.textAlignment = NSTextAlignmentCenter;
     [self.containerView addSubview:self.emailLabel];
@@ -93,8 +95,9 @@
     self.mobileLabel = [UILabel new];
     self.mobileLabel.text = self.contact.phone;
     [self.mobileLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.mobileLabel.layer.borderColor = [UIColor brownColor].CGColor;
-    self.mobileLabel.layer.borderWidth = 4.0;
+    self.mobileLabel.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.mobileLabel.layer.borderWidth = 2.0;
+    [self.mobileLabel.layer setCornerRadius:2];
     [self.mobileLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
     self.mobileLabel.textAlignment = NSTextAlignmentCenter;
     [self.containerView addSubview:self.mobileLabel];
@@ -102,8 +105,9 @@
     self.streetLabel = [UILabel new];
     self.streetLabel.text = self.contact.street;
     [self.streetLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.streetLabel.layer.borderColor = [UIColor brownColor].CGColor;
-    self.streetLabel.layer.borderWidth = 4.0;
+    self.streetLabel.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.streetLabel.layer.borderWidth = 2.0;
+    [self.streetLabel.layer setCornerRadius:2];
     [self.streetLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
     self.streetLabel.textAlignment = NSTextAlignmentCenter;
     [self.containerView addSubview:self.streetLabel];
@@ -111,18 +115,20 @@
     self.districtLabel = [UILabel new];
     self.districtLabel.text = self.contact.district;
     [self.districtLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.districtLabel.layer.borderColor = [UIColor brownColor].CGColor;
-    self.districtLabel.layer.borderWidth = 4.0;
+    self.districtLabel.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.districtLabel.layer.borderWidth = 2.0;
+    [self.districtLabel.layer setCornerRadius:2];
     [self.districtLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
     self.districtLabel.textAlignment = NSTextAlignmentCenter;
     [self.containerView addSubview:self.districtLabel];
 
     self.shareBtn = [UIButton new];
-    [self.shareBtn setTitle:@"share" forState:UIControlStateNormal];
+    [self.shareBtn setTitle:@"Share" forState:UIControlStateNormal];
     [self.shareBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.shareBtn setBackgroundColor:[UIColor blueColor]];
+    UIColor* backgroundColor = [UIColor colorWithRed:0.175f green:0.458f blue:0.831f alpha:1.0f];
+    [self.shareBtn setBackgroundColor:backgroundColor];
     [self.shareBtn.layer setCornerRadius:2];
-    [self.shareBtn.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    [self.shareBtn.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
     [self.shareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.shareBtn];
 

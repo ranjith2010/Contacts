@@ -10,5 +10,7 @@
 
 @protocol CLoginOptionsPresenterProtocol <NSObject>
 - (void)onSignupSelected;
+- (void)onLoginSelected;
+- (void)onSkipSelected;
 
 @end

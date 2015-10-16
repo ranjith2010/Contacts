@@ -7,15 +7,12 @@
 //
 
 #import "CSplashViewController.h"
-#import "CServerUserInterface.h"
-#import "CServerUser.h"
 #import "CSignUpViewController.h"
 #import "CLoginViewController.h"
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
 
 @interface CSplashViewController ()
-@property (nonatomic)id<CServerUserInterface> serverUser;
 @property (nonatomic) UIButton *loginBtnProperty;
 @property (nonatomic) UIButton *skipBtnProperty;
 @property (nonatomic) UIButton *signUpBtnProperty;
@@ -27,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.serverUser = [CServerUser defaultUser];
     [self.view removeConstraints:self.view.constraints];
     [self addConstraints];
 }
@@ -94,45 +90,17 @@
 #pragma mark - User Selection
 
 - (void)skipBtn {
-    [self showBusyIndicatorWithMessage:nil andImage:nil];
-    [self.serverUser createAnonymousUser:^(CUser *user, NSError *error) {
-        [self dismissBusyIndicator];
-        if(!error) {
-            NSLog(@"Anonymous user created");
-            [self launchTabBarVC];
-        }
-        else {
-            NSLog(@"%@",error.localizedDescription);
-        }
-    }];
+    [self.presenter onSkipSelected];
 }
 
 - (void)loginBtn {
-    CLoginViewController *loginVC = [CLoginViewController new];
-    [self.navigationController pushViewController:loginVC animated:YES];
+    [self.presenter onLoginSelected];
 }
 
 - (void)signUp {
     [self.presenter onSignupSelected];
-    
-    // Legacy code
-//    CSignUpViewController *signUpVC = [CSignUpViewController new];
-//    [self.navigationController pushViewController:signUpVC animated:YES];
 }
 
-- (void)launchTabBarVC {
-    UITabBarController *tabBarController = [UITabBarController new];
-    CPeopleTableViewController *peopleTVC = [CPeopleTableViewController new];
-    UINavigationController *navigationControllerForPeople = [[UINavigationController alloc]initWithRootViewController:peopleTVC];
-    navigationControllerForPeople.title = @"People";
-
-    CProfileViewController *userViewController = [CProfileViewController new];
-    UINavigationController *navigationControllerForProfile = [[UINavigationController alloc]initWithRootViewController:userViewController];
-    userViewController.title = @"Profile";
-    NSArray *tabControllers = [NSArray arrayWithObjects:navigationControllerForPeople,navigationControllerForProfile, nil];
-    tabBarController.viewControllers = tabControllers;
-    [self presentViewController:tabBarController animated:NO completion:nil];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

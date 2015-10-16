@@ -47,6 +47,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(!self.contact) {
+        self.title = @"New Contact";
+    }
     self.server = [CServer defaultParser];
     self.local = [CLocal defaultLocalDB];
     [self.view removeConstraints:self.view.constraints];

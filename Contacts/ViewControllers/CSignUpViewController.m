@@ -15,9 +15,6 @@
 #import "UIAlertView+ZPBlockAdditions.h"
 #import "CUser.h"
 
-#import "CServerUserInterface.h"
-#import "CServerUser.h"
-
 #import "CPeopleTableViewController.h"
 #import "CProfileViewController.h"
 
@@ -31,7 +28,6 @@
 @property (nonatomic) UITextField *emailTextField;
 @property (nonatomic) UITextField *passwordTextField;
 @property (nonatomic) UIButton *signUpBtn;
-@property (nonatomic)id<CServerUserInterface>serverUser;
 @property (nonatomic)id<CLocalInterface> local;
 @end
 
@@ -40,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.serverUser = [CServerUser defaultUser];
     self.local = [CLocal defaultLocalDB];
     [self.view removeConstraints:self.view.constraints];
     [self addConstraints];
@@ -121,33 +116,6 @@
         [newUser setPassword:self.passwordTextField.text];
         
         [self.presenter signUpWithNewUserInfo:newUser];
-        
-        
-       // Legacy code
-//        [self showBusyIndicatorWithMessage:nil andImage:nil];
-//        [self.serverUser
-//         createNewUserWithCredentials:
-//         newUser:^(BOOL succeeded, NSError *error) {
-//             [self dismissBusyIndicator];
-//             if (!error) {
-//                 [self.local
-//                  storeUser:
-//                  newUser:^(BOOL result, NSError *error) {
-//                      if (!error) {
-//                          NSLog(@"%@ user created",
-//                                self.userNameTextField.text);
-//                          [self.navigationController
-//                           popViewControllerAnimated:YES];
-//                      } else {
-//                          NSLog(@"%@",
-//                                error.localizedDescription);
-//                      }
-//                  }];
-//                 
-//             } else {
-//                 NSLog(@"%@", error.localizedDescription);
-//             }
-//         }];
     }
 }
 

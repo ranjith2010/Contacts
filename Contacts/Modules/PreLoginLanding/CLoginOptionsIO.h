@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^CAnonymousUserCreation)(BOOL succeeded,NSError *error);
+
 @protocol CLoginOptionInputLogicProtocol <NSObject>
+
+- (void)createAnonymousUser :(CAnonymousUserCreation)block;
 
 @end

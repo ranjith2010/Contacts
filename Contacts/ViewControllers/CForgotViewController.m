@@ -8,15 +8,11 @@
 
 #import "CForgotViewController.h"
 #import "NSString+Additions.h"
-#import "CServerUser.h"
-#import "CServerUserInterface.h"
 
 @interface CForgotViewController ()
 
 @property (nonatomic) UITextField *emailTextField;
 @property (nonatomic) UIButton *resetBtn;
-
-@property (nonatomic)id<CServerUserInterface>serverUser;
 
 @end
 
@@ -26,7 +22,6 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = @"Forgot Password";
-    self.serverUser = [CServerUser defaultUser];
     [self pr_initalDataSetup];
 }
 
@@ -42,7 +37,7 @@
     self.resetBtn = [UIButton new];
     [self.resetBtn setBackgroundColor:[UIColor blackColor]];
     [self.resetBtn setTitle:@"Reset" forState:UIControlStateNormal];
-    [self.resetBtn addTarget:self action:@selector(resetEmail) forControlEvents:UIControlEventTouchUpInside];
+    [self.resetBtn addTarget:self action:@selector(didTapForgotPasswordBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.resetBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.resetBtn.layer setCornerRadius:10];
     [self.view addSubview:self.resetBtn];
@@ -64,8 +59,7 @@
 
 }
 
-
-- (void)resetEmail {
+- (void)didTapForgotPasswordBtn {
     if([self.emailTextField.text c_isEmpty]) {
         NSLog(@"email is empty");
     }
@@ -73,14 +67,7 @@
         NSLog(@"invalid email");
     }
     else {
-        [self.serverUser forgotPassword:self.emailTextField.text :^(BOOL succeeded, NSError *error) {
-            if(!error){
-                NSLog(@"reset email sent");
-            }
-            else {
-                NSLog(@"%@",error.localizedDescription);
-            }
-        }];
+        [self.presenter onResetPasswordWithEmail:self.emailTextField.text];
     }
 }
 

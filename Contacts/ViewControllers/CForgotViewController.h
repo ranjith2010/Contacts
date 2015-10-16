@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBaseViewController.h"
+#import "CForgotPasswordPresenterProtocol.h"
+#import "CForgotPasswordViewProtocol.h"
 
-@interface CForgotViewController : UIViewController
+@interface CForgotViewController : CBaseViewController<CForgotPasswordViewProtocol>
+
+@property (nonatomic,strong)id<CForgotPasswordPresenterProtocol> presenter;
 
 @end

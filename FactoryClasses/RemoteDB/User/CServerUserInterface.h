@@ -28,6 +28,7 @@ typedef void(^userTaskCompletionBlock)(BOOL result, NSError* error);
  @param password this will be a user password
  @param completion block
  */
+// TODO:: In future No need to think about create one more use Because you can ask user related info from PFUser
 - (void)logInWithExistingUser:(NSString *)userName
                      password:(NSString *)password :(loginUserCompletionBlock)block;
 

@@ -36,7 +36,7 @@
 }
 
 - (void)presentAppStartup {
-    //MARK:: inFuture i will add.
+    //TODO:: inFuture i will add.
     //ZHSplashVC *splashVC = [[ZHSplashVC alloc] initWithNibName:@"ZHSplashVC" bundle:nil];
 //    self.window.rootViewController = splashVC;
 //    [self.window makeKeyAndVisible];

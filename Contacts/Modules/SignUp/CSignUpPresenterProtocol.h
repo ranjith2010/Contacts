@@ -11,6 +11,10 @@
 
 @protocol CSignUpPresenterProtocol <NSObject>
 
+/*!
+ @brief: 
+ */
+
 - (void)signUpWithNewUserInfo:(CUser*)userInfo;
 
 @end
