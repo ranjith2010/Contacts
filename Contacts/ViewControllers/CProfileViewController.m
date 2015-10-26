@@ -86,16 +86,17 @@
     [self.changePasswordBtn setTitle:@"Change Password" forState:UIControlStateNormal];
     [self.changePasswordBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.changePasswordBtn.layer setCornerRadius:2];
-    [self.changePasswordBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
+    [self.changePasswordBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15]];
     [self.changePasswordBtn setBackgroundColor:[UIColor brownColor]];
     [self.changePasswordBtn addTarget:self action:@selector(changePassword) forControlEvents:UIControlEventTouchUpInside];
+    [self.changePasswordBtn sizeToFit];
     [self.view addSubview:self.changePasswordBtn];
     
     self.editBtn = [UIButton new];
     [self.editBtn setTitle:@"Edit" forState:UIControlStateNormal];
     [self.editBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.editBtn.layer setCornerRadius:2];
-    [self.editBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
+    [self.editBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15]];
     [self.editBtn setBackgroundColor:[UIColor brownColor]];
     [self.editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.editBtn];

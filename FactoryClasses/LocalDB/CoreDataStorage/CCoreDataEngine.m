@@ -69,7 +69,8 @@
     [contactCoreDataModel safeAddForKey:kCoreDataContactPhone value:contact.phone];
     [contactCoreDataModel safeAddForKey:kCoreDataContactStreet value:contact.street];
     [contactCoreDataModel safeAddForKey:kServerDistrictAttr value:contact.district];
-    [contactCoreDataModel setValue:contact.userObjectId forKey:kServerUserObjectIdAttr];
+    //Note: No need to update the userObjectid here,Coz while storing the contact first time itself we are setting the user-relationship to contact
+//    [contactCoreDataModel setValue:contact.userObjectId forKey:kServerUserObjectIdAttr];
     BOOL result = [self saveCoreDataStateWithError:&error];
     block(result,error);
 }

@@ -21,6 +21,9 @@
 #import "CServerUser.h"
 #import "CDisplayViewController.h"
 
+#import "CCreateContactNavigation.h"
+#import "CCreateContactNavigationProtocol.h"
+
 @interface CPeopleTableViewController ()
 
 @property (nonatomic)UIRefreshControl *refreshControl;
@@ -29,6 +32,8 @@
 
 @property (nonatomic)id<CServerUserInterface> serverUser;
 @property (nonatomic)id<CServerInterface> server;
+
+@property (nonatomic,strong)id<CCreateContactNavigationProtocol> navigation;
 
 @end
 
@@ -109,8 +114,11 @@
 }
 
 - (void)addContact {
-    CEditViewController *editViewController = [CEditViewController new];
-    [self.navigationController pushViewController:editViewController animated:YES];
+    self.navigation = [CCreateContactNavigation new];
+    [self.navigation presentCreateContactFlow:self.navigationController];
+    
+//    CEditViewController *editViewController = [CEditViewController new];
+//    [self.navigationController pushViewController:editViewController animated:YES];
 }
 
 @end

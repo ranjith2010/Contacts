@@ -18,6 +18,9 @@
 
 #import "CLocalInterface.h"
 #import "CLocal.h"
+#import "CConstants.h"
+
+#import "UITextField+Additions.h"
 
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
@@ -41,6 +44,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 @property (nonatomic) id<CServerInterface> server;
 @property (nonatomic) id<CLocalInterface> local;
 
+@property (nonatomic) UITextField *previousTextField;
+
 @end
 
 @implementation CEditViewController
@@ -55,6 +60,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.view removeConstraints:self.view.constraints];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initialDataSetup];
+    [self addTapGestureToEndEditing];
 }
 
 #pragma mark - Private API
@@ -63,6 +69,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     UIBarButtonItem *rightBarbuttonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(storeContact)];
     self.navigationItem.rightBarButtonItem = rightBarbuttonItem;
     [self addConstraints];
+}
+- (void)addTapGestureToEndEditing {
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)]];
+}
+
+- (void)didTapOnView {
+    [self.view endEditing:YES];
 }
 
 - (void)addConstraints {
@@ -86,6 +99,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                action:@selector(methodToFire)
                      forControlEvents:UIControlEventEditingDidEndOnExit];
     self.nameTextField.delegate = self;
+    [self.nameTextField setFont:[UIFont fontWithName:GENERAL_FONT_SEMIBOLD size:15]];
     [self.containerView addSubview:self.nameTextField];
 
     self.mobileTextField = [UITextField new];
@@ -97,6 +111,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                action:@selector(methodToFire)
                      forControlEvents:UIControlEventEditingDidEndOnExit];
     self.mobileTextField.delegate = self;
+    [self.mobileTextField setFont:[UIFont fontWithName:GENERAL_FONT_SEMIBOLD size:15]];
     [self.containerView addSubview:self.mobileTextField];
 
     self.emailTextField = [UITextField new];
@@ -108,6 +123,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                action:@selector(methodToFire)
                      forControlEvents:UIControlEventEditingDidEndOnExit];
     self.emailTextField.delegate = self;
+    [self.emailTextField setFont:[UIFont fontWithName:GENERAL_FONT_SEMIBOLD size:15]];
     [self.containerView addSubview:self.emailTextField];
 
     self.streetTextField = [UITextField new];
@@ -119,6 +135,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                action:@selector(methodToFire)
                      forControlEvents:UIControlEventEditingDidEndOnExit];
     self.streetTextField.delegate = self;
+    [self.streetTextField setFont:[UIFont fontWithName:GENERAL_FONT_SEMIBOLD size:15]];
     [self.containerView addSubview:self.streetTextField];
 
     self.districtTextField = [UITextField new];
@@ -130,6 +147,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     action:@selector(methodToFire)
           forControlEvents:UIControlEventEditingDidEndOnExit];
     self.districtTextField.delegate = self;
+    [self.districtTextField setFont:[UIFont fontWithName:GENERAL_FONT_SEMIBOLD size:15]];
     [self.containerView addSubview:self.districtTextField];
 
 
@@ -183,7 +201,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.containerView setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 
 
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_nameTextField(50)]-[_mobileTextField(50)]-[_emailTextField(50)]-[_streetTextField(50)]-[_districtTextField(50)]" options:0 metrics:nil views:views]];
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[_nameTextField(40)]-[_mobileTextField(40)]-[_emailTextField(40)]-[_streetTextField(40)]-[_districtTextField(40)]" options:0 metrics:nil views:views]];
 
     [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_nameTextField]-|" options:0 metrics:nil views:views]];
 
@@ -219,63 +237,20 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // So, its updated scenario
     if(self.delegate) {
         contact.objectId = self.contact.objectId;
-        [self showBusyIndicatorWithMessage:nil andImage:nil];
-        [self.server updateContact:contact :^(BOOL result, NSError *error) {
-            [self dismissBusyIndicator];
-            if(!error){
-                [self.local updateContact:contact :^(BOOL result, NSError *error) {
-                    if(!error) {
-                        NSLog(@"update contact successfully");
-                        [self dismissViewControllerAnimated:NO completion:nil];
-                        [self.delegate popout];
-                    }
-                    else {
-                        NSLog(@"%@",error.localizedDescription);
-                    }
-                }];
-            }
-            else {
-                NSLog(@"%@",error.localizedDescription);
-            }
-        }];
+        [self.logic updateContactWithBlob:contact];
+        [self.delegate popout];
+
     }
     else {
         // Its came fresh look
         // New Contact
-        [self showBusyIndicatorWithMessage:nil andImage:nil];
-        [self.server storeContact:contact :^(CContact *contact, NSError *error) {
-            [self dismissBusyIndicator];
-            if(!error) {
-                [self.local storeContact:contact :^(BOOL result, NSError *error) {
-                    if(!error) {
-                        NSLog(@"contact stored successfully");
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }
-                    else {
-                        NSLog(@"%@",error.localizedDescription);
-                    }
-                }];
-            }
-            else {
-                NSLog(@"%@",error.localizedDescription);
-            }
-        }];
+        [self.logic createContactWithBlob:contact];
     }
 }
 
 - (void)delete {
-    [self showBusyIndicatorWithMessage:nil andImage:nil];
-    [self.server deleteContact:self.contact :^(BOOL result, NSError *error) {
-        [self dismissBusyIndicator];
-        if(!error) {
-            NSLog(@"contact deleted successfully");
-            [self dismissViewControllerAnimated:NO completion:nil];
-            [self.delegate popout];
-        }
-        else {
-            NSLog(@"%@",error.localizedDescription);
-        }
-    }];
+    [self.logic deleteContact:self.contact];
+    [self.delegate popout];
 }
 
 // dummy selector @note: There is no use for this selector
@@ -286,6 +261,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if(self.previousTextField) {
+        [self.previousTextField CRevertBorderColor];
+    }
+    [textField CAddBorderColor];
+    self.previousTextField = textField;
+    
     CGRect textFieldRect =
     [self.view.window convertRect:textField.bounds fromView:textField];
     CGRect viewRect =

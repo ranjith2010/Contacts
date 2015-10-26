@@ -35,3 +35,11 @@ NSString *horizontalConsForContainerView = [NSString stringWithFormat:@"H:|-0-[_
 
 [self.containerView setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 */
+
+
+/*!
+ @Note: VIPER: Actually the early days of Signup and Login and some other module we followed the View-Presenter-Logic -<Navigation>- but further digging we are limiting the presenter to use. So hereafter View-Logic thats it.
+ */
+
+
+

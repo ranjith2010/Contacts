@@ -12,6 +12,9 @@
 #import "CServerInterface.h"
 #import "CServer.h"
 
+#import "CCreateContactNavigationProtocol.h"
+#import "CCreateContactNavigation.h"
+
 @interface CDisplayViewController ()
 
 @property (nonatomic) UILabel *nameLabel;
@@ -27,6 +30,8 @@
 
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UIView *containerView;
+
+@property (nonatomic,strong)id<CCreateContactNavigationProtocol> createEditNavigation;
 
 @end
 
@@ -49,12 +54,8 @@
 #pragma mark - Private methods
 
 - (void)edit {
-    CEditViewController *editVC = [CEditViewController new];
-    [editVC setContact:self.contact];
-    editVC.delegate = self;
-    self.navigation = [[UINavigationController alloc]initWithRootViewController:editVC];
-    editVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
-    [self presentViewController:self.navigation animated:NO completion:nil];
+    self.createEditNavigation = [CCreateContactNavigation new];
+    [self.createEditNavigation presentEditContactFlow:self withContact:self.contact];
 }
 
 - (void)dismiss {
@@ -184,8 +185,10 @@
 }
 
 - (void)share {
+#warning deeplinking Share URL is not look like a URL in iOS9
     [self.server storeShareArray:@[self.contact.objectId] :^(NSString *objectId, NSError *error) {
     NSString *finalString = [@"Contacts:" stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"//multipleContacts/",objectId]];
+//        NSString *finalString = @"Yelp://12345";
     NSURL *customURL = [[NSURL alloc] initWithString:finalString];
     CActivityViewController *activityVC = [[CActivityViewController alloc] initWithURL:customURL];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[activityVC] applicationActivities:nil];

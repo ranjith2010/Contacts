@@ -44,8 +44,6 @@
     // make the status bar white
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    
-    
     [self.server initialize];
     
     [self setRootWindow:[CRootWindow sharedInstance]];

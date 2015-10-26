@@ -10,6 +10,17 @@
 
 @interface CConstants : NSObject
 
+
+#pragma mark - Custom font Names
+
+#define HEADING_FONT_BOLD               @"OpenSans-Bold"
+#define HEADING_FONT_REGULAR            @"OpenSans"
+#define HEADING_FONT_SEMIBOLD           @"OpenSans-Semibold"
+#define GENERAL_FONT_BOLD               @"SourceSansPro-Bold"
+#define GENERAL_FONT_REGULAR            @"SourceSansPro-Regular"
+#define GENERAL_FONT_SEMIBOLD           @"SourceSansPro-Semibold"
+
+
 extern NSString * const kServerApplicationId                            ;
 extern NSString * const kServerClientKey                                ;
 

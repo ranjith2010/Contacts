@@ -113,7 +113,7 @@ NSString *shareContactCloudFunction = @"storeSharedContact";
         [object saveInBackgroundWithBlock:block];
     }
     else {
-        block(nil,error);
+        block(NO,error);
     }
 }
 
@@ -133,7 +133,6 @@ NSString *shareContactCloudFunction = @"storeSharedContact";
     }
     }];
 }
-
 
 - (void)fetchSharedContacts:(NSURL *)sharedURL :(fetchSharedContactsCompletionBlock)block {
     // This case is individual contacts. like 1 or multiple contacts

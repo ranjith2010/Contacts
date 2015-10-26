@@ -17,6 +17,9 @@
 		07A55E2C1BCA90BC0083B844 /* CLoginOptionsLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E2B1BCA90BC0083B844 /* CLoginOptionsLogic.m */; settings = {ASSET_TAGS = (); }; };
 		07A55E301BCA90F50083B844 /* CLoginOptionsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A55E2F1BCA90F50083B844 /* CLoginOptionsPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		07D9CC271B98392B00E817B6 /* Reference.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D9CC261B98392B00E817B6 /* Reference.strings */; };
+		07DC42421BDE342A0067B359 /* UITextField+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DC42411BDE342A0067B359 /* UITextField+Additions.m */; settings = {ASSET_TAGS = (); }; };
+		07DF7E741BDCEF4000FCB823 /* CCreateContactLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF7E731BDCEF4000FCB823 /* CCreateContactLogic.m */; settings = {ASSET_TAGS = (); }; };
+		07DF7E781BDCEF9600FCB823 /* CCreateContactNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF7E771BDCEF9600FCB823 /* CCreateContactNavigation.m */; settings = {ASSET_TAGS = (); }; };
 		07EAF30F1BC792FC00D18303 /* CCoreDataConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */; settings = {ASSET_TAGS = (); }; };
 		07EB65311BD0D653005B537E /* CLoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB65301BD0D653005B537E /* CLoginPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		07EB65351BD0D6A6005B537E /* CLoginLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB65341BD0D6A6005B537E /* CLoginLogic.m */; settings = {ASSET_TAGS = (); }; };
@@ -118,6 +121,15 @@
 		07A55E311BCA910E0083B844 /* CLoginOptionsPresenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsPresenterProtocol.h; path = Modules/PreLoginLanding/CLoginOptionsPresenterProtocol.h; sourceTree = "<group>"; };
 		07A55E321BCA91290083B844 /* CLoginOptionsViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginOptionsViewProtocol.h; path = Modules/PreLoginLanding/CLoginOptionsViewProtocol.h; sourceTree = "<group>"; };
 		07D9CC261B98392B00E817B6 /* Reference.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Reference.strings; sourceTree = "<group>"; };
+		07DC42401BDE342A0067B359 /* UITextField+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Additions.h"; path = "Categories/UITextField+Additions.h"; sourceTree = "<group>"; };
+		07DC42411BDE342A0067B359 /* UITextField+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Additions.m"; path = "Categories/UITextField+Additions.m"; sourceTree = "<group>"; };
+		07DF7E721BDCEF4000FCB823 /* CCreateContactLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCreateContactLogic.h; path = Modules/CreateEditContact/CCreateContactLogic.h; sourceTree = "<group>"; };
+		07DF7E731BDCEF4000FCB823 /* CCreateContactLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCreateContactLogic.m; path = Modules/CreateEditContact/CCreateContactLogic.m; sourceTree = "<group>"; };
+		07DF7E751BDCEF6F00FCB823 /* CCreateContactLogicProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCreateContactLogicProtocol.h; path = Modules/CreateEditContact/CCreateContactLogicProtocol.h; sourceTree = "<group>"; };
+		07DF7E761BDCEF9600FCB823 /* CCreateContactNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCreateContactNavigation.h; path = Modules/CreateEditContact/CCreateContactNavigation.h; sourceTree = "<group>"; };
+		07DF7E771BDCEF9600FCB823 /* CCreateContactNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCreateContactNavigation.m; path = Modules/CreateEditContact/CCreateContactNavigation.m; sourceTree = "<group>"; };
+		07DF7E791BDCEFC000FCB823 /* CCreateContactNavigationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCreateContactNavigationProtocol.h; path = Modules/CreateEditContact/CCreateContactNavigationProtocol.h; sourceTree = "<group>"; };
+		07DF7E7A1BDCF3B800FCB823 /* CCreateEditContactViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCreateEditContactViewProtocol.h; path = Modules/CreateEditContact/CCreateEditContactViewProtocol.h; sourceTree = "<group>"; };
 		07EAF30D1BC792FC00D18303 /* CCoreDataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCoreDataConstants.h; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.h; sourceTree = "<group>"; };
 		07EAF30E1BC792FC00D18303 /* CCoreDataConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCoreDataConstants.m; path = FactoryClasses/LocalDB/CoreDataStorage/CCoreDataConstants.m; sourceTree = "<group>"; };
 		07EB652F1BD0D653005B537E /* CLoginPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLoginPresenter.h; path = Modules/Login/CLoginPresenter.h; sourceTree = "<group>"; };
@@ -286,11 +298,12 @@
 		0764E9981BC8245E008A17F8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				07EB65381BD0FEB4005B537E /* ForgotPassword */,
+				07DF7E6D1BDCED1200FCB823 /* CreateEditContact */,
 				07A55E251BCA905E0083B844 /* PreLoginLanding */,
 				0764E99C1BC824F7008A17F8 /* ContactDetail */,
 				0764E99B1BC824E8008A17F8 /* SignUp */,
 				0764E99A1BC824E1008A17F8 /* Login */,
+				07EB65381BD0FEB4005B537E /* ForgotPassword */,
 				0764E9991BC824D9008A17F8 /* Home */,
 			);
 			name = Modules;
@@ -460,6 +473,54 @@
 			name = External;
 			sourceTree = "<group>";
 		};
+		07DF7E6D1BDCED1200FCB823 /* CreateEditContact */ = {
+			isa = PBXGroup;
+			children = (
+				07DF7E711BDCED4E00FCB823 /* Navigation */,
+				07DF7E701BDCED4100FCB823 /* View */,
+				07DF7E6F1BDCED3B00FCB823 /* Logic */,
+				07DF7E6E1BDCED3400FCB823 /* Presenter */,
+			);
+			name = CreateEditContact;
+			sourceTree = "<group>";
+		};
+		07DF7E6E1BDCED3400FCB823 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		07DF7E6F1BDCED3B00FCB823 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				07DF7E721BDCEF4000FCB823 /* CCreateContactLogic.h */,
+				07DF7E731BDCEF4000FCB823 /* CCreateContactLogic.m */,
+				07DF7E751BDCEF6F00FCB823 /* CCreateContactLogicProtocol.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		07DF7E701BDCED4100FCB823 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C6C81CE01BA3673E005B804C /* CEditViewController.h */,
+				C6C81CE11BA3673E005B804C /* CEditViewController.m */,
+				07DF7E7A1BDCF3B800FCB823 /* CCreateEditContactViewProtocol.h */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		07DF7E711BDCED4E00FCB823 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				07DF7E761BDCEF9600FCB823 /* CCreateContactNavigation.h */,
+				07DF7E771BDCEF9600FCB823 /* CCreateContactNavigation.m */,
+				07DF7E791BDCEFC000FCB823 /* CCreateContactNavigationProtocol.h */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		07EB652B1BD0D611005B537E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,8 +624,6 @@
 				C6C81CDD1BA3673E005B804C /* CChangePasswordViewController.m */,
 				C6C81CDE1BA3673E005B804C /* CDisplayViewController.h */,
 				C6C81CDF1BA3673E005B804C /* CDisplayViewController.m */,
-				C6C81CE01BA3673E005B804C /* CEditViewController.h */,
-				C6C81CE11BA3673E005B804C /* CEditViewController.m */,
 				C6C81CE61BA3673E005B804C /* CPeopleTableViewController.h */,
 				C6C81CE71BA3673E005B804C /* CPeopleTableViewController.m */,
 				C6C81CE81BA3673E005B804C /* CProfileViewController.h */,
@@ -734,6 +793,8 @@
 				C6C81CAD1BA365C3005B804C /* UIAlertView+ZPBlockAdditions.h */,
 				C6C81CAE1BA365C3005B804C /* UIAlertView+ZPBlockAdditions.m */,
 				C6C81CAF1BA365C3005B804C /* ZPBlockAdditions.h */,
+				07DC42401BDE342A0067B359 /* UITextField+Additions.h */,
+				07DC42411BDE342A0067B359 /* UITextField+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -942,11 +1003,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DF7E741BDCEF4000FCB823 /* CCreateContactLogic.m in Sources */,
 				C6C81CCC1BA3665E005B804C /* CCoreDataSharedInstance.m in Sources */,
 				C6C81CCB1BA3665E005B804C /* CCoreDataEngine.m in Sources */,
 				07033A761BC6DDA3002BE065 /* CBaseTableViewController.m in Sources */,
 				07A55E301BCA90F50083B844 /* CLoginOptionsPresenter.m in Sources */,
 				07033A731BC6DD92002BE065 /* CBaseViewController.m in Sources */,
+				07DF7E781BDCEF9600FCB823 /* CCreateContactNavigation.m in Sources */,
 				C6C81CD01BA3670D005B804C /* CLongTaskViewHelper.m in Sources */,
 				C64200791BA38C09000119EA /* CDContact+Additions.m in Sources */,
 				C6C81CB11BA365C3005B804C /* NSMutableDictionary+Additions.m in Sources */,
@@ -957,6 +1020,7 @@
 				C6A3F5241A4000ED004D3479 /* CAppDelegate.m in Sources */,
 				07A55E221BC9341C0083B844 /* CInplaceSignUpNavigation.m in Sources */,
 				C6C81CB41BA365C3005B804C /* UIAlertView+ZPBlockAdditions.m in Sources */,
+				07DC42421BDE342A0067B359 /* UITextField+Additions.m in Sources */,
 				C6C81CF31BA3673E005B804C /* CLoginViewController.m in Sources */,
 				C6C81CBF1BA36620005B804C /* CServerUser.m in Sources */,
 				C6C81CB81BA365F7005B804C /* CServer.m in Sources */,

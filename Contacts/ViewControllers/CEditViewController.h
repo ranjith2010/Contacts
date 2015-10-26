@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CContact.h"
 #import "CBaseViewController.h"
+#import "CCreateContactLogicProtocol.h"
+#import "CCreateContactLogic.h"
+#import "CCreateEditContactViewProtocol.h"
 
 @protocol pop <NSObject>
 
@@ -16,10 +19,13 @@
 
 @end
 
-@interface CEditViewController : CBaseViewController
+@interface CEditViewController : CBaseViewController<CCreateEditContactViewProtocol>
 
 @property(nonatomic,strong)CContact *contact;
 
 @property (nonatomic)id<pop>delegate;
+
+//@Note:: Why we are using Logic in ViewController, Coz we are limiting the presenter to use further.
+@property (nonatomic,strong)id<CCreateContactLogicProtocol> logic;
 
 @end
